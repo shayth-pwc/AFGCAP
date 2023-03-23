@@ -46,5 +46,5 @@ resources:
       service-plan: application
       path: ./xs-security.json
       config:
-        xsappname: CAP-${org}-${space}
+        xsappname: AFG-CAP-API
         tenant-mode: dedicated
