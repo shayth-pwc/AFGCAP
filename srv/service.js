@@ -7,8 +7,8 @@ module.exports = async (srv) => {
         try {
             await UPSERT.into(settings.table).entries(items);
             for (let item of items) {
-                console.log(`Successfully inserted data in ${settings.table} for ${item[settings.keyProperty]}.`);
-                response.push({ success: true, message: `Successfully inserted data in ${settings.table} for ${item[settings.keyProperty]}.` });
+                console.log(`Successfully inserted data as bulk in ${settings.table} for ${item[settings.keyProperty]}.`);
+                response.push({ success: true, message: `Successfully inserted data as bulk in ${settings.table} for ${item[settings.keyProperty]}.` });
             };
         } catch (error) {
             console.log(`Failed to insert data in ${settings.table} in bulk for ${items.length} items. Switching to individual queries.`);
@@ -52,18 +52,476 @@ module.exports = async (srv) => {
         }
         return response;
     };
-
+    //done
     srv.on('A_FCT_SERVICE_ORDER_JOBS', async (req) => {
         const events = Array.isArray(req.data.events) ? req.data.events : [req.data.events];
         for (let event of events) {
-            event.LASTUPDATEDATE = new Date().toISOString().split('T')[0];
-            event.isDeferred = (event.ISDEFERRED === true);
+            event.serviceOrderJobId = (event.id);
+            delete event.id;
+            delete event.creationDate;
+
+            event.isDeferred = (event.isDeferred === true);
+
+            console.log(cds.entities('FCT').SERVICE_ORDER_JOBS.elements);
+
+            //event = fillObject(cds.entities('FCT').SERVICE_ORDER_JOBS, event)
         }
 
         return await upsertEvents(events, {
-            function: 'ServiceOrdersJobs / post',
+            function: 'SERVICE_ORDER_JOBS / UPSERT',
             table: 'FCT_SERVICE_ORDER_JOBS',
             keyProperty: 'serviceOrderJobId'
         });
     });
+
+    //done
+    srv.on('A_FCT_CUST_ECO_SYSTEM', async (req) => {
+        const events = Array.isArray(req.data.events) ? req.data.events : [req.data.events];
+
+        return await upsertEvents(events, {
+            function: 'ECO_SYSTEM / UPSERT',
+            table: 'FCT_CUST_ECO_SYSTEM',
+            keyProperty: 'mainTicketId'
+        });
+    });
+
+    //mapping issue
+    srv.on('A_FCT_ENQUIRY', async (req) => {
+        const events = Array.isArray(req.data.events) ? req.data.events : [req.data.events];
+        for (let event of events) {
+            event.enquiryId = (event.id);
+
+            if (typeof event.partners != "undefined") {
+                event.partner = (event.partners[0].partner);
+                event.partnerFunction = (event.partners[0].partnerFunction);
+                event.partnerName = (event.partners[0].partnerName);
+            }
+
+            if (typeof event.vehicleInterests != "undefined") {
+                event.variant_Code = (event.vehicleInterests[0].variantCode);
+                event.modelGroup = (event.vehicleInterests[0].modelGroup);
+                event.genericArticleCode = (event.vehicleInterests[0].genericArticleCode);
+                event.testDriveDate = (event.vehicleInterests[0].testDriveDate);
+                event.testDrive = (event.vehicleInterests[0].testDrive);
+                event.vehicle_model = (event.vehicleInterests[0].model);
+                event.tradeIn = (event.vehicleInterests[0].tradeIn);
+                event.budgetLow = (event.vehicleInterests[0].budgetLow);
+                event.budgetHigh = (event.vehicleInterests[0].budgetHigh);
+                event.financeType = (event.vehicleInterests[0].financeType);
+                event.currentMake = (event.vehicleInterests[0].currentMake);
+                event.financeTerm = (event.vehicleInterests[0].financeTerm);
+                event.testDriveRejection = (event.vehicleInterests[0].testDriveRejection);
+                event.currentModel = (event.vehicleInterests[0].currentModel);
+                event.sourceOfEnquiry = (event.vehicleInterests[0].sourceOfEnquiry);
+            }
+            if (typeof event.EnquiryDetails != "undefined") {
+                event.EnquiryStatus = (event.EnquiryDetails.EnquiryStatus);
+                event.QuotationID = (event.EnquiryDetails.QuotationID);
+                event.EnquiryCreatedDate = (event.EnquiryDetails.EnquiryCreatedDate);
+                event.OrderId = (event.EnquiryDetails.OrderId);
+            }
+
+            if (typeof event.enquiryInformation != "undefined") {
+                event.salesManagerId = (event.enquiryInformation.salesManagerId);
+                event.offerExpired = (event.enquiryInformation.offerExpired);
+                event.businessManagerId = (event.enquiryInformation.businessManagerId);
+                event.customerId = (event.enquiryInformation.customerId);
+                event.enquiryType = (event.enquiryInformation.enquiryType);
+                event.branchId = (event.enquiryInformation.branchId);
+                event.saleType = (event.enquiryInformation.saleType);
+                event.staffId = (event.enquiryInformation.staffId);
+                event.distributionChannel = (event.enquiryInformation.distributionChannel);
+                event.salesGroup = (event.enquiryInformation.salesGroup);
+                event.division = (event.enquiryInformation.division);
+                event.salesOffice = (event.enquiryInformation.salesOffice);
+                event.leadId = (event.enquiryInformation.leadId);
+                event.salesExecutiveId = (event.enquiryInformation.salesExecutiveId);
+                event.orgId = (event.enquiryInformation.orgId);
+            }
+
+
+        }
+
+        return await upsertEvents(events, {
+            function: 'ENQUIRY / UPSERT',
+            table: 'FCT_ENQUIRY',
+            keyProperty: 'enquiryId'
+        });
+    });
+
+    //dene
+    srv.on('A_FCT_ENQUIRY_FOLLOWUP', async (req) => {
+        const events = Array.isArray(req.data.events) ? req.data.events : [req.data.events];
+
+        for (let event of events) {
+            event.followUpId = (event.id);
+            delete event.id
+            delete event.creationDate
+
+        }
+
+        return await upsertEvents(events, {
+            function: 'ENQUIRY_FOLLOWUP / UPSERT',
+            table: 'FCT_ENQUIRY_FOLLOWUP',
+            keyProperty: 'followUpId'
+        });
+    });
+
+    //mapping issue
+    srv.on('A_FCT_ENQUIRY_ITEMS', async (req) => {
+        const events = Array.isArray(req.data.events) ? req.data.events : [req.data.events];
+        for (let event of events) {
+            event.enquiryItemId = (event.id);
+            delete event.engineSize
+            console.log("#######", typeof event.ProductDetails)
+
+            if (typeof event.ProductDetails != "undefined") {
+                event.productClassification = (event.ProductDetails[0].productClassification);
+                event.productCost = (event.ProductDetails[0].productCost);
+                event.isVatApplicable = (event.ProductDetails[0].isVatApplicable);
+                event.productIdDescription = (event.ProductDetails[0].productIdDescription);
+
+            }
+
+            if (typeof event.financeDetails[0] != "undefined") {
+                event.productCategory = (event.financeDetails[0].productCategory);
+                event.productID = (event.financeDetails[0].productID);
+                event.financeCompanyNumber = (event.financeDetails[0].financeCompanyNumber);
+                event.financeSchemeName = (event.financeDetails[0].financeSchemeName);
+                event.financeBalance = (event.financeDetails[0].financeBalance);
+                event.financeRate = (event.financeDetails[0].financeRate);
+                event.financeTerm = (event.financeDetails[0].financeTerm);
+                event.financeType = (event.financeDetails[0].financeType);
+                event.minimumGuaranteedFutureValue = (event.financeDetails[0].minimumGuaranteedFutureValue);
+                event.pcpContractMileage = (event.financeDetails[0].pcpContractMileage);
+                event.monthlyPayment = (event.financeDetails[0].monthlyPayment);
+                event.cashInput = (event.financeDetails[0].cashInput);
+                event.financeCompanyNumberSAP = (event.financeDetails[0].financeCompanyNumberSAP);
+                event.quotationReferenceNumber = (event.financeDetails[0].quotationReferenceNumber);
+            }
+
+
+        }
+
+        return await upsertEvents(events, {
+            function: 'ENQUIRY_ITEMS / UPSERT',
+            table: 'FCT_ENQUIRY_ITEMS',
+            keyProperty: 'enquiryItemId'
+        });
+    });
+
+    //done
+    srv.on('A_FCT_LEAD', async (req) => {
+        const events = Array.isArray(req.data.events) ? req.data.events : [req.data.events];
+        for (let event of events) {
+            delete event.salesExecutiveId
+            delete event.creationDate
+            delete event.removed
+            delete event.salesManagerId
+        }
+
+        return await upsertEvents(events, {
+            function: 'LEAD / UPSERT',
+            table: 'FCT_LEAD',
+            keyProperty: 'leadId'
+        });
+    });
+
+    //done
+    srv.on('A_FCT_LEAD_UPDATES', async (req) => {
+        const events = Array.isArray(req.data.events) ? req.data.events : [req.data.events];
+        for (let event of events) {
+            event.leadUpdateId = (event.leadUpdatedId)
+            delete event.leadUpdatedId
+        }
+
+        return await upsertEvents(events, {
+            function: 'LEAD UPDATES / UPSERT',
+            table: 'FCT_LEAD_UPDATES',
+            keyProperty: 'leadUpdateId'
+        });
+    });
+
+    //done
+    srv.on('A_DIM_MATERIAL', async (req) => {
+        const events = Array.isArray(req.data.events) ? req.data.events : [req.data.events];
+        // for (let event of events) {
+
+        // }
+
+        return await upsertEvents(events, {
+            function: 'MATERIAL / UPSERT',
+            table: 'DIM_MATERIAL',
+            keyProperty: 'material'
+        });
+    });
+
+    //done
+    srv.on('A_FCT_OPPORTUNITY', async (req) => {
+        const events = Array.isArray(req.data.events) ? req.data.events : [req.data.events];
+        // for (let event of events) {
+        // }
+
+        return await upsertEvents(events, {
+            function: 'OPPORTUNITY / UPSERT',
+            table: 'FCT_OPPORTUNITY',
+            keyProperty: 'opportunityId'
+        });
+    });
+
+
+    //done
+    srv.on('A_FCT_ORDER_ITEMS', async (req) => {
+        const events = Array.isArray(req.data.events) ? req.data.events : [req.data.events];
+        for (let event of events) {
+            event.orderItemId = (event.id);
+            event.delivery_Time = (event.deliveryTime);
+            delete event.id
+            delete event.creationDate
+            delete event.removed
+            delete event.salesOffice
+            delete event.deliveryTime
+        }
+
+        return await upsertEvents(events, {
+            function: 'ORDER_ITEMS / UPSERT',
+            table: 'FCT_ORDER_ITEMS',
+            keyProperty: 'orderItemId'
+        });
+    });
+
+    //mapping issue
+    srv.on('A_FCT_ORDERS', async (req) => {
+        const events = Array.isArray(req.data.events) ? req.data.events : [req.data.events];
+        for (let event of events) {
+            event.orderId = (event.id);
+
+            if (typeof event.partners != "undefined") {
+                event.partner = (event.partners[0].partner);
+                event.partnerFunction = (event.partners[0].partnerFunction);
+                event.partnerName = (event.partners[0].partnerName);
+            }
+
+            if (typeof event.finance != "undefined") {
+                event.financeSchemeName = (event.finance[0].financeSchemeName);
+                event.productCategory = (event.finance[0].productCategory);
+                event.term = (event.finance[0].term);
+                event.monthlyPayment = (event.finance[0].monthlyPayment);
+                event.rate = (event.finance[0].rate);
+                event.startDate = (event.finance[0].startDate);
+                event.endDate = (event.finance[0].endDate);
+                event.type = (event.finance[0].type);
+                event.balance = (event.finance[0].balance);
+                event.invoiceId = (event.finance[0].invoiceId);
+                event.minimumGuaranteedFutureValue = (event.finance[0].minimumGuaranteedFutureValue);
+
+            }
+        }
+
+        return await upsertEvents(events, {
+            function: 'ORDERS / UPSERT',
+            table: 'FCT_ORDERS',
+            keyProperty: 'orderId'
+        });
+    });
+
+    // mapping issue
+    srv.on('A_FCT_QUOTATIONS', async (req) => {
+        const events = Array.isArray(req.data.events) ? req.data.events : [req.data.events];
+        for (let event of events) {
+
+            serviceOrderJoblinesIdserviceOrderJoblinesId
+            if (typeof event.partners != "undefined") {
+                event.partner = (event.partners[0].partner);
+                event.partnerFunction = (event.partners[0].partnerFunction);
+                event.partnerName = (event.partners[0].partnerName);
+            }
+
+            if (typeof event.finance != "undefined") {
+                event.invoiceId = (event.finance.invoiceId);
+                event.rate = (event.finance.rate);
+                event.minimumGuranteedFutureValue = (event.finance.minimumGuranteedFutureValue);
+                event.type = (event.finance.type);
+                event.startDate = (event.finance.startDate);
+                event.endDate = (event.finance.endDate);
+                event.balance = (event.finance.balance);
+                event.monthlyPayment = (event.finance.monthlyPayment);
+                event.productCategory = (event.finance.productCategory);
+                event.term = (event.finance.term);
+            }
+        }
+
+        return await upsertEvents(events, {
+            function: 'QUOTATIONS / UPSERT',
+            table: 'FCT_QUOTATIONS',
+            keyProperty: 'quotationsItemsId'
+        });
+    });
+
+
+    // done 
+    srv.on('A_FCT_QUOTATIONS_ITEMS', async (req) => {
+        const events = Array.isArray(req.data.events) ? req.data.events : [req.data.events];
+        for (let event of events) {
+
+            event.quotationsItemsId = (event.id);
+            delete event.id
+        }
+
+        return await upsertEvents(events, {
+            function: 'QUOTATIONS_ITEMS / UPSERT',
+            table: 'FCT_QUOTATIONS_ITEMS',
+            keyProperty: 'quotationsItemsId'
+        });
+    });
+
+    //done
+    srv.on('A_FCT_SERVICE_MAIN_CONT', async (req) => {
+        const events = Array.isArray(req.data.events) ? req.data.events : [req.data.events];
+        for (let event of events) {
+            event.serviceMainContractId = (event.id);
+            event.endDate = (event.contractEndDate);
+            delete event.id
+            delete event.removed
+            delete event.contractEndDate
+        }
+
+        return await upsertEvents(events, {
+            function: 'SERVICE_MAIN_CONT / UPSERT',
+            table: 'FCT_SERVICE_MAIN_CONT',
+            keyProperty: 'serviceMainContractId'
+        });
+    });
+
+    // mapping issue
+    srv.on('A_FCT_SERVICE_ORDER', async (req) => {
+        const events = Array.isArray(req.data.events) ? req.data.events : [req.data.events];
+        for (let event of events) {
+
+            event.serviceOrderId = (event.id);
+
+            if (typeof event.appointment != "undefined") {
+                event.startDate = (event.appointment.startDate);
+                event.show = (event.appointment.show);
+                event.showDate = (event.appointment.showDate);
+                event.confirmationDate = (event.appointment.confirmationDate);
+                event.plannedStartTimestamp = (event.appointment.plannedStartTimestamp);
+                event.plannedStartDate = (event.appointment.plannedStartDate);
+                event.endDate = (event.appointment.endDate);
+            }
+
+            if (typeof event.addtionalInformation != "undefined") {
+                event.currentOdometer = (event.addtionalInformation.currentOdometer);
+                event.vehicleIdentificationNumber = (event.addtionalInformation.vehicleIdentificationNumber);
+                event.customerName = (event.addtionalInformation.customerName);
+                event.totalServiceTime = (event.addtionalInformation.totalServiceTime);
+                event.make = (event.addtionalInformation.make);
+                event.model = (event.addtionalInformation.model);
+                event.year = (event.addtionalInformation.year);
+                event.variant = (event.addtionalInformation.variant);
+            }
+
+            if (typeof event.partners != "undefined") {
+                event.partner = (event.partners[0].partner);
+                event.partnerFunction = (event.partners[0].partnerFunction);
+                event.partnerName = (event.partners[0].partnerName);
+            }
+
+            if (typeof event.address != "undefined") {
+                event.customerFirstName = (event.address[0].customerFirstName);
+                event.customerLastName = (event.address[0].customerLastName);
+                event.postalCode = (event.address[0].postalCode);
+                event.city = (event.address[0].city);
+                event.region = (event.address[0].region);
+                event.country = (event.address[0].country);
+                event.countryCode = (event.address[0].countryCode);
+                event.state = (event.address[0].state);
+                event.streetAddress = (event.address[0].streetAddress);
+                event.addressType = (event.address[0].addressType);
+                event.phoneNumber = (event.address[0].phoneNumber);
+            }
+
+            if (typeof event.contactInfo != "undefined") {
+                event.emailId = (event.contactInfo.emailId);
+                event.phoneNumber = (event.contactInfo.phoneNumber);
+            }
+        }
+
+        return await upsertEvents(events, {
+            function: 'SERVICE_ORDER / UPSERT',
+            table: 'FCT_SERVICE_ORDER',
+            keyProperty: 'serviceOrderId'
+        });
+    });
+
+    // done
+    srv.on('A_FCT_SERVICE_ORDER_JOB_LINES', async (req) => {
+        const events = Array.isArray(req.data.events) ? req.data.events : [req.data.events];
+        for (let event of events) {
+            event.serviceOrderJoblinesId = (event.id);
+            delete event.id
+        }
+
+        return await upsertEvents(events, {
+            function: 'SERVICE_ORDER_JOB_LINES / UPSERT',
+            table: 'FCT_SERVICE_ORDER_JOB_LINES',
+            keyProperty: 'serviceOrderJoblinesId'
+        });
+    });
+
+    srv.on('A_DIM_VEHICLE_GROUP', async (req) => {
+        const events = Array.isArray(req.data.events) ? req.data.events : [req.data.events];
+        for (let event of events) {
+            event.vehicleIdentificationNumber = (event.id);
+            event.engineCapacity = (event.engineSize);
+            event.odometer = (event.currentOdometer);
+            event.exteriorColours = (event.exteriorColor);
+            event.interiorColours = (event.interiorColor);
+            
+            delete event.id
+            delete event.engineSize
+            delete event.itemStatus
+            delete event.brandCode
+            delete event.referenceDocumentItem
+            delete event.currentOdometer
+            delete event.exteriorColours
+            delete event.interiorColors
+             delete event.quantity
+             delete event.deliveryDate
+             delete event.customerId
+             delete event.orgId
+             delete event.salesOffice
+             delete event.salesGroup
+             delete event.division 
+             delete event.distributionChannel
+             delete event.creationDate
+        }
+
+        return await upsertEvents(events, {
+            function: 'VEHICLE_GROUP / UPSERT',
+            table: 'DIM_VEHICLE_GROUP',
+            keyProperty: 'vehicleIdentificationNumber'
+        });
+    });
+
+
+
+};
+
+const fillObject = (entity, data) => {
+
+    return Object.keys(entity.elements).reduce((a, v) => {
+
+        if (data[v]) {
+
+            return { ...a, [v]: data[v] }
+
+        } else {
+
+            return { ...a }
+
+        }
+
+    }, {});
+
 };

@@ -1,0 +1,1069 @@
+# Sample API call to refresh the integration content of a tenant (change the ObjectID to an existing entity):
+
+#SERVICE ORDER JOBS
+POST http://localhost:4004/upsert/A_FCT_SERVICE_ORDER_JOBS HTTP/1.1
+Content-Type:application/json;charset=UTF-8;IEEE754Compatible=true
+
+{
+  "events" : [
+    {
+      "orderNumber" : "307186891",
+      "id" : "307186891-7",
+      "customerCode" : "210117610",
+      "jobDescription" : "REPLACE V-BELT",
+      "brandCode" : "2001-41",
+      "price" : 0,
+      "jobId" : "7",
+      "isDeferred" : true,
+      "deferredReason" : "ts",
+      "deferredCategory" : "Medium - Necessary",
+      "deferredJobFollowupDate" : "2020-03-03T20:00:00.000Z",
+      "creationDate" : "2019-12-31T20:00:00.000Z"
+    },
+    {
+      "orderNumber" : "307186891",
+      "id" : "307186891-6",
+      "customerCode" : "210117610",
+      "jobDescription" : "REPLACE WIPER RUBBERS",
+      "brandCode" : "2001-41",
+      "price" : 0,
+      "jobId" : "6",
+      "isDeferred" : true,
+      "deferredReason" : "ts",
+      "deferredCategory" : "Medium - Necessary",
+      "deferredJobFollowupDate" : "2020-03-03T20:00:00.000Z",
+      "creationDate" : "2019-12-31T20:00:00.000Z"
+    },
+    {
+      "orderNumber" : "307186891",
+      "id" : "307186891-7",
+      "customerCode" : "210117610",
+      "jobDescription" : "REPLACE V-BELT",
+      "brandCode" : "2001-41",
+      "price" : 0,
+      "jobId" : "7",
+      "isDeferred" : true,
+      "deferredReason" : "ts",
+      "deferredCategory" : "Medium - Necessary",
+      "deferredJobFollowupDate" : "2020-03-03T20:00:00.000Z",
+      "creationDate" : "2019-12-31T20:00:00.000Z"
+    }
+  ]
+}
+
+
+####
+#ECO SYSTEM
+POST http://localhost:4004/upsert/A_FCT_CUST_ECO_SYSTEM HTTP/1.1
+Content-Type:application/json;charset=UTF-8;IEEE754Compatible=true
+
+{
+    "events": [
+        {
+            "initialReviewCompletedDateTime": "1964-03-21T05:49:00.945Z",
+            "additionDetails": "veniam in anim",
+            "priority": "Lorem ad officia",
+            "sourceSystem": "dolor quis do",
+            "VIN": "consequat",
+            "employeeResponsible": "elit",
+            "source": "pariatur cupidatat",
+            "complaintSubCategory": "anim nulla exercitation",
+            "unclearStatusReason": "esse nisi mollit",
+            "customerId": "101510",
+            "originId": "eu pariatur exercitation dolore et",
+            "customerExpectation": "do velit minim",
+            "sourceObjectType": "exercitation sit veniam ea sint",
+            "acquisitionDate": "2001-04-17T05:32:15.686Z",
+            "communicationMedium": "consectetur ullamco ex do",
+            "reportedBy": "dolore Lorem Ut minim eu",
+            "brand": "ut minim nulla",
+            "processingTypeCode": "sunt ea",
+            "contactPersonName": "et consectetur id",
+            "approvalStatus": "proident ad laborum",
+            "lastName": "Emard",
+            "complaintCategory": "minim",
+            "showroomName": "cillum velit nostrud nisi anim",
+            "creationDateTime": "2014-04-11T07:04:42.618Z",
+            "saleDate": "2001-04-17T05:32:15.686Z",
+            "assignedTo": "labore et",
+            "complaintId": "dolore anim cillum reprehenderit exercitation",
+            "status": "dolor commodo sed nulla",
+            "callType": "Duis officia proident ad sunt",
+            "plateNumber": "enim sit",
+            "firstReactionDueDateTime": "1950-04-17T15:03:35.054Z",
+            "vehicleModel": "et id",
+            "contactPersonEmail": "cillum do",
+            "serviceCenterName": "consequat sit minim eu",
+            "odometerReading": "magna Excepteur consequat",
+            "relatedTo": "ut adipisicing",
+            "mainTicketId": "Ut magna non minim",
+            "completedCaseStatus": "cillum Ut nulla minim",
+            "escalationStatus": "nostrud dolor",
+            "firstName": "Jesus",
+            "vehicleMake": "elit irure anim",
+            "complaintTitle": "esse",
+            "completionDueDateTime": "2012-06-24T03:04:54.184Z",
+            "isConsumer": false,
+            "contactPersonMobileNo": "Lorem",
+            "resolvedOnDateTime": "2001-04-17T05:32:15.686Z"
+        },
+          {
+            "initialReviewCompletedDateTime": "1964-03-21T05:49:00.945Z",
+            "additionDetails": "veniam in anim",
+            "priority": "Lorem ad officia",
+            "sourceSystem": "dolor quis do",
+            "VIN": "consequat",
+            "employeeResponsible": "elit",
+            "source": "pariatur cupidatat",
+            "complaintSubCategory": "anim nulla exercitation",
+            "unclearStatusReason": "esse nisi mollit",
+            "customerId": "101510",
+            "originId": "eu pariatur exercitation dolore et",
+            "customerExpectation": "do velit minim",
+            "sourceObjectType": "exercitation sit veniam ea sint",
+            "acquisitionDate": "2001-04-17T05:32:15.686Z",
+            "communicationMedium": "consectetur ullamco ex do",
+            "reportedBy": "dolore Lorem Ut minim eu",
+            "brand": "ut minim nulla",
+            "processingTypeCode": "sunt ea",
+            "contactPersonName": "et consectetur id",
+            "approvalStatus": "proident ad laborum",
+            "lastName": "Emard",
+            "complaintCategory": "minim",
+            "showroomName": "cillum velit nostrud nisi anim",
+            "creationDateTime": "2014-04-11T07:04:42.618Z",
+            "saleDate": "2001-04-17T05:32:15.686Z",
+            "assignedTo": "labore et",
+            "complaintId": "dolore anim cillum reprehenderit exercitation",
+            "status": "dolor commodo sed nulla",
+            "callType": "Duis officia proident ad sunt",
+            "plateNumber": "enim sit",
+            "firstReactionDueDateTime": "1950-04-17T15:03:35.054Z",
+            "vehicleModel": "et id",
+            "contactPersonEmail": "cillum do",
+            "serviceCenterName": "consequat sit minim eu",
+            "odometerReading": "magna Excepteur consequat",
+            "relatedTo": "ut adipisicing",
+            "mainTicketId": "Ut magna non minim",
+            "completedCaseStatus": "cillum Ut nulla minim",
+            "escalationStatus": "nostrud dolor",
+            "firstName": "Jesus",
+            "vehicleMake": "elit irure anim",
+            "complaintTitle": "esse",
+            "completionDueDateTime": "2012-06-24T03:04:54.184Z",
+            "isConsumer": false,
+            "contactPersonMobileNo": "Lorem",
+            "resolvedOnDateTime": "2001-04-17T05:32:15.686Z"
+        }
+    ]
+}
+
+
+#######
+
+####
+# LEAD UPDATES
+POST http://localhost:4004/upsert/FCT_LEAD_UPDATES HTTP/1.1
+Content-Type:application/json;charset=UTF-8;IEEE754Compatible=true
+
+{
+  "events" : [
+    {
+      "orderNumber" : "307186891",
+      "id" : "307186891-7",
+      "customerCode" : "210117610",
+      "jobDescription" : "REPLACE V-BELT",
+      "brandCode" : "2001-41",
+      "price" : 0,
+      "jobId" : "7",
+      "isDeferred" : true,
+      "deferredReason" : "ts",
+      "deferredCategory" : "Medium - Necessary",
+      "deferredJobFollowupDate" : "2020-03-03T20:00:00.000Z"
+     
+    },
+    {
+      "orderNumber" : "307186891",
+      "id" : "307186891-6",
+      "customerCode" : "210117610",
+      "jobDescription" : "REPLACE WIPER RUBBERS",
+      "brandCode" : "2001-41",
+      "price" : 0,
+      "jobId" : "6",
+      "isDeferred" : true,
+      "deferredReason" : "ts",
+      "deferredCategory" : "Medium - Necessary",
+      "deferredJobFollowupDate" : "2020-03-03T20:00:00.000Z"
+    
+    },
+    {
+      "orderNumber" : "307186891",
+      "id" : "307186891-7",
+      "customerCode" : "210117610",
+      "jobDescription" : "REPLACE V-BELT",
+      "brandCode" : "2001-41",
+      "price" : 0,
+      "jobId" : "7",
+      "isDeferred" : true,
+      "deferredReason" : "ts",
+      "deferredCategory" : "Medium - Necessary",
+      "deferredJobFollowupDate" : "2020-03-03T20:00:00.000Z"
+    }
+  ]
+}
+
+#######
+
+####
+#ENQUIRY
+POST http://localhost:4004/upsert/A_FCT_ENQUIRY HTTP/1.1
+Content-Type:application/json;charset=UTF-8;IEEE754Compatible=true
+
+{
+    "events": [
+        {
+            "startDate": "1987-06-28T15:39:07.099Z",
+            "reasonForStatus": "n",
+            "lostTimestamp": "1971-11-19T17:23:07.482Z",
+            "documentType": "on",
+            "vehicleInterests": [
+                {
+                    "testDriveRejection": "it",
+                    "makeCode": "ud",
+                    "tradeIn": "qua",
+                    "sourceOfEnquiry": "rit",
+                    "vehicleCategory": "at",
+                    "budgetLow": "gna",
+                    "bodyStyleCode": "uis",
+                    "testDrive": "unt",
+                    "bodyStyle": "uis",
+                    "currentModel": "non",
+                    "budgetHigh": "is",
+                    "make": "ure",
+                    "model": "ette",
+                    "currentMake": "cia",
+                    "modelGroup": "cing",
+                    "derivative": "sint",
+                    "genericArticleCode": "erit",
+                    "variantCode": "et",
+                    "financeType": "in",
+                    "financeTerm": "re",
+                    "testDriveDate": "1989-10-08T20:09:27.452Z",
+                    "modelCode": "smod"
+                }
+            ],
+            "name": "tur",
+            "fabrication": "tate",
+            "customization": "ex",
+            "weightedValue": 1209,
+            "lastContactTime": "1996-12-21T00:36:13.851Z",
+            "removed": true,
+            "closeDate": "1989-03-19T10:36:31.034Z",
+            "EnquiryDetails": {
+                "EnquiryCreatedDate": "1972-12-13T10:23:28.646Z",
+                "EnquiryStatus": "in",
+                "OrderId": "anim",
+                "QuotationID": "ng"
+            },
+            "firstVisitDate": "1979-03-17T18:45:41.019Z",
+            "fAndIIntroduction": "dor",
+            "customerDetail": {
+                "CRMID": "uip"
+            },
+            "timeOfNextAppointment": "1943-11-05T15:38:29.995Z",
+            "noOfCarsInHousehold": 925,
+            "salesCycle": "et",
+            "modeOfPayment": "unt",
+            "tenderRegistrationStart": "2018-02-12T17:30:18.315Z",
+            "probability": "non",
+            "sourceSystem": "Dus",
+            "lostReason": "ad",
+            "salesPhase": "ua",
+            "enquiryInformation": {
+                "staffId": "6321",
+                "orgId": "ent",
+                "salesGroup": "s",
+                "salesManagerId": "3362",
+                "branchId": "iat",
+                "customerId": "psum",
+                "division": "mo",
+                "salesOffice": "ore",
+                "salesExecutiveId": "663",
+                "leadId": "ure",
+                "enquiryType": "rure",
+                "saleType": "cdo",
+                "distributionChannel": "ut",
+                "offerExpired": "20",
+                "businessManagerId": "55242"
+            },
+            "Partners": [
+                {
+                    "partner": "prosit",
+                    "partnerFunction": "um",
+                    "partnerName": "name"
+                }
+            ],
+            "id": "fc5a3af9-f3ff-4637-842f-b28b5572cf4f",
+            "totalNegotiatedValue": 836,
+            "forecastCategory": "idatat",
+            "expectedValue": 2415,
+            "lastupdatedate": "2006-01-24T09:09:46.186Z",
+            "tenderFee": "at",
+            "orderedDate": "1991-10-27T06:54:04.641Z",
+            "deliveryTimestamp": "2017-01-23T19:11:46.925Z",
+            "lostTo": "vlit",
+            "guaranteedFutureValue": 243,
+            "creationDate": "1978-09-24T10:47:00.308Z",
+            "category": "unt",
+            "natureOfBusiness": "dsint",
+            "tenderRegistrationEnd": "2005-11-28T03:50:48.034Z",
+            "brandCode": "in",
+            "accesories": "nii",
+            "deliveryDate": "2011-12-22T19:43:29.63Z",
+            "paymentType": "441"
+        }
+    ]
+}
+
+####
+#ENQUIRY FOLLOWUP
+POST http://localhost:4004/upsert/A_FCT_ENQUIRY_FOLLOWUP HTTP/1.1
+Content-Type:application/json;charset=UTF-8;IEEE754Compatible=true
+
+{
+    "events": [
+        {
+            "priority": "is",
+            "assignedToSEDate": "2003-10-13T11:07:49.358Z",
+            "action": "ng",
+            "brandCode": "id",
+            "subType": "ur",
+            "customerName": "dat",
+            "channel": "e",
+            "leadId": "qua",
+            "allDayEvent": "iat",
+            "comments": "at",
+            "senderEmailId": "uip",
+            "type": "se",
+            "opportunityId": "nim",
+            "createdBy": "in",
+            "reason": "sum",
+            "sentOn": "2000-08-27T09:29:23.733Z",
+            "primaryContactName": "et",
+            "passedToBranchDate": "1989-10-17T01:27:43.613Z",
+            "division": "ud",
+            "primaryContactId": "re",
+            "activityStart": "1988-07-14T23:21:17.074Z",
+            "createdOn": "1973-04-13T10:06:52.165Z",
+            "mobileNumber": "is",
+            "salesExecId": "re",
+            "chatText": "t",
+            "activityChangedDate": "1943-06-04T22:43:21.773Z",
+            "activityEnd": "1955-01-16T05:52:23.427Z",
+            "salesOffice": "t",
+            "appointmentDate": "1988-12-10T10:42:42.226Z",
+            "location": "st",
+            "senderName": "do",
+            "phoneNumber": "5234",
+            "associatedObject": "unt",
+            "creationDate": "2003-04-16T11:59:15.619Z",
+            "receiverEmailId": "re",
+            "completionPercentage": "ut",
+            "organizer": "is",
+            "dateCompleted": "2013-08-28T21:12:05.131Z",
+            "subject": "ion",
+            "customerId": "ia",
+            "salesOrg": "in",
+            "sourceSystem": "iam",
+            "distributionChannel": "n",
+            "c4cLeadId": "nim",
+            "id": "d6ab9acd",
+            "passToBranchId": "n",
+            "direction": "t",
+            "processor": "ore",
+            "activityTimeStamp": "1948-07-24T06:44:55.406Z",
+            "transmissionStatus": "ed",
+            "associatedObjectId": "ea",
+            "category": "st",
+            "status": "aa",
+            "owner": "rum",
+            "followUpDate": "1952-08-20T03:23:11.235Z",
+            "salesGroup": "Ut",
+            "assignedToSEId": "t",
+            "enquiryid": "vv"
+        }
+    ]
+}
+
+####
+
+####
+#ENQUIRY ITEMS
+POST http://localhost:4004/upsert/A_FCT_ENQUIRY_ITEMS HTTP/1.1
+Content-Type:application/json;charset=UTF-8;IEEE754Compatible=true
+
+{
+  "events" : [
+    {
+      "engineSize" : "2.0 L",
+      "ProductDetails" : [
+        {
+          "productIdDescription" : "Price",
+          "productClassification" : "RSP",
+          "productCost" : "215000.00",
+          "isVatApplicable" : "YES"
+        }
+      ],
+      "engineNumber" : "4233596",
+      "itemStatus" : "1",
+      "brandCode" : "2001-41",
+      "referenceDocumentItem" : "000010",
+      "model" : "NX",
+      "material" : "LXNX03T20A1ERA20",
+      "currentOdometer" : "29928",
+      "enquiryId" : "70166",
+      "id" : "70166-10",
+      "referenceDocument" : "0000070166",
+      "make" : "LEXUS",
+      "derivative" : "2020 NX300 Platinum 2.0L Turbo",
+      "productionDate" : "2019-12-01T00:00:00.000Z",
+      "interiorColor" : "DARK ROSE (F-Sports Only)",
+      "vehicleInternalNumber" : "JTJBARBZ5L2229396",
+      "financeDetails" : [
+        {
+          "financeTerm" : "60",
+          "financeRate" : "2.99",
+          "financeCompanyNumberSAP" : "0200009830",
+          "monthlyPayment" : "1975.17",
+          "cashInput" : "100899.00",
+          "financeCompanyNumber" : "229",
+          "minimumGuaranteedFutureValue" : "0.00",
+          "financeSchemeName" : "HP Scheme(New)",
+          "financeBalance" : "103097.00",
+          "financeType" : "FIN"
+        }
+      ],
+      "quantity" : "1.000",
+      "exteriorColor" : "SONIC QUARTZ",
+      "deliveryDate" : "2020-01-03T20:00:00.000Z",
+      "variantCode" : "LXNX03T20A1ERA2001",
+      "customerId" : "221463299",
+      "modelYear" : "2020",
+      "orgId" : "2001",
+      "salesOffice" : "L711",
+      "salesGroup" : "001",
+      "division" : "41",
+      "distributionChannel" : "10",
+      "creationDate" : "2020-01-04T06:05:05.000Z",
+      "orderItemId" : "44013278-10"
+    }
+  ]
+}
+
+####
+
+####
+#LEAD
+POST http://localhost:4004/upsert/A_FCT_LEAD HTTP/1.1
+Content-Type:application/json;charset=UTF-8;IEEE754Compatible=true
+
+{
+    "events": [
+        {
+            "salesExecutiveId": "ostrud",
+            "creationDate": "1953-08-02T21:36:00.142Z",
+            "type": "caiiiok",
+            "salesOrg": "re",
+            "leadReceivedDate": "1991-12-31T03:37:42.522Z",
+            "distributionChannel": "t",
+            "webSource": "sse",
+            "customerId": "ed",
+            "closedReasonCode": "non",
+            "vehicleInterestMake": "it",
+            "tradeInModelYear": "ulpa",
+            "webFormName": "lpa",
+            "salesGroup": "re",
+            "sourceSystem": "id",
+            "vehicleInterestModelGroup": "re",
+            "lastUpdateDate": "2017-12-05T14:31:07.382Z",
+            "manualLeadCreatedBy": "it",
+            "language": "in",
+            "statusCode": "nt",
+            "enquiryId": "unt",
+            "leadReceivedDateTime": "1982-11-26T10:29:00.242Z",
+            "tradeInMake": "in",
+            "leadPassedByEmpId": "ure",
+            "division": "em",
+            "closedDate": "2008-06-04T05:20:18.723Z",
+            "c4cLeadId": "anim",
+            "createdDate": "1969-12-01T16:14:08.434Z",
+            "brandCode": "su",
+            "tradeInModel": "it",
+            "leadPassedToBranchTimestamp": "1970-04-30T01:23:14.298Z",
+            "source": "cum",
+            "removed": false,
+            "salesOffice": "it",
+            "leadCampaign": "iam",
+            "sourceCode": "est",
+            "closedReason": "ed",
+            "leadId": "orum",
+            
+            "leadStatus": "ex",
+            "salesManagerId": "in",
+            "branch": "fy",
+            "leadChannel": "unt",
+            "webSourceUrl": "webSourceUrl",
+            "googleClientId": "googleClientId",
+            "usedCarVin": "usedCarVin"
+        }
+    ]
+}
+
+####
+
+####
+#LEAD UPDATES
+POST http://localhost:4004/upsert/A_FCT_LEAD_UPDATES HTTP/1.1
+Content-Type:application/json;charset=UTF-8;IEEE754Compatible=true
+
+ {
+     "events": [
+    
+    {
+      "leadUpdatedId": "5521",
+      "leadId": "1",
+      "sourceSystem": "1",
+      "leadStatus": "1",
+      "status": "33",
+      "customerId": "120299"
+    },
+    {
+      "leadUpdatedId": "5521",
+      "leadId": "1",
+      "sourceSystem": "1",
+      "leadStatus": "1",
+      "status": "33",
+      "customerId": "120299"
+    },
+    {
+      "leadUpdatedId": "5521",
+      "leadId": "1",
+      "sourceSystem": "1",
+      "leadStatus": "1",
+      "status": "33",
+      "customerId": "120299"
+    },
+    {
+      "leadUpdatedId": "5521",
+      "leadId": "1",
+      "sourceSystem": "1",
+      "leadStatus": "1",
+      "status": "33",
+      "customerId": "120299"
+    },
+    {
+      "leadUpdatedId": "5521",
+      "leadId": "1",
+      "sourceSystem": "1",
+      "leadStatus": "1",
+      "status": "33",
+      "customerId": "120299"
+    },
+    {
+      "leadUpdatedId": "5521",
+      "leadId": "1",
+      "sourceSystem": "1",
+      "leadStatus": "1",
+      "status": "33",
+      "customerId": "120299"
+    },
+    {
+      "leadUpdatedId": "5521",
+      "leadId": "1",
+      "sourceSystem": "1",
+      "leadStatus": "1",
+      "status": "33",
+      "customerId": "120299"
+    },
+    {
+      "leadUpdatedId": "5521",
+      "leadId": "1",
+      "sourceSystem": "1",
+      "leadStatus": "1",
+      "status": "33",
+      "customerId": "120299"
+    },
+    {
+      "leadUpdatedId": "5521",
+      "leadId": "1",
+      "sourceSystem": "1",
+      "leadStatus": "1",
+      "status": "33",
+      "customerId": "120299"
+    },
+    {
+      "leadUpdatedId": "5521",
+      "leadId": "1",
+      "sourceSystem": "1",
+      "leadStatus": "1",
+      "status": "33",
+      "customerId": "120299"
+    },
+    {
+      "leadUpdatedId": "5521",
+      "leadId": "1",
+      "sourceSystem": "1",
+      "leadStatus": "1",
+      "status": "33",
+      "customerId": "120299"
+    },
+    {
+      "leadUpdatedId": "5521",
+      "leadId": "1",
+      "sourceSystem": "1",
+      "leadStatus": "1",
+      "status": "33",
+      "customerId": "120299"
+    },
+    {
+      "leadUpdatedId": "5521",
+      "leadId": "1",
+      "sourceSystem": "1",
+      "leadStatus": "1",
+      "status": "33",
+      "customerId": "120299"
+    }
+  ]
+ }
+
+#####
+
+####
+#MATERIAL
+POST http://localhost:4004/upsert/A_DIM_MATERIAL HTTP/1.1
+Content-Type:application/json;charset=UTF-8;IEEE754Compatible=true
+
+{
+    "events": [
+        {
+            "torque": "niam",
+            "material": "iatur",
+            "numberOfTyres": 831,
+            "numberOfGears": 16,
+            "transmissionType": "mmodo",
+            "fuelTankCapacity": "ed",
+            "modelYear": 30163,
+            "tireSize": "por",
+            "vehicleType": "borum",
+            "engineCapacity": "elit",
+            "numberOfCylinders": 2264,
+            "typeOfWheel": "pteur",
+            "cubicCapacity": "esse",
+            "numberOfDoors": 312,
+            "yearOfManufature": 581,
+            "bodyType": "in",
+            "modelCode": "nim",
+            "derivative": "uip",
+            "engineType": "a",
+            "trimType": "ectetur",
+            "numberOfValves": 53,
+            "numberOfSeats": "rumin",
+            "make": "eniam",
+            "fuelType": "lit",
+            "numberOfAxles": 39,
+            "countryOfOrigin": "idunt",
+            "finalDrive": "empor",
+            "makeCode": "cat",
+            "modelGrade": "icia",
+            "model": "on",
+            "modelGroup": "na",
+            "specificationRegion": "am"
+        }
+    ]
+}
+
+#####
+
+####
+#OPPORTUNITY
+POST http://localhost:4004/upsert/A_FCT_OPPORTUNITY HTTP/1.1
+Content-Type:application/json;charset=UTF-8;IEEE754Compatible=true
+
+{
+    "events": [
+        {
+          "opportunityId" : "5521456",
+            "sourceSystem": "sourceSystemhdbTest",
+            "status": "status",
+            "createdDate": "2003-10-13T11:07:49.358Z",
+            "type": "type",
+            "salesOffice": "254",
+            "lostReason": "lostreason",
+            "lostDate": "2003-10-13T11:07:49.358Z",
+            "currentVehicleMake": "5225",
+            "currentVehicleModel": "2564",
+            "salesExecutiveId": "258",
+            "brandCode": "521"
+        },
+        {
+          "opportunityId" : "5521456",
+            "sourceSystem": "hdbTest",
+            "status": "status",
+            "createdDate": "2003-10-13T11:07:49.358Z",
+            "type": "type",
+            "salesOffice": "254",
+            "lostReason": "lostreason",
+            "lostDate": "2003-10-13T11:07:49.358Z",
+            "currentVehicleMake": "5225",
+            "currentVehicleModel": "2564",
+            "salesExecutiveId": "258",
+            "brandCode": "521"
+        }
+    ]
+}
+
+####
+
+
+#######
+#ORDER ITEMS
+POST http://localhost:4004/upsert/A_FCT_ORDER_ITEMS HTTP/1.1
+Content-Type:application/json;charset=UTF-8;IEEE754Compatible=true
+
+{
+    "events": [
+        {
+            "salesGroup": "ut",
+            "productClassification": "irure",
+            "creationDate": "1952-08-09T15:02:46.985Z",
+            "productIdDescription": "sit",
+            "quantity": 795,
+            "removed": false,
+            "rejectionReason": "it",
+            "productCategory": "odo",
+            "invoiceDate": "1995-03-30T10:02:04.22Z",
+            "salesOffice": "in",
+            "orderAmount": 92338,
+            "itemStatus": "t",
+            "brandCode": "at",
+            "deliveryDate": "1970-06-22T15:30:19.971Z",
+            "customerId": "ecat",
+            "derivative": "t",
+            "orderNumber": "Lorem",
+            "material": "agna",
+            "vehicleIdentificationNumber": "qui",
+            "sourceSystem": "aliquip enim ullamco proident",
+            "vehicleDetails": "consequat",
+            "item": "it",
+            "itemAmount": 547762,
+            "id": "d5fce3fb",
+            "productId": "mmodo",
+            "orderId": "254",
+            "deliveryTime": "1952-08-09T15:02:46.985Z"
+        }
+    ]
+}
+
+
+####
+#ORDER ITEMS
+POST http://localhost:4004/upsert/A_FCT_ORDERS HTTP/1.1
+Content-Type:application/json;charset=UTF-8;IEEE754Compatible=true
+
+{
+      "events": [{
+        "orgId": "12",
+        "brandCode": "d",
+        "tax":327,
+        "expectedDeliveryDate": "2003-10-13T11:07:49.358Z",
+        "sourceSystem": "consequat fugiat officia veniam",
+        "finance": {
+          "financeSchemaName": "la",
+          "endDate": "2018-05-24",
+          "type": "ia",
+          "balance": "552",
+          "productCategory": "cia",
+          "startDate": "2002-09-13",
+          "minimumGuaranteedFutureValue": 552,
+          "invoiceId": "inim",
+          "rate": 52,
+          "term": "anim",
+          "monthlyPayment": 22037
+        },
+        "orderType": "ur",
+        "currency": "si",
+        "invoiceId": "ut ut",
+        "distributionchannel": "m",
+        "partners": [{
+          "partnerName": "laborum",
+          "partnerFunction": "at",
+          "partner": "se"
+        }],
+        "division": "sse",
+        "opportunityId": "anim",
+        "customerId": "magna",
+        "orderStatus": "r",
+        "salesExecutiveId": "olor",
+        "branchcode": "nt",
+        "amount": 525.14,
+        "salesManagerId": "runt",
+        "removed": true,
+        "quotationId": "cillum",
+        "creationDate": "2012-05-28",
+        "id": "715c1c52-8e77-4b53-a15d-5dcb3ea615e1",
+        "salesGroup": "im",
+        "rate":12,
+        "lastUpdatedDate":"2022-01-01"
+      }]
+    }
+
+
+
+
+####
+
+
+#########
+#ORDER ITEMS
+POST http://localhost:4004/upsert/A_FCT_QUOTATIONS_ITEMS HTTP/1.1
+Content-Type:application/json;charset=UTF-8;IEEE754Compatible=true
+
+{
+    "events": [
+        {
+            "productClassification": "ur",
+            "quantity": 91,
+            "productId": "rit",
+            "brandCode": "o",
+            "rejectionReason": "it",
+            "quotationNumber": "ion",
+            "productCategory": "sed",
+            "sourceSystem": "sit",
+            "vehicleIdentificationNumber": "4415in",
+            "id": "77d983da-ca9f-441c-ad93-2107001186fb",
+            "quotationAmount": 144,
+            "salesGroup": "do",
+            "productIdDescription": "lit",
+            "deliveryDate": "2000-10-23T12:07:05.07Z",
+            "lastUpdateDate": "1992-01-22T15:33:08.425Z",
+            "itemAmount": 89,
+            "item": "eu",
+            "customerId": "eu",
+            "derivative": "enim",
+            "itemStatus": "ur",
+            "material": "elit",
+            "vehicleDetails": "onsequat",
+            "quotationId": "441"
+        }
+    ]
+}
+
+
+#########
+# SERVICE MAIN CONT
+POST http://localhost:4004/upsert/A_FCT_SERVICE_MAIN_CONT HTTP/1.1
+Content-Type:application/json;charset=UTF-8;IEEE754Compatible=true
+
+{
+    "events": [
+        {
+            "salesGroup": "a",
+            "coverageItemNumber": 96321,
+            "fleetCounterUnit": "it",
+            "currency": "sum",
+            "contractType": "rum",
+            "distributionchannel": "m",
+            "sourceSystem": "agna",
+            "orgId": "in",
+            "brandCode": "ex",
+            "contractServiceAdvisor": "ididunt",
+            "initialContractOdometer": 2459,
+            "serviceContractItem": 6632,
+            "startDate": "1990-03-10T03:02:43.147Z",
+            "serviceAdvisorId": "quin",
+            "customerCode": "agna",
+            "coverageConsumption": 22,
+            "creationDate": "1952-12-02T02:33:48.119Z",
+            "removed": false,
+            "salesOffice": "ing",
+            "amount": 531.14,
+            "id": "100467a",
+            "coverageCounter": 6,
+            "contractStartDate": "2001-06-18T21:11:53.829Z",
+            "packageHeaderIdentification": "qui",
+            "serviceContractNumber": "8521477",
+            "counterReadingMileageTo": 471,
+            "counterReadingMileageFrom": 894,
+            "division": "ur",
+            "contractStatus": "ut",
+            "branchcode": "ur",
+            "endDate": "1996-10-20T12:06:53.594Z",
+            "contractEndDate": "1996-10-20T12:06:53.594Z",
+            "vehicleIdentificationNumber": "rure"
+        }
+    ]
+}
+
+
+#########
+# SERVICE ORDERS
+POST http://localhost:4004/upsert/A_FCT_SERVICE_ORDER HTTP/1.1
+Content-Type:application/json;charset=UTF-8;IEEE754Compatible=true
+
+{
+  "events" : [
+    {
+      "addtionalInformation" : {
+        "vehicleIdentificationNumber" : "JTJHY00W2G4189203",
+        "currentOdometer" : 97123,
+        "locationName" : "LX-Sharjah Wadha A.sales"
+      },
+      "id" : "307186891",
+      "orgId" : "2001",
+      "brandCode" : "2001-41",
+      "orderNumber" : "307186891",
+      "salesGroup" : "017",
+      "closeDate" : "2020-01-03T20:00:00.000Z",
+      "status" : "Invoiced (repost cost)",
+      "vehicleOnsite" : false,
+      "division" : "41",
+      "amount" : 4027.65,
+      "serviceDate" : "2019-12-31T20:00:00.000Z",
+      "serviceAdvisorNumber" : "153534",
+      "customerCode" : "210117610",
+      "orderType" : "Z130",
+      "distributionchannel" : "30",
+      "appointment" : {
+        "startDate" : "2020-01-02T07:15:00.000Z",
+        "endDate" : "2020-01-04T07:00:00.000Z"
+      },
+      "creationDate" : "2019-12-31T20:00:00.000Z",
+      "invoiceDate" : "2020-01-03T20:00:00.000Z"
+    },
+    {
+      "addtionalInformation" : {
+        "vehicleIdentificationNumber" : "JTHBA5D24G5029916",
+        "currentOdometer" : 60786,
+        "locationName" : "LX-Fujairah A.sales"
+      },
+      "id" : "307186892",
+      "orgId" : "2001",
+      "brandCode" : "2001-41",
+      "orderNumber" : "307186892",
+      "salesGroup" : "001",
+      "closeDate" : "2020-01-07T20:00:00.000Z",
+      "status" : "Invoiced (repost cost)",
+      "vehicleOnsite" : false,
+      "division" : "41",
+      "amount" : 1519.28,
+      "serviceDate" : "2019-12-31T20:00:00.000Z",
+      "serviceAdvisorNumber" : "131846",
+      "customerCode" : "220473534",
+      "orderType" : "Z130",
+      "distributionchannel" : "30",
+      "appointment" : {
+        "startDate" : "2020-01-02T10:15:00.000Z",
+        "endDate" : "2020-01-02T13:15:00.000Z"
+      },
+      "creationDate" : "2019-12-31T20:00:00.000Z",
+      "invoiceDate" : "2020-01-03T20:00:00.000Z"
+    }
+  ]
+}
+
+
+#########
+# SERVICE ORDER JOB LINES
+POST http://localhost:4004/upsert/A_FCT_SERVICE_ORDER_JOB_LINES HTTP/1.1
+Content-Type:application/json;charset=UTF-8;IEEE754Compatible=true
+
+{
+  "events" : [
+    {
+      "uom" : "STD",
+      "jobNumber" : "7",
+      "orderType" : "Z130",
+      "material" : "MECH1",
+      "id" : "307186891-250-7",
+      "brandCode" : "2001-41",
+      "currency" : "AED",
+      "jobDescription" : "REPLACE V-BELT",
+      "discount" : 0,
+      "salesGroup" : "017",
+      "sourceSystem" : "ISAUTO",
+      "total" : 0,
+      "description" : "V BELT",
+      "orderTypeDesc" : "Z130 - AFM Service Workshop",
+      "quantity" : 1,
+      "item" : "250",
+      "price" : 450,
+      "creationDate" : "2020-01-01T00:00:00.000Z"
+    },
+    {
+      "uom" : "STD",
+      "jobNumber" : "6",
+      "orderType" : "Z130",
+      "material" : "MECH1",
+      "id" : "307186891-240-6",
+      "brandCode" : "2001-41",
+      "currency" : "AED",
+      "jobDescription" : "REPLACE WIPER RUBBERS",
+      "discount" : 0,
+      "salesGroup" : "017",
+      "sourceSystem" : "ISAUTO",
+      "total" : 0,
+      "description" : "GR REP ALL WIPER RUBBER",
+      "orderTypeDesc" : "Z130 - AFM Service Workshop",
+      "quantity" : 0,
+      "item" : "240",
+      "price" : 450,
+      "creationDate" : "2020-01-01T00:00:00.000Z"
+    }
+  ]
+}
+
+
+
+
+#########
+# SERVICE ORDER JOB LINES
+POST http://localhost:4004/upsert/A_DIM_VEHICLE_GROUP HTTP/1.1
+Content-Type:application/json;charset=UTF-8;IEEE754Compatible=true
+
+
+{
+    "events": [
+{
+    "engineSize": "2.0 L",
+    "engineNumber": "4105124",
+    "itemStatus": "1",
+    "brandCode": "2001-41",
+    "referenceDocumentItem": "000000",
+    "model": "NX",
+    "modelCode": "AMULX0018",
+    "material": "LXNX03T20A1ERA20",
+    "currentOdometer": "0",
+    "id": "71197-20",
+    "make": "LEXUS",
+    "derivative": "2020 NX300 Platinum 2.0L Turbo",
+  
+    "interiorColor": "DARK ROSE (F-Sports Only)",
+    "vehicleInternalNumber": "JTJBARBZ4L2217739",
+    "quantity": "1.000",
+    "exteriorColor": "SONIC QUARTZ",
+    "deliveryDate": "0002-11-29T20:00:00.000Z",
+    "variantCode": "LXNX03T20A1ERA2001",
+    "customerId": "221463772",
+    "modelYear": "2020",
+    "orgId": "2001",
+    "salesOffice": "L431",
+    "salesGroup": "001",
+    "division": "41",
+    "distributionChannel": "20",
+    "creationDate": "2020-01-04T12:55:46.000Z"
+}
+]
+}
+
+
+

@@ -1,5 +1,5 @@
 {
-  "xsappname": "AFG-CAP-API",
+  "xsappname": "afg-server-cap",
   "tenant-mode": "dedicated",
   "description": "Security profile of AFG-CAP-API",
   "scopes": [

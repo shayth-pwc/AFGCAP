@@ -1,7 +1,7 @@
 _schema-version: '3.1'
-ID: CAP
+ID: afg-server
 version: 1.0.0
-description: "A simple CAP project."
+description: A simple CAP project.
 parameters:
   enable-parallel-deployments: true
 build-parameters:
@@ -18,13 +18,12 @@ modules:
     build-parameters:
       builder: npm-ci
     provides:
-      - name: srv-api # required by consumers of CAP services (e.g. approuter)
+      - name: srv-api
         properties:
-          srv-url: ${default-url}
+          srv-url: '${default-url}'
     requires:
       - name: CAP-db
       - name: CAP-auth
-
   - name: CAP-db-deployer
     type: hdb
     path: gen/db
@@ -32,7 +31,6 @@ modules:
       buildpack: nodejs_buildpack
     requires:
       - name: CAP-db
-
 resources:
   - name: CAP-db
     type: com.sap.xs.hdi-container
