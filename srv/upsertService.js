@@ -52,6 +52,48 @@ module.exports = async (srv) => {
         }
         return response;
     };
+    // checks if the 'item' is an array, if yes: take the first element of the array and add it to the main event. If no: add the element to the main event.
+    const assignFirstChild = (target, item) => {
+        if (Array.isArray(target[item]) && target[item].length >= 1) {
+            Object.assign(target, target[item][0]);
+            delete target[item];
+        } else {
+            Object.assign(target, target[item]);
+            delete target[item];
+        }
+    };
+    // gets all columns of all tables in the schema, so we know the table structures in HANA
+    const getHANATableColumns = async (schemaName) => {
+        const tableFields = {};
+        const cols = await cds.run(`SELECT TABLE_NAME, COLUMN_NAME FROM SYS.TABLE_COLUMNS WHERE SCHEMA_NAME = '${schemaName}'`);
+        for (c of cols) {
+            if (tableFields[c.TABLE_NAME]) {
+                tableFields[c.TABLE_NAME].push(c.COLUMN_NAME);
+            } else {
+                tableFields[c.TABLE_NAME] = [c.COLUMN_NAME];
+            }
+        }
+        return tableFields;
+    };
+    // removes properties from the event if they don't fit in HANA, and logs the ones that are in HANA but not in the Event
+    const mapToHANAStructure = (event, tableName) => {
+        const deleted = [];
+        for (k of Object.keys(event)) {
+            if (!HANA_Tables[tableName].includes(k.toUpperCase())) {
+                deleted.push(k);
+                delete event[k];
+            }
+        }
+        deleted.length > 0 && console.log(`WARNING for ${tableName}: Removed ${deleted.length} properties coming from Boomi: ${deleted.join(', ')}`);
+        const upperCaseKeys = Object.keys(event).map(x => x.toUpperCase());
+        const missing = HANA_Tables[tableName].filter(x => !upperCaseKeys.includes(x));
+        missing.length > 0 && console.log(`WARNING for ${tableName}: Missing ${missing.length} properties HANA expects: ${missing.join(', ')}`);
+    }
+
+    // load HANA table structure when app starts
+    const HANA_Tables = await getHANATableColumns('TECHDBUSER1');
+    console.log(`Downloaded table structures of ${Object.keys(HANA_Tables).length} tables`);
+
     //done
     srv.on('A_FCT_SERVICE_ORDER_JOBS', async (req) => {
         const events = Array.isArray(req.data.events) ? req.data.events : [req.data.events];
@@ -61,10 +103,6 @@ module.exports = async (srv) => {
             delete event.creationDate;
 
             event.isDeferred = (event.isDeferred === true);
-
-            console.log(cds.entities('FCT').SERVICE_ORDER_JOBS.elements);
-
-            //event = fillObject(cds.entities('FCT').SERVICE_ORDER_JOBS, event)
         }
 
         return await upsertEvents(events, {
@@ -91,55 +129,55 @@ module.exports = async (srv) => {
         for (let event of events) {
             event.enquiryId = (event.id);
 
-            if (typeof event.partners != "undefined") {
-                event.partner = (event.partners[0].partner);
-                event.partnerFunction = (event.partners[0].partnerFunction);
-                event.partnerName = (event.partners[0].partnerName);
-            }
+            // if (typeof event.vehicleInterests != "undefined") {
+            //     event.variant_Code = (event.vehicleInterests[0].variantCode);
+            //     event.modelGroup = (event.vehicleInterests[0].modelGroup);
+            //     event.genericArticleCode = (event.vehicleInterests[0].genericArticleCode);
+            //     event.testDriveDate = (event.vehicleInterests[0].testDriveDate);
+            //     event.testDrive = (event.vehicleInterests[0].testDrive);
+            //     event.vehicle_model = (event.vehicleInterests[0].model);
+            //     event.tradeIn = (event.vehicleInterests[0].tradeIn);
+            //     event.budgetLow = (event.vehicleInterests[0].budgetLow);
+            //     event.budgetHigh = (event.vehicleInterests[0].budgetHigh);
+            //     event.financeType = (event.vehicleInterests[0].financeType);
+            //     event.currentMake = (event.vehicleInterests[0].currentMake);
+            //     event.financeTerm = (event.vehicleInterests[0].financeTerm);
+            //     event.testDriveRejection = (event.vehicleInterests[0].testDriveRejection);
+            //     event.currentModel = (event.vehicleInterests[0].currentModel);
+            //     event.sourceOfEnquiry = (event.vehicleInterests[0].sourceOfEnquiry);
+            // }
+            // if (typeof event.EnquiryDetails != "undefined") {
+            //     event.EnquiryStatus = (event.EnquiryDetails.EnquiryStatus);
+            //     event.QuotationID = (event.EnquiryDetails.QuotationID);
+            //     event.EnquiryCreatedDate = (event.EnquiryDetails.EnquiryCreatedDate);
+            //     event.OrderId = (event.EnquiryDetails.OrderId);
+            // }
 
-            if (typeof event.vehicleInterests != "undefined") {
-                event.variant_Code = (event.vehicleInterests[0].variantCode);
-                event.modelGroup = (event.vehicleInterests[0].modelGroup);
-                event.genericArticleCode = (event.vehicleInterests[0].genericArticleCode);
-                event.testDriveDate = (event.vehicleInterests[0].testDriveDate);
-                event.testDrive = (event.vehicleInterests[0].testDrive);
-                event.vehicle_model = (event.vehicleInterests[0].model);
-                event.tradeIn = (event.vehicleInterests[0].tradeIn);
-                event.budgetLow = (event.vehicleInterests[0].budgetLow);
-                event.budgetHigh = (event.vehicleInterests[0].budgetHigh);
-                event.financeType = (event.vehicleInterests[0].financeType);
-                event.currentMake = (event.vehicleInterests[0].currentMake);
-                event.financeTerm = (event.vehicleInterests[0].financeTerm);
-                event.testDriveRejection = (event.vehicleInterests[0].testDriveRejection);
-                event.currentModel = (event.vehicleInterests[0].currentModel);
-                event.sourceOfEnquiry = (event.vehicleInterests[0].sourceOfEnquiry);
-            }
-            if (typeof event.EnquiryDetails != "undefined") {
-                event.EnquiryStatus = (event.EnquiryDetails.EnquiryStatus);
-                event.QuotationID = (event.EnquiryDetails.QuotationID);
-                event.EnquiryCreatedDate = (event.EnquiryDetails.EnquiryCreatedDate);
-                event.OrderId = (event.EnquiryDetails.OrderId);
-            }
+            // if (typeof event.enquiryInformation != "undefined") {
+            //     event.salesManagerId = (event.enquiryInformation.salesManagerId);
+            //     event.offerExpired = (event.enquiryInformation.offerExpired);
+            //     event.businessManagerId = (event.enquiryInformation.businessManagerId);
+            //     event.customerId = (event.enquiryInformation.customerId);
+            //     event.enquiryType = (event.enquiryInformation.enquiryType);
+            //     event.branchId = (event.enquiryInformation.branchId);
+            //     event.saleType = (event.enquiryInformation.saleType);
+            //     event.staffId = (event.enquiryInformation.staffId);
+            //     event.distributionChannel = (event.enquiryInformation.distributionChannel);
+            //     event.salesGroup = (event.enquiryInformation.salesGroup);
+            //     event.division = (event.enquiryInformation.division);
+            //     event.salesOffice = (event.enquiryInformation.salesOffice);
+            //     event.leadId = (event.enquiryInformation.leadId);
+            //     event.salesExecutiveId = (event.enquiryInformation.salesExecutiveId);
+            //     event.orgId = (event.enquiryInformation.orgId);
+            // }
 
-            if (typeof event.enquiryInformation != "undefined") {
-                event.salesManagerId = (event.enquiryInformation.salesManagerId);
-                event.offerExpired = (event.enquiryInformation.offerExpired);
-                event.businessManagerId = (event.enquiryInformation.businessManagerId);
-                event.customerId = (event.enquiryInformation.customerId);
-                event.enquiryType = (event.enquiryInformation.enquiryType);
-                event.branchId = (event.enquiryInformation.branchId);
-                event.saleType = (event.enquiryInformation.saleType);
-                event.staffId = (event.enquiryInformation.staffId);
-                event.distributionChannel = (event.enquiryInformation.distributionChannel);
-                event.salesGroup = (event.enquiryInformation.salesGroup);
-                event.division = (event.enquiryInformation.division);
-                event.salesOffice = (event.enquiryInformation.salesOffice);
-                event.leadId = (event.enquiryInformation.leadId);
-                event.salesExecutiveId = (event.enquiryInformation.salesExecutiveId);
-                event.orgId = (event.enquiryInformation.orgId);
-            }
+            assignFirstChild(event, 'Partners');
+            assignFirstChild(event, 'vehicleInterests');
+            assignFirstChild(event, 'EnquiryDetails');
+            assignFirstChild(event, 'customerDetail');
+            assignFirstChild(event, 'enquiryInformation');
 
-
+            mapToHANAStructure(event, 'FCT_ENQUIRY');
         }
 
         return await upsertEvents(events, {
@@ -477,7 +515,7 @@ module.exports = async (srv) => {
             event.odometer = (event.currentOdometer);
             event.exteriorColours = (event.exteriorColor);
             event.interiorColours = (event.interiorColor);
-            
+
             delete event.id
             delete event.engineSize
             delete event.itemStatus
@@ -486,15 +524,15 @@ module.exports = async (srv) => {
             delete event.currentOdometer
             delete event.exteriorColours
             delete event.interiorColors
-             delete event.quantity
-             delete event.deliveryDate
-             delete event.customerId
-             delete event.orgId
-             delete event.salesOffice
-             delete event.salesGroup
-             delete event.division 
-             delete event.distributionChannel
-             delete event.creationDate
+            delete event.quantity
+            delete event.deliveryDate
+            delete event.customerId
+            delete event.orgId
+            delete event.salesOffice
+            delete event.salesGroup
+            delete event.division
+            delete event.distributionChannel
+            delete event.creationDate
         }
 
         return await upsertEvents(events, {
@@ -505,23 +543,5 @@ module.exports = async (srv) => {
     });
 
 
-
-};
-
-const fillObject = (entity, data) => {
-
-    return Object.keys(entity.elements).reduce((a, v) => {
-
-        if (data[v]) {
-
-            return { ...a, [v]: data[v] }
-
-        } else {
-
-            return { ...a }
-
-        }
-
-    }, {});
 
 };

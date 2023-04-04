@@ -6,7 +6,7 @@ service API {}
 service FCT {}
 service DIM {}
 
-service UpsertService {
+service UpsertService @(impl: './upsertService.js') {
   entity ResponseMessages       as projection on API.ResponseMessages;
 
   entity FCT_SERVICE_ORDER_JOBS as projection on FCT.SERVICE_ORDER_JOBS;

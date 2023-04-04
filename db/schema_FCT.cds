@@ -81,9 +81,9 @@ entity RECALLS {
 
 @cds.persistence.exists
 entity SERVICE_ORDER_JOB_LINES {
-  //
-  id : String;
-  //
+      //
+      id                     : String;
+      //
   key serviceOrderJoblinesId : String;
       serviceOrderJobId      : String;
       sourceSystem           : String;
@@ -112,11 +112,11 @@ entity SERVICE_ORDER_JOB_LINES {
 
 @cds.persistence.exists
 entity SERVICE_MAIN_CONT {
-    //
-  id : String;
-  removed : Boolean default false;
-  contractEndDate : DateTime;
-  //
+      //
+      id                          : String;
+      removed                     : Boolean default false;
+      contractEndDate             : DateTime;
+      //
   key serviceMainContractId       : String;
       sourceSystem                : String;
       brandCode                   : String;
@@ -153,13 +153,13 @@ entity SERVICE_MAIN_CONT {
 
 @cds.persistence.exists
 entity ORDER_ITEMS {
-  //
-  creationDate : DateTime;
-  removed : Boolean  default false;
-  salesOffice : String;
-  id : String(500);
-  deliveryTime : DateTime;
-  //
+      //
+      creationDate                : DateTime;
+      removed                     : Boolean default false;
+      salesOffice                 : String;
+      id                          : String(500);
+      deliveryTime                : DateTime;
+      //
   key orderItemId                 : String(500);
       orderId                     : String;
       sourceSystem                : String;
@@ -189,9 +189,9 @@ entity ORDER_ITEMS {
 
 @cds.persistence.exists
 entity QUOTATIONS_ITEMS {
-  //
-  id : String;
-  //
+      //
+      id                          : String;
+      //
   key quotationsItemsId           : String;
       quotationId                 : String;
       sourceSystem                : String;
@@ -236,13 +236,13 @@ entity OPPORTUNITY {
 
 @cds.persistence.exists
 entity LEAD_UPDATES {
-  leadUpdatedId : String;
-  key leadUpdateId : String;
-      sourceSystem : String;
-      leadId       : String;
-      leadStatus   : String;
-      status       : String;
-      customerId   : String;
+      leadUpdatedId : String;
+  key leadUpdateId  : String;
+      sourceSystem  : String;
+      leadId        : String;
+      leadStatus    : String;
+      status        : String;
+      customerId    : String;
 };
 
 @cds.persistence.exists
@@ -469,8 +469,67 @@ entity ENQUIRY_ITEMS {
 
 @cds.persistence.exists
 entity ENQUIRY {
-
-  key enquiryId               : String;
+      vehicleInterests        : Composition of many {
+                                  testDriveRejection : String;
+                                  makeCode           : String;
+                                  tradeIn            : String;
+                                  sourceOfEnquiry    : String;
+                                  vehicleCategory    : String;
+                                  budgetLow          : String;
+                                  bodyStyleCode      : String;
+                                  testDrive          : String;
+                                  bodyStyle          : String;
+                                  currentModel       : String;
+                                  budgetHigh         : String;
+                                  make               : String;
+                                  model              : String;
+                                  currentMake        : String;
+                                  modelGroup         : String;
+                                  derivative         : String;
+                                  genericArticleCode : String;
+                                  variantCode        : String;
+                                  financeType        : String;
+                                  financeTerm        : String;
+                                  testDriveDate      : DateTime;
+                                  modelCode          : String;
+                                };
+      EnquiryDetails          : Composition of one {
+                                  EnquiryCreatedDate : DateTime;
+                                  EnquiryStatus      : String;
+                                  OrderId            : String;
+                                  QuotationID        : String;
+                                };
+      customerDetail          : Composition of one {
+                                  CRMID : String;
+                                };
+      enquiryInformation      : Composition of one {
+                                  staffId             : Decimal default 0;
+                                  orgId               : String;
+                                  salesGroup          : String;
+                                  salesManagerId      : Decimal default 0;
+                                  branchId            : String;
+                                  customerId          : String;
+                                  division            : String;
+                                  salesOffice         : String;
+                                  salesExecutiveId    : Decimal default 0;
+                                  leadId              : String;
+                                  enquiryType         : String;
+                                  saleType            : String;
+                                  distributionChannel : String;
+                                  offerExpired        : String;
+                                  businessManagerId   : Decimal default 0;
+                                };
+      Partners                : Composition of many {
+                                  partner         : String;
+                                  partnerFunction : String;
+                                  partnerName     : String;
+                                };
+      removed                 : Boolean;
+      lostTo                  : String;
+      guaranteedFutureValue   : Decimal;
+      creationDate            : DateTime;
+      paymentType             : String;
+  key id                      : String; //enquiryId
       salesManagerId          : Decimal default 0;
       offerExpired            : String;
       businessManagerId       : Decimal default 0;
@@ -515,7 +574,7 @@ entity ENQUIRY {
       orgId                   : String;
       lostTimestamp           : String;
       lostReason              : String;
-      noOfCarsInHousehold     : String;
+      noOfCarsInHousehold     : Decimal;
       timeOfNextAppointment   : DateTime;
       deliveryTimestamp       : DateTime;
       orderedDate             : DateTime;
