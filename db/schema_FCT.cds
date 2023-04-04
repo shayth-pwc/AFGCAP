@@ -1,6 +1,5 @@
 namespace FCT;
 
-
 @cds.persistence.exists
 entity SERVICE_ORDER_JOBS {
       creationDate                : Timestamp;
@@ -215,7 +214,6 @@ entity QUOTATIONS_ITEMS {
       lastUpdateDate              : DateTime;
       quotationNumber             : String;
       quotationAmount             : Decimal default 0;
-
 };
 
 @cds.persistence.exists
@@ -293,7 +291,6 @@ entity LEAD {
       leadReceivedDateTime        : String;
       manualLeadCreatedBy         : String;
       customerId                  : String;
-
 };
 
 @cds.persistence.exists
@@ -408,20 +405,45 @@ entity CUST_ECO_SYSTEM {
       isConsumer                     : Boolean default false;
       contactPersonMobileNo          : String;
       resolvedOnDateTime             : String;
-
-}
+};
 
 @cds.persistence.exists
-
 entity ENQUIRY_ITEMS {
-
-      //ProductDetails : String @assert.range enum{productClassification;};
+      ProductDetails               : Composition of many {
+                                       productIdDescription  : String;
+                                       productClassification : String;
+                                       productCost           : String;
+                                       isVatApplicable       : String;
+                                     };
+      financeDetails               : Composition of many {
+                                       financeTerm                  : String;
+                                       financeRate                  : String;
+                                       financeCompanyNumberSAP      : String;
+                                       monthlyPayment               : String;
+                                       cashInput                    : String;
+                                       financeCompanyNumber         : String;
+                                       minimumGuaranteedFutureValue : String;
+                                       financeSchemeName            : String;
+                                       financeBalance               : String;
+                                       financeType                  : String;
+                                     };
+      brandCode                    : String;
+      model                        : String;
+      material                     : String;
+      make                         : String;
+      currentOdometer              : String;
+      derivative                   : String;
+      modelYear                    : String;
+      creationDate                 : DateTime;
+      interiorColor                : String;
+      exteriorColor                : String;
+      variantCode                  : String;
+      orderItemId                  : String;
       engineSize                   : String;
-      //
       vehicleInterestModel         : String;
       vehicleInterestMake          : String;
       vehicleInterestModelGroup    : String;
-  key enquiryItemId                : String;
+  key id                           : String; //enquiryItemId
       lastUpdateDate               : DateTime;
       salesGroup                   : String;
       division                     : String;
@@ -435,8 +457,8 @@ entity ENQUIRY_ITEMS {
       quantity                     : Decimal default 0;
       campaignId                   : String;
       rejectReasonCode             : String;
-      referencedocument            : String;
-      referencedocumentItem        : Decimal default 0;
+      referenceDocument            : String;
+      referenceDocumentItem        : String;
       itemStatus                   : String;
       engineNumber                 : String;
       productionDate               : DateTime;
@@ -464,8 +486,7 @@ entity ENQUIRY_ITEMS {
       negotiatedValue              : Decimal default 0;
       revenueStartDate             : DateTime;
       revenueEndDate               : DateTime;
-
-}
+};
 
 @cds.persistence.exists
 entity ENQUIRY {
@@ -603,7 +624,7 @@ entity ENQUIRY {
       documentType            : String;
       customization           : String;
       payment_Type            : String;
-}
+};
 
 entity QUOTATIONS {
   key quotationId                 : String;
@@ -637,10 +658,31 @@ entity QUOTATIONS {
       monthlyPayment              : Decimal default 0;
       productCategory             : String;
       term                        : String;
-}
+};
 
 entity ORDERS {
-  key orderId                      : String;
+      finance                      : Composition of one {
+                                       financeSchemaName            : String;
+                                       endDate                      : String;
+                                       type                         : String;
+                                       balance                      : String;
+                                       productCategory              : String;
+                                       startDate                    : String;
+                                       minimumGuaranteedFutureValue : Decimal;
+                                       invoiceId                    : String;
+                                       rate                         : Decimal;
+                                       term                         : String;
+                                       monthlyPayment               : Decimal;
+                                     };
+      partners                     : Composition of many {
+                                       partnerName     : String;
+                                       partnerFunction : String;
+                                       partner         : String;
+                                     };
+      removed                      : Boolean;
+      creationDate                 : Date;
+      lastUpdatedDate              : Date;
+  key id                           : String; //orderId
       tax                          : Decimal default 0;
       orderStatus                  : String;
       customerId                   : String;
@@ -674,17 +716,29 @@ entity ORDERS {
       type                         : String;
       balance                      : Decimal default 0;
       invoiceId                    : String;
-}
+};
 
+//typo in addtionalInformation, but HTTP data has the same
 entity SERVICE_ORDER {
-  key serviceOrderId              : String;
+      addtionalInformation        : Composition of one {
+                                      vehicleIdentificationNumber : String;
+                                      currentOdometer             : Decimal;
+                                      locationName                : String;
+                                    };
+      appointment                 : Composition of one {
+                                      startDate : DateTime;
+                                      endDate   : DateTime;
+                                    };
+      serviceAdvisorNumber        : String;
+      creationDate                : DateTime;
+  key id                          : String; //serviceOrderId
       orderType                   : String;
       amount                      : Decimal default 0;
       orderNumber                 : String;
       serviceDate                 : DateTime;
       salesGroup                  : String;
       invoiceDate                 : DateTime;
-      vehicleOnsite               : String;
+      vehicleOnsite               : Boolean;
       isVehicleOnSite             : Boolean default false;
       orgId                       : String;
       division                    : String;
@@ -735,5 +789,4 @@ entity SERVICE_ORDER {
       state                       : String;
       streetAddress               : String;
       addressType                 : String;
-
-}
+};

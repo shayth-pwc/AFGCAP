@@ -9,7 +9,7 @@ entity ResponseMessages {
 
 @cds.persistence.exists
 entity LOG {
-  key ID              : UUID      @Core.Computed;
+  key ID              : UUID @Core.Computed;
       CALLED_FUNC     : String;
       RESPONSE_CODE   : String;
       BRANDCODE       : String;

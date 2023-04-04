@@ -34,8 +34,9 @@ entity MATERIAL {
         numberOfValves      : Integer default 0;
         fuelTankCapacity    : String;
         numberOfCylinders   : Integer default 0;
-}
+};
 
+@cds.persistence.exists
 entity VEHICLE_GROUP {
         //
         id                          : String;
@@ -43,18 +44,18 @@ entity VEHICLE_GROUP {
         itemStatus                  : String;
         referenceDocumentItem       : String;
         brandCode                   : String;
-        interiorColors          : String;
-        exteriorColors               : String;
+        interiorColors              : String;
+        exteriorColors              : String;
         currentOdometer             : Decimal default 0;
-        quantity : String;
-        deliveryDate : DateTime;
-        customerId : String;
-        orgId : String;
-        salesOffice : String;
-        salesGroup : String;
-         division : String;
-         distributionChannel : String;
-         creationDate : DateTime;
+        quantity                    : String;
+        deliveryDate                : DateTime;
+        customerId                  : String;
+        orgId                       : String;
+        salesOffice                 : String;
+        salesGroup                  : String;
+        division                    : String;
+        distributionChannel         : String;
+        creationDate                : DateTime;
         //
         accountId                   : String;
         accountName                 : String;
@@ -111,5 +112,4 @@ entity VEHICLE_GROUP {
         activeCustomerId            : String;
         exteriorAttributes          : String;
         interiorAttributes          : String;
-
-}
+};

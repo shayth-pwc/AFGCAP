@@ -29,7 +29,7 @@ module.exports = async (srv) => {
             const logData = {
                 ID: uuid,
                 CALLED_FUNC: settings.function,
-                RESPONSE_CODE: error.code.toString(),
+                RESPONSE_CODE: error.code?.toString().slice(0, 50),
                 RESPONSE_STATUS: 'error',
                 RESPONSE_TEXT: `Failed to insert data in ${settings.table} for ${item[settings.keyProperty]}: ${JSON.stringify(error)}`.slice(0, 5000),
                 RESPONSE_TIME: 'NA',
@@ -53,13 +53,13 @@ module.exports = async (srv) => {
         return response;
     };
     // checks if the 'item' is an array, if yes: take the first element of the array and add it to the main event. If no: add the element to the main event.
-    const assignFirstChild = (target, item) => {
-        if (Array.isArray(target[item]) && target[item].length >= 1) {
-            Object.assign(target, target[item][0]);
-            delete target[item];
+    const assignFirstChild = (target, itemName) => {
+        if (Array.isArray(target[itemName]) && target[itemName].length >= 1) {
+            Object.assign(target, target[itemName][0]);
+            delete target[itemName];
         } else {
-            Object.assign(target, target[item]);
-            delete target[item];
+            Object.assign(target, target[itemName]);
+            delete target[itemName];
         }
     };
     // gets all columns of all tables in the schema, so we know the table structures in HANA
@@ -99,10 +99,8 @@ module.exports = async (srv) => {
         const events = Array.isArray(req.data.events) ? req.data.events : [req.data.events];
         for (let event of events) {
             event.serviceOrderJobId = (event.id);
-            delete event.id;
-            delete event.creationDate;
-
             event.isDeferred = (event.isDeferred === true);
+            mapToHANAStructure(event, 'FCT_SERVICE_ORDER_JOBS');
         }
 
         return await upsertEvents(events, {
@@ -115,6 +113,9 @@ module.exports = async (srv) => {
     //done
     srv.on('A_FCT_CUST_ECO_SYSTEM', async (req) => {
         const events = Array.isArray(req.data.events) ? req.data.events : [req.data.events];
+        for (let event of events) {
+            mapToHANAStructure(event, 'FCT_CUST_ECO_SYSTEM');
+        }
 
         return await upsertEvents(events, {
             function: 'ECO_SYSTEM / UPSERT',
@@ -190,12 +191,9 @@ module.exports = async (srv) => {
     //dene
     srv.on('A_FCT_ENQUIRY_FOLLOWUP', async (req) => {
         const events = Array.isArray(req.data.events) ? req.data.events : [req.data.events];
-
         for (let event of events) {
             event.followUpId = (event.id);
-            delete event.id
-            delete event.creationDate
-
+            mapToHANAStructure(event, 'FCT_ENQUIRY_FOLLOWUP');
         }
 
         return await upsertEvents(events, {
@@ -210,35 +208,37 @@ module.exports = async (srv) => {
         const events = Array.isArray(req.data.events) ? req.data.events : [req.data.events];
         for (let event of events) {
             event.enquiryItemId = (event.id);
-            delete event.engineSize
-            console.log("#######", typeof event.ProductDetails)
+            // delete event.engineSize
+            // console.log("#######", typeof event.ProductDetails)
 
-            if (typeof event.ProductDetails != "undefined") {
-                event.productClassification = (event.ProductDetails[0].productClassification);
-                event.productCost = (event.ProductDetails[0].productCost);
-                event.isVatApplicable = (event.ProductDetails[0].isVatApplicable);
-                event.productIdDescription = (event.ProductDetails[0].productIdDescription);
+            // if (typeof event.ProductDetails != "undefined") {
+            //     event.productClassification = (event.ProductDetails[0].productClassification);
+            //     event.productCost = (event.ProductDetails[0].productCost);
+            //     event.isVatApplicable = (event.ProductDetails[0].isVatApplicable);
+            //     event.productIdDescription = (event.ProductDetails[0].productIdDescription);
 
-            }
+            // }
 
-            if (typeof event.financeDetails[0] != "undefined") {
-                event.productCategory = (event.financeDetails[0].productCategory);
-                event.productID = (event.financeDetails[0].productID);
-                event.financeCompanyNumber = (event.financeDetails[0].financeCompanyNumber);
-                event.financeSchemeName = (event.financeDetails[0].financeSchemeName);
-                event.financeBalance = (event.financeDetails[0].financeBalance);
-                event.financeRate = (event.financeDetails[0].financeRate);
-                event.financeTerm = (event.financeDetails[0].financeTerm);
-                event.financeType = (event.financeDetails[0].financeType);
-                event.minimumGuaranteedFutureValue = (event.financeDetails[0].minimumGuaranteedFutureValue);
-                event.pcpContractMileage = (event.financeDetails[0].pcpContractMileage);
-                event.monthlyPayment = (event.financeDetails[0].monthlyPayment);
-                event.cashInput = (event.financeDetails[0].cashInput);
-                event.financeCompanyNumberSAP = (event.financeDetails[0].financeCompanyNumberSAP);
-                event.quotationReferenceNumber = (event.financeDetails[0].quotationReferenceNumber);
-            }
+            // if (typeof event.financeDetails[0] != "undefined") {
+            //     event.productCategory = (event.financeDetails[0].productCategory);
+            //     event.productID = (event.financeDetails[0].productID);
+            //     event.financeCompanyNumber = (event.financeDetails[0].financeCompanyNumber);
+            //     event.financeSchemeName = (event.financeDetails[0].financeSchemeName);
+            //     event.financeBalance = (event.financeDetails[0].financeBalance);
+            //     event.financeRate = (event.financeDetails[0].financeRate);
+            //     event.financeTerm = (event.financeDetails[0].financeTerm);
+            //     event.financeType = (event.financeDetails[0].financeType);
+            //     event.minimumGuaranteedFutureValue = (event.financeDetails[0].minimumGuaranteedFutureValue);
+            //     event.pcpContractMileage = (event.financeDetails[0].pcpContractMileage);
+            //     event.monthlyPayment = (event.financeDetails[0].monthlyPayment);
+            //     event.cashInput = (event.financeDetails[0].cashInput);
+            //     event.financeCompanyNumberSAP = (event.financeDetails[0].financeCompanyNumberSAP);
+            //     event.quotationReferenceNumber = (event.financeDetails[0].quotationReferenceNumber);
+            // }
 
-
+            assignFirstChild(event, 'ProductDetails');
+            assignFirstChild(event, 'financeDetails');
+            mapToHANAStructure(event, 'FCT_ENQUIRY_ITEMS');
         }
 
         return await upsertEvents(events, {
@@ -252,10 +252,7 @@ module.exports = async (srv) => {
     srv.on('A_FCT_LEAD', async (req) => {
         const events = Array.isArray(req.data.events) ? req.data.events : [req.data.events];
         for (let event of events) {
-            delete event.salesExecutiveId
-            delete event.creationDate
-            delete event.removed
-            delete event.salesManagerId
+            mapToHANAStructure(event, 'FCT_LEAD');
         }
 
         return await upsertEvents(events, {
@@ -270,7 +267,7 @@ module.exports = async (srv) => {
         const events = Array.isArray(req.data.events) ? req.data.events : [req.data.events];
         for (let event of events) {
             event.leadUpdateId = (event.leadUpdatedId)
-            delete event.leadUpdatedId
+            mapToHANAStructure(event, 'FCT_LEAD_UPDATES');
         }
 
         return await upsertEvents(events, {
@@ -283,9 +280,9 @@ module.exports = async (srv) => {
     //done
     srv.on('A_DIM_MATERIAL', async (req) => {
         const events = Array.isArray(req.data.events) ? req.data.events : [req.data.events];
-        // for (let event of events) {
-
-        // }
+        for (let event of events) {
+            mapToHANAStructure(event, 'DIM_MATERIAL');
+        }
 
         return await upsertEvents(events, {
             function: 'MATERIAL / UPSERT',
@@ -297,8 +294,9 @@ module.exports = async (srv) => {
     //done
     srv.on('A_FCT_OPPORTUNITY', async (req) => {
         const events = Array.isArray(req.data.events) ? req.data.events : [req.data.events];
-        // for (let event of events) {
-        // }
+        for (let event of events) {
+            mapToHANAStructure(event, 'FCT_OPPORTUNITY');
+        }
 
         return await upsertEvents(events, {
             function: 'OPPORTUNITY / UPSERT',
@@ -314,11 +312,7 @@ module.exports = async (srv) => {
         for (let event of events) {
             event.orderItemId = (event.id);
             event.delivery_Time = (event.deliveryTime);
-            delete event.id
-            delete event.creationDate
-            delete event.removed
-            delete event.salesOffice
-            delete event.deliveryTime
+            mapToHANAStructure(event, 'FCT_ORDER_ITEMS');
         }
 
         return await upsertEvents(events, {
@@ -334,26 +328,30 @@ module.exports = async (srv) => {
         for (let event of events) {
             event.orderId = (event.id);
 
-            if (typeof event.partners != "undefined") {
-                event.partner = (event.partners[0].partner);
-                event.partnerFunction = (event.partners[0].partnerFunction);
-                event.partnerName = (event.partners[0].partnerName);
-            }
+            // if (typeof event.partners != "undefined") {
+            //     event.partner = (event.partners[0].partner);
+            //     event.partnerFunction = (event.partners[0].partnerFunction);
+            //     event.partnerName = (event.partners[0].partnerName);
+            // }
 
-            if (typeof event.finance != "undefined") {
-                event.financeSchemeName = (event.finance[0].financeSchemeName);
-                event.productCategory = (event.finance[0].productCategory);
-                event.term = (event.finance[0].term);
-                event.monthlyPayment = (event.finance[0].monthlyPayment);
-                event.rate = (event.finance[0].rate);
-                event.startDate = (event.finance[0].startDate);
-                event.endDate = (event.finance[0].endDate);
-                event.type = (event.finance[0].type);
-                event.balance = (event.finance[0].balance);
-                event.invoiceId = (event.finance[0].invoiceId);
-                event.minimumGuaranteedFutureValue = (event.finance[0].minimumGuaranteedFutureValue);
+            // if (typeof event.finance != "undefined") {
+            //     event.financeSchemeName = (event.finance[0].financeSchemeName);
+            //     event.productCategory = (event.finance[0].productCategory);
+            //     event.term = (event.finance[0].term);
+            //     event.monthlyPayment = (event.finance[0].monthlyPayment);
+            //     event.rate = (event.finance[0].rate);
+            //     event.startDate = (event.finance[0].startDate);
+            //     event.endDate = (event.finance[0].endDate);
+            //     event.type = (event.finance[0].type);
+            //     event.balance = (event.finance[0].balance);
+            //     event.invoiceId = (event.finance[0].invoiceId);
+            //     event.minimumGuaranteedFutureValue = (event.finance[0].minimumGuaranteedFutureValue);
 
-            }
+            // }
+
+            assignFirstChild(event, 'finance');
+            assignFirstChild(event, 'partners');
+            mapToHANAStructure(event, 'FCT_ORDERS');
         }
 
         return await upsertEvents(events, {
@@ -363,6 +361,7 @@ module.exports = async (srv) => {
         });
     });
 
+    // can not test, no data in HTTP file
     // mapping issue
     srv.on('A_FCT_QUOTATIONS', async (req) => {
         const events = Array.isArray(req.data.events) ? req.data.events : [req.data.events];
@@ -401,9 +400,8 @@ module.exports = async (srv) => {
     srv.on('A_FCT_QUOTATIONS_ITEMS', async (req) => {
         const events = Array.isArray(req.data.events) ? req.data.events : [req.data.events];
         for (let event of events) {
-
             event.quotationsItemsId = (event.id);
-            delete event.id
+            mapToHANAStructure(event, 'FCT_QUOTATIONS_ITEMS');
         }
 
         return await upsertEvents(events, {
@@ -419,9 +417,7 @@ module.exports = async (srv) => {
         for (let event of events) {
             event.serviceMainContractId = (event.id);
             event.endDate = (event.contractEndDate);
-            delete event.id
-            delete event.removed
-            delete event.contractEndDate
+            mapToHANAStructure(event, 'FCT_SERVICE_MAIN_CONT');
         }
 
         return await upsertEvents(events, {
@@ -438,51 +434,56 @@ module.exports = async (srv) => {
 
             event.serviceOrderId = (event.id);
 
-            if (typeof event.appointment != "undefined") {
-                event.startDate = (event.appointment.startDate);
-                event.show = (event.appointment.show);
-                event.showDate = (event.appointment.showDate);
-                event.confirmationDate = (event.appointment.confirmationDate);
-                event.plannedStartTimestamp = (event.appointment.plannedStartTimestamp);
-                event.plannedStartDate = (event.appointment.plannedStartDate);
-                event.endDate = (event.appointment.endDate);
-            }
+            // if (typeof event.appointment != "undefined") {
+            //     event.startDate = (event.appointment.startDate);
+            //     event.show = (event.appointment.show);
+            //     event.showDate = (event.appointment.showDate);
+            //     event.confirmationDate = (event.appointment.confirmationDate);
+            //     event.plannedStartTimestamp = (event.appointment.plannedStartTimestamp);
+            //     event.plannedStartDate = (event.appointment.plannedStartDate);
+            //     event.endDate = (event.appointment.endDate);
+            // }
 
-            if (typeof event.addtionalInformation != "undefined") {
-                event.currentOdometer = (event.addtionalInformation.currentOdometer);
-                event.vehicleIdentificationNumber = (event.addtionalInformation.vehicleIdentificationNumber);
-                event.customerName = (event.addtionalInformation.customerName);
-                event.totalServiceTime = (event.addtionalInformation.totalServiceTime);
-                event.make = (event.addtionalInformation.make);
-                event.model = (event.addtionalInformation.model);
-                event.year = (event.addtionalInformation.year);
-                event.variant = (event.addtionalInformation.variant);
-            }
+            // if (typeof event.addtionalInformation != "undefined") {
+            //     event.currentOdometer = (event.addtionalInformation.currentOdometer);
+            //     event.vehicleIdentificationNumber = (event.addtionalInformation.vehicleIdentificationNumber);
+            //     event.customerName = (event.addtionalInformation.customerName);
+            //     event.totalServiceTime = (event.addtionalInformation.totalServiceTime);
+            //     event.make = (event.addtionalInformation.make);
+            //     event.model = (event.addtionalInformation.model);
+            //     event.year = (event.addtionalInformation.year);
+            //     event.variant = (event.addtionalInformation.variant);
+            // }
 
-            if (typeof event.partners != "undefined") {
-                event.partner = (event.partners[0].partner);
-                event.partnerFunction = (event.partners[0].partnerFunction);
-                event.partnerName = (event.partners[0].partnerName);
-            }
+            // if (typeof event.partners != "undefined") {
+            //     event.partner = (event.partners[0].partner);
+            //     event.partnerFunction = (event.partners[0].partnerFunction);
+            //     event.partnerName = (event.partners[0].partnerName);
+            // }
 
-            if (typeof event.address != "undefined") {
-                event.customerFirstName = (event.address[0].customerFirstName);
-                event.customerLastName = (event.address[0].customerLastName);
-                event.postalCode = (event.address[0].postalCode);
-                event.city = (event.address[0].city);
-                event.region = (event.address[0].region);
-                event.country = (event.address[0].country);
-                event.countryCode = (event.address[0].countryCode);
-                event.state = (event.address[0].state);
-                event.streetAddress = (event.address[0].streetAddress);
-                event.addressType = (event.address[0].addressType);
-                event.phoneNumber = (event.address[0].phoneNumber);
-            }
+            // if (typeof event.address != "undefined") {
+            //     event.customerFirstName = (event.address[0].customerFirstName);
+            //     event.customerLastName = (event.address[0].customerLastName);
+            //     event.postalCode = (event.address[0].postalCode);
+            //     event.city = (event.address[0].city);
+            //     event.region = (event.address[0].region);
+            //     event.country = (event.address[0].country);
+            //     event.countryCode = (event.address[0].countryCode);
+            //     event.state = (event.address[0].state);
+            //     event.streetAddress = (event.address[0].streetAddress);
+            //     event.addressType = (event.address[0].addressType);
+            //     event.phoneNumber = (event.address[0].phoneNumber);
+            // }
 
-            if (typeof event.contactInfo != "undefined") {
-                event.emailId = (event.contactInfo.emailId);
-                event.phoneNumber = (event.contactInfo.phoneNumber);
-            }
+            // if (typeof event.contactInfo != "undefined") {
+            //     event.emailId = (event.contactInfo.emailId);
+            //     event.phoneNumber = (event.contactInfo.phoneNumber);
+            // }
+
+            event.vehicleOnsite = event.vehicleOnsite ? 'Y' : 'N'
+            assignFirstChild(event, 'addtionalInformation');
+            assignFirstChild(event, 'appointment');
+            mapToHANAStructure(event, 'FCT_SERVICE_ORDER');
         }
 
         return await upsertEvents(events, {
@@ -497,7 +498,7 @@ module.exports = async (srv) => {
         const events = Array.isArray(req.data.events) ? req.data.events : [req.data.events];
         for (let event of events) {
             event.serviceOrderJoblinesId = (event.id);
-            delete event.id
+            mapToHANAStructure(event, 'FCT_SERVICE_ORDER_JOB_LINES');
         }
 
         return await upsertEvents(events, {
@@ -516,23 +517,24 @@ module.exports = async (srv) => {
             event.exteriorColours = (event.exteriorColor);
             event.interiorColours = (event.interiorColor);
 
-            delete event.id
-            delete event.engineSize
-            delete event.itemStatus
-            delete event.brandCode
-            delete event.referenceDocumentItem
-            delete event.currentOdometer
-            delete event.exteriorColours
-            delete event.interiorColors
-            delete event.quantity
-            delete event.deliveryDate
-            delete event.customerId
-            delete event.orgId
-            delete event.salesOffice
-            delete event.salesGroup
-            delete event.division
-            delete event.distributionChannel
-            delete event.creationDate
+            // delete event.id
+            // delete event.engineSize
+            // delete event.itemStatus
+            // delete event.brandCode
+            // delete event.referenceDocumentItem
+            // delete event.currentOdometer
+            // delete event.exteriorColours
+            // delete event.interiorColors
+            // delete event.quantity
+            // delete event.deliveryDate
+            // delete event.customerId
+            // delete event.orgId
+            // delete event.salesOffice
+            // delete event.salesGroup
+            // delete event.division
+            // delete event.distributionChannel
+            // delete event.creationDate
+            mapToHANAStructure(event, 'DIM_VEHICLE_GROUP');
         }
 
         return await upsertEvents(events, {
