@@ -35,10 +35,13 @@ entity SERVICE_ORDER_JOBS {
 
 @cds.persistence.exists
 entity WARRANTIES {
+      //
+      id                         : String;
+      //
   key warrantieSid               : String;
       sourceSystem               : String;
-      brandcode                  : String;
-      lastupdatedate             : DateTime;
+      brandCode                  : String;
+      lastUpdateDate             : DateTime;
       status                     : String;
       description                : String;
       endDate                    : String;
@@ -53,11 +56,17 @@ entity WARRANTIES {
 
 @cds.persistence.exists
 entity RECALLS {
+      //
+      creationDate                : DateTime;
+      id                          : String;
+      claimTypeDescription        : String;
+      //
+
   key recallSid                   : String;
       sourceSystem                : String;
       brandCode                   : String;
-      lastupdatedate              : DateTime;
-      vehicleidentificationnumber : String;
+      lastUpdateDate              : DateTime;
+      vehicleIdentificationNumber : String;
       recallNumber                : String;
       vehicleRecallStatus         : String;
       claimType                   : String;
@@ -67,15 +76,17 @@ entity RECALLS {
       recallPriorityDescription   : String;
       recallValidFrom             : String;
       recallValidTo               : String;
-      claimTypeDescription        : String;
+      claim_Type_Description      : String;
       createdBy                   : String;
       createdByName               : String;
       recallInfo                  : String;
       externalRecallNumber        : String;
-      partnerDescription          : String;
-      partner                     : String;
       customerCode                : String;
       created_On                  : DateTime;
+      partners                     : Composition of many {
+                                      partner            : String;
+                                      partnerDescription : String;
+                                    };
 };
 
 @cds.persistence.exists
@@ -119,7 +130,7 @@ entity SERVICE_MAIN_CONT {
   key serviceMainContractId       : String;
       sourceSystem                : String;
       brandCode                   : String;
-      lastupdatedate              : DateTime;
+      lastUpdateDate              : DateTime;
       vehicleIdentificationNumber : String;
       currency                    : String;
       amount                      : Decimal default 0;
@@ -234,13 +245,13 @@ entity OPPORTUNITY {
 
 @cds.persistence.exists
 entity LEAD_UPDATES {
-      leadUpdatedId : String;
-  key leadUpdateId  : String;
-      sourceSystem  : String;
-      leadId        : String;
-      leadStatus    : String;
-      status        : String;
-      customerId    : String;
+
+  key leadUpdateId : String;
+      sourceSystem : String;
+      leadId       : String;
+      leadStatus   : String;
+      status       : String;
+      customerId   : String;
 };
 
 @cds.persistence.exists
@@ -355,6 +366,7 @@ entity ENQUIRY_FOLLOWUP {
       activityTimeStamp    : String;
       chatText             : String;
       mobileNumber         : String;
+      lastUpdatedDate      : DateTime;
 };
 
 @cds.persistence.exists
@@ -627,42 +639,55 @@ entity ENQUIRY {
 };
 
 entity QUOTATIONS {
-  key quotationId                 : String;
-      tax                         : Decimal default 0;
-      customerId                  : String;
-      currency                    : String;
-      branchCode                  : String;
-      orgId                       : String;
-      opportunityId               : String;
-      distributionChannel         : String;
-      salesGroup                  : String;
-      amount                      : Decimal default 0;
-      division                    : String;
-      brandCode                   : String;
-      expectedDeliveryDate        : DateTime;
-      sourceSystem                : String;
-      quotationType               : String;
-      lastUpdateDate              : DateTime;
-      salesManagerId              : String;
-      salesExecutiveId            : String;
-      partnerFuction              : String;
-      partnerName                 : String;
-      partner                     : String;
-      invoiceId                   : String;
-      rate                        : Decimal default 0;
-      minimumGuranteedFutureValue : Decimal default 0;
-      type                        : String;
-      startDate                   : DateTime;
-      endDate                     : DateTime;
-      balance                     : Decimal default 0;
-      monthlyPayment              : Decimal default 0;
-      productCategory             : String;
-      term                        : String;
+      //
+      id                   : String;
+      //
+
+  key quotationId          : String;
+      tax                  : Decimal default 0;
+      customerId           : String;
+      currency             : String;
+      branchCode           : String;
+      orgId                : String;
+      opportunityId        : String;
+      distributionChannel  : String;
+      salesGroup           : String;
+      amount               : Decimal default 0;
+      division             : String;
+      brandCode            : String;
+      expectedDeliveryDate : DateTime;
+      sourceSystem         : String;
+      quotationType        : String;
+      quotationStatus      : String;
+      lastUpdateDate       : DateTime;
+      salesManagerId       : String;
+      salesExecutiveId     : String;
+      invoiceId            : String;
+
+
+      finance              : Composition of one {
+                               balance                     : Decimal default 0;
+                               startDate                   : DateTime;
+                               endDate                     : DateTime;
+                               rate                        : Decimal default 0;
+                               minimumGuranteedFutureValue : Decimal default 0;
+                               type                        : String;
+                               monthlyPayment              : Decimal default 0;
+                               productCategory             : String;
+                               term                        : String;
+
+
+                             };
+      partners             : Composition of many {
+                               partnerName    : String;
+                               partnerFuction : String;
+                               partner        : String;
+                             };
 };
 
 entity ORDERS {
       finance                      : Composition of one {
-                                       financeSchemaName            : String;
+                                       financeSchemeName            : String;
                                        endDate                      : String;
                                        type                         : String;
                                        balance                      : String;
@@ -729,6 +754,12 @@ entity SERVICE_ORDER {
                                       startDate : DateTime;
                                       endDate   : DateTime;
                                     };
+
+      Partners                    : Composition of many {
+                                      partner         : String;
+                                      partnerFunction : String;
+                                      partnerName     : String;
+                                    };
       serviceAdvisorNumber        : String;
       creationDate                : DateTime;
   key id                          : String; //serviceOrderId
@@ -738,7 +769,7 @@ entity SERVICE_ORDER {
       serviceDate                 : DateTime;
       salesGroup                  : String;
       invoiceDate                 : DateTime;
-      vehicleOnsite               : Boolean;
+      vehicleOnsite               : String;
       isVehicleOnSite             : Boolean default false;
       orgId                       : String;
       division                    : String;

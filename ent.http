@@ -36,7 +36,7 @@ Content-Type:application/json;charset=UTF-8;IEEE754Compatible=true
     },
     {
       "orderNumber" : "307186891",
-      "id" : "307186891-7",
+      "id" : "12021999-7",
       "customerCode" : "210117610",
       "jobDescription" : "REPLACE V-BELT",
       "brandCode" : "2001-41",
@@ -53,6 +53,8 @@ Content-Type:application/json;charset=UTF-8;IEEE754Compatible=true
 
 
 ####
+
+
 #ECO SYSTEM
 POST http://localhost:4004/upsert/A_FCT_CUST_ECO_SYSTEM HTTP/1.1
 Content-Type:application/json;charset=UTF-8;IEEE754Compatible=true
@@ -64,7 +66,7 @@ Content-Type:application/json;charset=UTF-8;IEEE754Compatible=true
             "additionDetails": "veniam in anim",
             "priority": "Lorem ad officia",
             "sourceSystem": "dolor quis do",
-            "VIN": "consequat",
+            "VIN": "101510",
             "employeeResponsible": "elit",
             "source": "pariatur cupidatat",
             "complaintSubCategory": "anim nulla exercitation",
@@ -96,7 +98,7 @@ Content-Type:application/json;charset=UTF-8;IEEE754Compatible=true
             "serviceCenterName": "consequat sit minim eu",
             "odometerReading": "magna Excepteur consequat",
             "relatedTo": "ut adipisicing",
-            "mainTicketId": "Ut magna non minim",
+            "mainTicketId": "ShaythTest",
             "completedCaseStatus": "cillum Ut nulla minim",
             "escalationStatus": "nostrud dolor",
             "firstName": "Jesus",
@@ -213,8 +215,6 @@ Content-Type:application/json;charset=UTF-8;IEEE754Compatible=true
 }
 
 #######
-
-####
 #ENQUIRY
 POST http://localhost:4004/upsert/A_FCT_ENQUIRY HTTP/1.1
 Content-Type:application/json;charset=UTF-8;IEEE754Compatible=true
@@ -303,7 +303,7 @@ Content-Type:application/json;charset=UTF-8;IEEE754Compatible=true
                     "partnerName": "name"
                 }
             ],
-            "id": "fc5a3af9-f3ff-4637-842f-b28b5572cf4f",
+            "id": "J101510",
             "totalNegotiatedValue": 836,
             "forecastCategory": "idatat",
             "expectedValue": 2415,
@@ -317,7 +317,7 @@ Content-Type:application/json;charset=UTF-8;IEEE754Compatible=true
             "category": "unt",
             "natureOfBusiness": "dsint",
             "tenderRegistrationEnd": "2005-11-28T03:50:48.034Z",
-            "brandCode": "in",
+            "brandCode": "Jum",
             "accesories": "nii",
             "deliveryDate": "2011-12-22T19:43:29.63Z",
             "paymentType": "441"
@@ -326,6 +326,8 @@ Content-Type:application/json;charset=UTF-8;IEEE754Compatible=true
 }
 
 ####
+
+
 #ENQUIRY FOLLOWUP
 POST http://localhost:4004/upsert/A_FCT_ENQUIRY_FOLLOWUP HTTP/1.1
 Content-Type:application/json;charset=UTF-8;IEEE754Compatible=true
@@ -333,6 +335,7 @@ Content-Type:application/json;charset=UTF-8;IEEE754Compatible=true
 {
     "events": [
         {
+          "lastUpdatedDate" : "2003-01-13T11:07:49.358Z",
             "priority": "is",
             "assignedToSEDate": "2003-10-13T11:07:49.358Z",
             "action": "ng",
@@ -377,7 +380,7 @@ Content-Type:application/json;charset=UTF-8;IEEE754Compatible=true
             "sourceSystem": "iam",
             "distributionChannel": "n",
             "c4cLeadId": "nim",
-            "id": "d6ab9acd",
+            "id": "d6acdjum",
             "passToBranchId": "n",
             "direction": "t",
             "processor": "ore",
@@ -390,7 +393,7 @@ Content-Type:application/json;charset=UTF-8;IEEE754Compatible=true
             "followUpDate": "1952-08-20T03:23:11.235Z",
             "salesGroup": "Ut",
             "assignedToSEId": "t",
-            "enquiryid": "vv"
+            "enquiryid": "524"
         }
     ]
 }
@@ -411,7 +414,7 @@ Content-Type:application/json;charset=UTF-8;IEEE754Compatible=true
           "productIdDescription" : "Price",
           "productClassification" : "RSP",
           "productCost" : "215000.00",
-          "isVatApplicable" : "YES"
+          "isVatApplicable" : "Y"
         }
       ],
       "engineNumber" : "4233596",
@@ -422,7 +425,7 @@ Content-Type:application/json;charset=UTF-8;IEEE754Compatible=true
       "material" : "LXNX03T20A1ERA20",
       "currentOdometer" : "29928",
       "enquiryId" : "70166",
-      "id" : "70166-10",
+      "id" : "10150-10",
       "referenceDocument" : "0000070166",
       "make" : "LEXUS",
       "derivative" : "2020 NX300 Platinum 2.0L Turbo",
@@ -470,7 +473,7 @@ Content-Type:application/json;charset=UTF-8;IEEE754Compatible=true
 {
     "events": [
         {
-            "salesExecutiveId": "ostrud",
+            
             "creationDate": "1953-08-02T21:36:00.142Z",
             "type": "caiiiok",
             "salesOrg": "re",
@@ -521,7 +524,7 @@ Content-Type:application/json;charset=UTF-8;IEEE754Compatible=true
 
 ####
 
-####
+#####
 #LEAD UPDATES
 POST http://localhost:4004/upsert/A_FCT_LEAD_UPDATES HTTP/1.1
 Content-Type:application/json;charset=UTF-8;IEEE754Compatible=true
@@ -530,7 +533,7 @@ Content-Type:application/json;charset=UTF-8;IEEE754Compatible=true
      "events": [
     
     {
-      "leadUpdatedId": "5521",
+      "leadUpdateId": "5523355",
       "leadId": "1",
       "sourceSystem": "1",
       "leadStatus": "1",
@@ -538,7 +541,7 @@ Content-Type:application/json;charset=UTF-8;IEEE754Compatible=true
       "customerId": "120299"
     },
     {
-      "leadUpdatedId": "5521",
+      "leadUpdateId": "5521",
       "leadId": "1",
       "sourceSystem": "1",
       "leadStatus": "1",
@@ -546,7 +549,7 @@ Content-Type:application/json;charset=UTF-8;IEEE754Compatible=true
       "customerId": "120299"
     },
     {
-      "leadUpdatedId": "5521",
+      "leadUpdateId": "5521",
       "leadId": "1",
       "sourceSystem": "1",
       "leadStatus": "1",
@@ -554,7 +557,7 @@ Content-Type:application/json;charset=UTF-8;IEEE754Compatible=true
       "customerId": "120299"
     },
     {
-      "leadUpdatedId": "5521",
+      "leadUpdateId": "5521",
       "leadId": "1",
       "sourceSystem": "1",
       "leadStatus": "1",
@@ -562,7 +565,7 @@ Content-Type:application/json;charset=UTF-8;IEEE754Compatible=true
       "customerId": "120299"
     },
     {
-      "leadUpdatedId": "5521",
+      "leadUpdateId": "5521",
       "leadId": "1",
       "sourceSystem": "1",
       "leadStatus": "1",
@@ -570,7 +573,7 @@ Content-Type:application/json;charset=UTF-8;IEEE754Compatible=true
       "customerId": "120299"
     },
     {
-      "leadUpdatedId": "5521",
+      "leadUpdateId": "5521",
       "leadId": "1",
       "sourceSystem": "1",
       "leadStatus": "1",
@@ -578,7 +581,7 @@ Content-Type:application/json;charset=UTF-8;IEEE754Compatible=true
       "customerId": "120299"
     },
     {
-      "leadUpdatedId": "5521",
+      "leadUpdateId": "5521",
       "leadId": "1",
       "sourceSystem": "1",
       "leadStatus": "1",
@@ -586,7 +589,7 @@ Content-Type:application/json;charset=UTF-8;IEEE754Compatible=true
       "customerId": "120299"
     },
     {
-      "leadUpdatedId": "5521",
+      "leadUpdateId": "5521",
       "leadId": "1",
       "sourceSystem": "1",
       "leadStatus": "1",
@@ -594,7 +597,7 @@ Content-Type:application/json;charset=UTF-8;IEEE754Compatible=true
       "customerId": "120299"
     },
     {
-      "leadUpdatedId": "5521",
+      "leadUpdateId": "5521",
       "leadId": "1",
       "sourceSystem": "1",
       "leadStatus": "1",
@@ -602,7 +605,7 @@ Content-Type:application/json;charset=UTF-8;IEEE754Compatible=true
       "customerId": "120299"
     },
     {
-      "leadUpdatedId": "5521",
+      "leadUpdateId": "5521",
       "leadId": "1",
       "sourceSystem": "1",
       "leadStatus": "1",
@@ -610,7 +613,7 @@ Content-Type:application/json;charset=UTF-8;IEEE754Compatible=true
       "customerId": "120299"
     },
     {
-      "leadUpdatedId": "5521",
+      "leadUpdateId": "5521",
       "leadId": "1",
       "sourceSystem": "1",
       "leadStatus": "1",
@@ -618,7 +621,7 @@ Content-Type:application/json;charset=UTF-8;IEEE754Compatible=true
       "customerId": "120299"
     },
     {
-      "leadUpdatedId": "5521",
+      "leadUpdateId": "5521",
       "leadId": "1",
       "sourceSystem": "1",
       "leadStatus": "1",
@@ -626,7 +629,7 @@ Content-Type:application/json;charset=UTF-8;IEEE754Compatible=true
       "customerId": "120299"
     },
     {
-      "leadUpdatedId": "5521",
+      "leadUpdateId": "5521",
       "leadId": "1",
       "sourceSystem": "1",
       "leadStatus": "1",
@@ -636,9 +639,8 @@ Content-Type:application/json;charset=UTF-8;IEEE754Compatible=true
   ]
  }
 
-#####
-
 ####
+
 #MATERIAL
 POST http://localhost:4004/upsert/A_DIM_MATERIAL HTTP/1.1
 Content-Type:application/json;charset=UTF-8;IEEE754Compatible=true
@@ -647,7 +649,7 @@ Content-Type:application/json;charset=UTF-8;IEEE754Compatible=true
     "events": [
         {
             "torque": "niam",
-            "material": "iatur",
+            "material": "shaythbaker",
             "numberOfTyres": 831,
             "numberOfGears": 16,
             "transmissionType": "mmodo",
@@ -682,9 +684,9 @@ Content-Type:application/json;charset=UTF-8;IEEE754Compatible=true
     ]
 }
 
-#####
-
 ####
+
+
 #OPPORTUNITY
 POST http://localhost:4004/upsert/A_FCT_OPPORTUNITY HTTP/1.1
 Content-Type:application/json;charset=UTF-8;IEEE754Compatible=true
@@ -692,7 +694,7 @@ Content-Type:application/json;charset=UTF-8;IEEE754Compatible=true
 {
     "events": [
         {
-          "opportunityId" : "5521456",
+          "opportunityId" : "799978266",
             "sourceSystem": "sourceSystemhdbTest",
             "status": "status",
             "createdDate": "2003-10-13T11:07:49.358Z",
@@ -722,10 +724,9 @@ Content-Type:application/json;charset=UTF-8;IEEE754Compatible=true
     ]
 }
 
-####
-
-
 #######
+
+
 #ORDER ITEMS
 POST http://localhost:4004/upsert/A_FCT_ORDER_ITEMS HTTP/1.1
 Content-Type:application/json;charset=UTF-8;IEEE754Compatible=true
@@ -756,10 +757,11 @@ Content-Type:application/json;charset=UTF-8;IEEE754Compatible=true
             "vehicleDetails": "consequat",
             "item": "it",
             "itemAmount": 547762,
-            "id": "d5fce3fb",
+            "id": "shaythjum",
             "productId": "mmodo",
             "orderId": "254",
-            "deliveryTime": "1952-08-09T15:02:46.985Z"
+            "deliveryTime": "1952-08-09T15:02:46.985Z",
+            "lastUpdateDate" : "1952-08-09T15:02:46.985Z"
         }
     ]
 }
@@ -778,7 +780,7 @@ Content-Type:application/json;charset=UTF-8;IEEE754Compatible=true
         "expectedDeliveryDate": "2003-10-13T11:07:49.358Z",
         "sourceSystem": "consequat fugiat officia veniam",
         "finance": {
-          "financeSchemaName": "la",
+          "financeSchemeName": "la",
           "endDate": "2018-05-24",
           "type": "ia",
           "balance": "552",
@@ -810,17 +812,13 @@ Content-Type:application/json;charset=UTF-8;IEEE754Compatible=true
         "removed": true,
         "quotationId": "cillum",
         "creationDate": "2012-05-28",
-        "id": "715c1c52-8e77-4b53-a15d-5dcb3ea615e1",
+        "id": "cb3ea615e1",
         "salesGroup": "im",
         "rate":12,
-        "lastUpdatedDate":"2022-01-01"
+        "lastUpdateDate":"2003-10-13T11:07:49.358Z"
       }]
     }
 
-
-
-
-####
 
 
 #########
@@ -840,7 +838,7 @@ Content-Type:application/json;charset=UTF-8;IEEE754Compatible=true
             "productCategory": "sed",
             "sourceSystem": "sit",
             "vehicleIdentificationNumber": "4415in",
-            "id": "77d983da-ca9f-441c-ad93-2107001186fb",
+            "id": "7701186fb",
             "quotationAmount": 144,
             "salesGroup": "do",
             "productIdDescription": "lit",
@@ -899,7 +897,8 @@ Content-Type:application/json;charset=UTF-8;IEEE754Compatible=true
             "branchcode": "ur",
             "endDate": "1996-10-20T12:06:53.594Z",
             "contractEndDate": "1996-10-20T12:06:53.594Z",
-            "vehicleIdentificationNumber": "rure"
+            "vehicleIdentificationNumber": "rure",
+            "lastUpdateDate" : "1996-10-20T12:06:53.594Z"
         }
     ]
 }
@@ -925,7 +924,7 @@ Content-Type:application/json;charset=UTF-8;IEEE754Compatible=true
       "salesGroup" : "017",
       "closeDate" : "2020-01-03T20:00:00.000Z",
       "status" : "Invoiced (repost cost)",
-      "vehicleOnsite" : false,
+      "isVehicleOnSite" : false,
       "division" : "41",
       "amount" : 4027.65,
       "serviceDate" : "2019-12-31T20:00:00.000Z",
@@ -936,34 +935,6 @@ Content-Type:application/json;charset=UTF-8;IEEE754Compatible=true
       "appointment" : {
         "startDate" : "2020-01-02T07:15:00.000Z",
         "endDate" : "2020-01-04T07:00:00.000Z"
-      },
-      "creationDate" : "2019-12-31T20:00:00.000Z",
-      "invoiceDate" : "2020-01-03T20:00:00.000Z"
-    },
-    {
-      "addtionalInformation" : {
-        "vehicleIdentificationNumber" : "JTHBA5D24G5029916",
-        "currentOdometer" : 60786,
-        "locationName" : "LX-Fujairah A.sales"
-      },
-      "id" : "307186892",
-      "orgId" : "2001",
-      "brandCode" : "2001-41",
-      "orderNumber" : "307186892",
-      "salesGroup" : "001",
-      "closeDate" : "2020-01-07T20:00:00.000Z",
-      "status" : "Invoiced (repost cost)",
-      "vehicleOnsite" : false,
-      "division" : "41",
-      "amount" : 1519.28,
-      "serviceDate" : "2019-12-31T20:00:00.000Z",
-      "serviceAdvisorNumber" : "131846",
-      "customerCode" : "220473534",
-      "orderType" : "Z130",
-      "distributionchannel" : "30",
-      "appointment" : {
-        "startDate" : "2020-01-02T10:15:00.000Z",
-        "endDate" : "2020-01-02T13:15:00.000Z"
       },
       "creationDate" : "2019-12-31T20:00:00.000Z",
       "invoiceDate" : "2020-01-03T20:00:00.000Z"
@@ -1026,10 +997,62 @@ Content-Type:application/json;charset=UTF-8;IEEE754Compatible=true
 
 
 #########
-# SERVICE ORDER JOB LINES
-POST http://localhost:4004/upsert/A_DIM_VEHICLE_GROUP HTTP/1.1
+
+
+#QUOTATIONS
+POST http://localhost:4004/upsert/A_FCT_QUOTATIONS HTTP/1.1
 Content-Type:application/json;charset=UTF-8;IEEE754Compatible=true
 
+
+{
+      "events": [
+        {
+        "invoiceId": "ex",
+        "expectedDeliveryDate": "1967-05-10T22:09:32.933Z",
+        "amount": 109,
+        "quotationStatus": "n",
+        "orgId": "444",
+        "distributionChannel": "e",
+        "salesManagerId": "st",
+        "lastUpdateDate": "2019-05-10T14:49:26.821Z",
+        "customerId": "bore",
+        "opportunityId": "r",
+        "branchCode": "ing",
+        "salesGroup": "n",
+        "finance": {
+          "balance": 33,
+          "startDate": "1984-07-07T07:13:42.297Z",
+          "term": "do",
+          "minimumGuranteedFutureValue": 30,
+          "endDate": "1980-12-09T17:47:00.889Z",
+          "productCategory": "llit",
+          "rate": 14,
+          "monthlyPayment": 79,
+          "type": "ion"
+        },
+        "tax": 95,
+        "division": "mod",
+        "brandCode": "iam",
+        "quotationType": "on",
+        "currency": "521",
+        "salesExecutiveId": "ore",
+        "id": "ffac75ebb",
+        "partners": [{
+          "partner": "la",
+          "partnerFuction": "t",
+          "partnerName": "fugiat"
+        }],
+        "sourceSystem": "ad"
+      }
+      ]
+    }
+
+#########
+
+
+#VEHICLE_GROUP
+POST http://localhost:4004/upsert/A_DIM_VEHICLE_GROUP HTTP/1.1
+Content-Type:application/json;charset=UTF-8;IEEE754Compatible=true
 
 {
     "events": [
@@ -1047,10 +1070,10 @@ Content-Type:application/json;charset=UTF-8;IEEE754Compatible=true
     "make": "LEXUS",
     "derivative": "2020 NX300 Platinum 2.0L Turbo",
   
-    "interiorColor": "DARK ROSE (F-Sports Only)",
+    "interiorColours": "DARK ROSE (F-Sports shatyth)",
     "vehicleInternalNumber": "JTJBARBZ4L2217739",
     "quantity": "1.000",
-    "exteriorColor": "SONIC QUARTZ",
+    "exteriorColours": "SONIC QUARTZ",
     "deliveryDate": "0002-11-29T20:00:00.000Z",
     "variantCode": "LXNX03T20A1ERA2001",
     "customerId": "221463772",
@@ -1064,6 +1087,77 @@ Content-Type:application/json;charset=UTF-8;IEEE754Compatible=true
 }
 ]
 }
+
+
+
+
+###########
+
+
+#WARRANTIES
+POST http://localhost:4004/upsert/A_FCT_WARRANTIES HTTP/1.1
+Content-Type:application/json;charset=UTF-8;IEEE754Compatible=true
+
+{
+      "events": [{
+        "warrantyinfo": "et eiusmod consectetur",
+        "description": "velit mollit id enim",
+        "endDate": "2000-06-11T10:56:48.398Z",
+        "endMileage": 17,
+        "status": "eu irure",
+        "sourceSystem": "velit veniam anim elit",
+        "vehicleidentifcationnumber": "amet non sed proident",
+        "period": 12,
+        "id": "40b89372-ef",
+        "startMileage": 3419,
+        "months": "March",
+        "startDate": "1944-06-28T15:32:04.431Z",
+        "brandCode": "cat",
+        "lastUpdateDate" : "1944-06-28T15:32:04.431Z"
+      }]
+    }
+
+
+
+#############
+#WARRANTIES
+POST http://localhost:4004/upsert/A_FCT_RECALLS HTTP/1.1
+Content-Type:application/json;charset=UTF-8;IEEE754Compatible=true
+
+
+ {
+      "events": [{
+        "brandCode": "nt55555555555555",
+        "sourceSystem": "tur",
+        "creationDate": "1944-06-28T15:32:04.431Z",
+        "referenceNumber": "llit",
+        "recallValidFrom": "1944-06-28T15:32:04.431Z",
+        "referenceDate": "1944-06-28T15:32:04.431Z",
+        "id": "fdb89db2-37e1-40a4-8431-6a877422396e",
+        "partners": [{
+           "partner": "strud",
+          "partnerDescription": "ectetur"
+         
+        }],
+        "recallNumber": "trudut",
+        "createdByName": "magna",
+        "externalRecallNumber": "mco",
+        "claimType": "0000",
+        "vehicleRecallStatus": "u",
+        "recallValidTo": "2000013",
+        "recallStatusDescription": "ate",
+        "recallInfo": "elit",
+        "createdBy": "culpa",
+        "recallPriorityDescription": "in",
+        "claimTypeDescription": "nt",
+        "vehicleIdentificationNumber": "Duis",
+        "customerCode":"f4l"
+      }]
+    }
+
+
+
+
 
 
 

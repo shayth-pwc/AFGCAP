@@ -44,8 +44,8 @@ entity VEHICLE_GROUP {
         itemStatus                  : String;
         referenceDocumentItem       : String;
         brandCode                   : String;
-        interiorColors              : String;
-        exteriorColors              : String;
+        interiorColours            : String;
+        exteriorColours           : String;
         currentOdometer             : Decimal default 0;
         quantity                    : String;
         deliveryDate                : DateTime;
@@ -80,8 +80,6 @@ entity VEHICLE_GROUP {
         transmissionType            : String;
         genericExteriorColours      : String;
         genericInteriorColours      : String;
-        exteriorColours             : String;
-        interiorColours             : String;
         exteriorColourCode          : String;
         interiorColourCode          : String;
         vehicleInternalNumber       : String;

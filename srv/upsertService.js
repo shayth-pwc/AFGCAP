@@ -1,549 +1,505 @@
 const cds = require("@sap/cds");
-const generateUUID = require('@sap/cds-foss')('uuid');
+const generateUUID = require("@sap/cds-foss")("uuid");
 
 module.exports = async (srv) => {
-    const upsertAll = async (settings, items) => {
-        var response = [];
-        try {
-            await UPSERT.into(settings.table).entries(items);
-            for (let item of items) {
-                console.log(`Successfully inserted data as bulk in ${settings.table} for ${item[settings.keyProperty]}.`);
-                response.push({ success: true, message: `Successfully inserted data as bulk in ${settings.table} for ${item[settings.keyProperty]}.` });
-            };
-        } catch (error) {
-            console.log(`Failed to insert data in ${settings.table} in bulk for ${items.length} items. Switching to individual queries.`);
-        }
-        return response;
-    };
-    const upsertOne = async (settings, item) => {
-        var response = {};
-        try {
-            await UPSERT.into(settings.table).entries(item);
-            console.log(`Successfully inserted data in ${settings.table} for ${item[settings.keyProperty]}.`);
-            response = { success: true, message: `Successfully inserted data in ${settings.table} for ${item[settings.keyProperty]}.` };
-        } catch (error) {
-            console.log(`Failed to insert data for ${item[settings.keyProperty]}.`, JSON.stringify(error));
-            response = { success: false, message: `Failed to insert data in ${settings.table} for ${item[settings.keyProperty]}.`, error: JSON.stringify(error) };
+  const upsertAll = async (settings, items) => {
+    var response = [];
+    try {
+      await UPSERT.into(settings.table).entries(items);
+      for (let item of items) {
+        console.log(
+          `Successfully inserted data as bulk in ${settings.table} for ${
+            item[settings.keyProperty]
+          }.`
+        );
+        response.push({
+          success: true,
+          message: `Successfully inserted data as bulk in ${
+            settings.table
+          } for ${item[settings.keyProperty]}.`,
+        });
+      }
+    } catch (error) {
+      console.log(
+        `Failed to insert data in ${settings.table} in bulk for ${items.length} items. Switching to individual queries.`
+      );
+    }
+    return response;
+  };
+  const upsertOne = async (settings, item) => {
+    var response = {};
+    try {
+      await UPSERT.into(settings.table).entries(item);
+      console.log(
+        `Successfully inserted data in ${settings.table} for ${
+          item[settings.keyProperty]
+        }.`
+      );
+      response = {
+        success: true,
+        message: `Successfully inserted data in ${settings.table} for ${
+          item[settings.keyProperty]
+        }.`,
+      };
+    } catch (error) {
+      console.log(
+        `Failed to insert data for ${item[settings.keyProperty]}.`,
+        JSON.stringify(error)
+      );
+      response = {
+        success: false,
+        message: `Failed to insert data in ${settings.table} for ${
+          item[settings.keyProperty]
+        }.`,
+        error: JSON.stringify(error),
+      };
 
-            const uuid = generateUUID.v4();
-            const logData = {
-                ID: uuid,
-                CALLED_FUNC: settings.function,
-                RESPONSE_CODE: error.code?.toString().slice(0, 50),
-                RESPONSE_STATUS: 'error',
-                RESPONSE_TEXT: `Failed to insert data in ${settings.table} for ${item[settings.keyProperty]}: ${JSON.stringify(error)}`.slice(0, 5000),
-                RESPONSE_TIME: 'NA',
-                CAPTURE_DATE: new Date(),
-                CAPTURE_TIME: new Date(),
-                CAPTURED_BY: 'system',
-                PAYLOAD: JSON.stringify(item).slice(0, 5000),
-                STATUS: 'new'
-            };
-            await INSERT.into('API_LOG').entries(logData);
-        }
-        return response;
-    };
-    const upsertEvents = async (events, settings) => {
-        const response = await upsertAll(settings, events);
-        if (response.length == 0) {
-            for (let item of events) {
-                response.push(await upsertOne(settings, item));
-            };
-        }
-        return response;
-    };
-    // checks if the 'item' is an array, if yes: take the first element of the array and add it to the main event. If no: add the element to the main event.
-    const assignFirstChild = (target, itemName) => {
-        if (Array.isArray(target[itemName]) && target[itemName].length >= 1) {
-            Object.assign(target, target[itemName][0]);
-            delete target[itemName];
-        } else {
-            Object.assign(target, target[itemName]);
-            delete target[itemName];
-        }
-    };
-    // gets all columns of all tables in the schema, so we know the table structures in HANA
-    const getHANATableColumns = async (schemaName) => {
-        const tableFields = {};
-        const cols = await cds.run(`SELECT TABLE_NAME, COLUMN_NAME FROM SYS.TABLE_COLUMNS WHERE SCHEMA_NAME = '${schemaName}'`);
-        for (c of cols) {
-            if (tableFields[c.TABLE_NAME]) {
-                tableFields[c.TABLE_NAME].push(c.COLUMN_NAME);
-            } else {
-                tableFields[c.TABLE_NAME] = [c.COLUMN_NAME];
-            }
-        }
-        return tableFields;
-    };
-    // removes properties from the event if they don't fit in HANA, and logs the ones that are in HANA but not in the Event
-    const mapToHANAStructure = (event, tableName) => {
-        const deleted = [];
-        for (k of Object.keys(event)) {
-            if (!HANA_Tables[tableName].includes(k.toUpperCase())) {
-                deleted.push(k);
-                delete event[k];
-            }
-        }
-        deleted.length > 0 && console.log(`WARNING for ${tableName}: Removed ${deleted.length} properties coming from Boomi: ${deleted.join(', ')}`);
-        const upperCaseKeys = Object.keys(event).map(x => x.toUpperCase());
-        const missing = HANA_Tables[tableName].filter(x => !upperCaseKeys.includes(x));
-        missing.length > 0 && console.log(`WARNING for ${tableName}: Missing ${missing.length} properties HANA expects: ${missing.join(', ')}`);
+      const uuid = generateUUID.v4();
+      const logData = {
+        ID: uuid,
+        CALLED_FUNC: settings.function,
+        RESPONSE_CODE: error.code?.toString().slice(0, 50),
+        RESPONSE_STATUS: "error",
+        RESPONSE_TEXT: `Failed to insert data in ${settings.table} for ${
+          item[settings.keyProperty]
+        }: ${JSON.stringify(error)}`.slice(0, 5000),
+        RESPONSE_TIME: "NA",
+        CAPTURE_DATE: new Date(),
+        CAPTURE_TIME: new Date(),
+        CAPTURED_BY: "system",
+        PAYLOAD: JSON.stringify(item).slice(0, 5000),
+        STATUS: "new",
+      };
+      await INSERT.into("API_LOG").entries(logData);
+    }
+    return response;
+  };
+  const upsertEvents = async (events, settings) => {
+    const response = await upsertAll(settings, events);
+    if (response.length == 0) {
+      for (let item of events) {
+        response.push(await upsertOne(settings, item));
+      }
+    }
+    return response;
+  };
+  // checks if the 'item' is an array, if yes: take the first element of the array and add it to the main event. If no: add the element to the main event.
+  const assignFirstChild = (target, itemName) => {
+    if (Array.isArray(target[itemName]) && target[itemName].length >= 1) {
+      Object.assign(target, target[itemName][0]);
+      delete target[itemName];
+    } else {
+      Object.assign(target, target[itemName]);
+      delete target[itemName];
+    }
+  };
+  // gets all columns of all tables in the schema, so we know the table structures in HANA
+  const getHANATableColumns = async (schemaName) => {
+    const tableFields = {};
+    const cols = await cds.run(
+      `SELECT TABLE_NAME, COLUMN_NAME FROM SYS.TABLE_COLUMNS WHERE SCHEMA_NAME = '${schemaName}'`
+    );
+    for (c of cols) {
+      if (tableFields[c.TABLE_NAME]) {
+        tableFields[c.TABLE_NAME].push(c.COLUMN_NAME);
+      } else {
+        tableFields[c.TABLE_NAME] = [c.COLUMN_NAME];
+      }
+    }
+    return tableFields;
+  };
+  // removes properties from the event if they don't fit in HANA, and logs the ones that are in HANA but not in the Event
+  const mapToHANAStructure = (event, tableName) => {
+    const deleted = [];
+    for (k of Object.keys(event)) {
+      if (!HANA_Tables[tableName].includes(k.toUpperCase())) {
+        deleted.push(k);
+        delete event[k];
+      }
+    }
+    deleted.length > 0 &&
+      console.log(
+        `WARNING for ${tableName}: Removed ${
+          deleted.length
+        } properties coming from Boomi: ${deleted.join(", ")}`
+      );
+    const upperCaseKeys = Object.keys(event).map((x) => x.toUpperCase());
+    const missing = HANA_Tables[tableName].filter(
+      (x) => !upperCaseKeys.includes(x)
+    );
+    missing.length > 0 &&
+      console.log(
+        `WARNING for ${tableName}: Missing ${
+          missing.length
+        } properties HANA expects: ${missing.join(", ")}`
+      );
+  };
+
+  // load HANA table structure when app starts
+  const HANA_Tables = await getHANATableColumns("TECHDBUSER1");
+  console.log(
+    `Downloaded table structures of ${Object.keys(HANA_Tables).length} tables`
+  );
+
+  //done - UPSERT Tested
+  srv.on("A_FCT_SERVICE_ORDER_JOBS", async (req) => {
+    const events = Array.isArray(req.data.events)
+      ? req.data.events
+      : [req.data.events];
+    for (let event of events) {
+      event.serviceOrderJobId = event.id;
+      event.isDeferred = event.isDeferred === true;
+      delete event.id
+      mapToHANAStructure(event, "FCT_SERVICE_ORDER_JOBS");
+      
     }
 
-    // load HANA table structure when app starts
-    const HANA_Tables = await getHANATableColumns('TECHDBUSER1');
-    console.log(`Downloaded table structures of ${Object.keys(HANA_Tables).length} tables`);
-
-    //done
-    srv.on('A_FCT_SERVICE_ORDER_JOBS', async (req) => {
-        const events = Array.isArray(req.data.events) ? req.data.events : [req.data.events];
-        for (let event of events) {
-            event.serviceOrderJobId = (event.id);
-            event.isDeferred = (event.isDeferred === true);
-            mapToHANAStructure(event, 'FCT_SERVICE_ORDER_JOBS');
-        }
-
-        return await upsertEvents(events, {
-            function: 'SERVICE_ORDER_JOBS / UPSERT',
-            table: 'FCT_SERVICE_ORDER_JOBS',
-            keyProperty: 'serviceOrderJobId'
-        });
+    return await upsertEvents(events, {
+      function: "SERVICE_ORDER_JOBS / UPSERT",
+      table: "FCT_SERVICE_ORDER_JOBS",
+      keyProperty: "serviceOrderJobId",
     });
+  });
 
-    //done
-    srv.on('A_FCT_CUST_ECO_SYSTEM', async (req) => {
-        const events = Array.isArray(req.data.events) ? req.data.events : [req.data.events];
-        for (let event of events) {
-            mapToHANAStructure(event, 'FCT_CUST_ECO_SYSTEM');
-        }
+  //done - UPSERT Tested
+  srv.on("A_FCT_CUST_ECO_SYSTEM", async (req) => {
+    const events = Array.isArray(req.data.events)
+      ? req.data.events
+      : [req.data.events];
+    for (let event of events) {
+      mapToHANAStructure(event, "FCT_CUST_ECO_SYSTEM");
+    }
 
-        return await upsertEvents(events, {
-            function: 'ECO_SYSTEM / UPSERT',
-            table: 'FCT_CUST_ECO_SYSTEM',
-            keyProperty: 'mainTicketId'
-        });
+    return await upsertEvents(events, {
+      function: "ECO_SYSTEM / UPSERT",
+      table: "FCT_CUST_ECO_SYSTEM",
+      keyProperty: "mainTicketId",
     });
+  });
 
-    //mapping issue
-    srv.on('A_FCT_ENQUIRY', async (req) => {
-        const events = Array.isArray(req.data.events) ? req.data.events : [req.data.events];
-        for (let event of events) {
-            event.enquiryId = (event.id);
+  //done - UPSERT Tested
+  srv.on("A_FCT_ENQUIRY", async (req) => {
+    const events = Array.isArray(req.data.events)
+      ? req.data.events
+      : [req.data.events];
+    for (let event of events) {
+      event.enquiryId = event.id;
 
-            // if (typeof event.vehicleInterests != "undefined") {
-            //     event.variant_Code = (event.vehicleInterests[0].variantCode);
-            //     event.modelGroup = (event.vehicleInterests[0].modelGroup);
-            //     event.genericArticleCode = (event.vehicleInterests[0].genericArticleCode);
-            //     event.testDriveDate = (event.vehicleInterests[0].testDriveDate);
-            //     event.testDrive = (event.vehicleInterests[0].testDrive);
-            //     event.vehicle_model = (event.vehicleInterests[0].model);
-            //     event.tradeIn = (event.vehicleInterests[0].tradeIn);
-            //     event.budgetLow = (event.vehicleInterests[0].budgetLow);
-            //     event.budgetHigh = (event.vehicleInterests[0].budgetHigh);
-            //     event.financeType = (event.vehicleInterests[0].financeType);
-            //     event.currentMake = (event.vehicleInterests[0].currentMake);
-            //     event.financeTerm = (event.vehicleInterests[0].financeTerm);
-            //     event.testDriveRejection = (event.vehicleInterests[0].testDriveRejection);
-            //     event.currentModel = (event.vehicleInterests[0].currentModel);
-            //     event.sourceOfEnquiry = (event.vehicleInterests[0].sourceOfEnquiry);
-            // }
-            // if (typeof event.EnquiryDetails != "undefined") {
-            //     event.EnquiryStatus = (event.EnquiryDetails.EnquiryStatus);
-            //     event.QuotationID = (event.EnquiryDetails.QuotationID);
-            //     event.EnquiryCreatedDate = (event.EnquiryDetails.EnquiryCreatedDate);
-            //     event.OrderId = (event.EnquiryDetails.OrderId);
-            // }
+      assignFirstChild(event, "Partners");
+      assignFirstChild(event, "vehicleInterests");
+      assignFirstChild(event, "EnquiryDetails");
+      assignFirstChild(event, "customerDetail");
+      assignFirstChild(event, "enquiryInformation");
 
-            // if (typeof event.enquiryInformation != "undefined") {
-            //     event.salesManagerId = (event.enquiryInformation.salesManagerId);
-            //     event.offerExpired = (event.enquiryInformation.offerExpired);
-            //     event.businessManagerId = (event.enquiryInformation.businessManagerId);
-            //     event.customerId = (event.enquiryInformation.customerId);
-            //     event.enquiryType = (event.enquiryInformation.enquiryType);
-            //     event.branchId = (event.enquiryInformation.branchId);
-            //     event.saleType = (event.enquiryInformation.saleType);
-            //     event.staffId = (event.enquiryInformation.staffId);
-            //     event.distributionChannel = (event.enquiryInformation.distributionChannel);
-            //     event.salesGroup = (event.enquiryInformation.salesGroup);
-            //     event.division = (event.enquiryInformation.division);
-            //     event.salesOffice = (event.enquiryInformation.salesOffice);
-            //     event.leadId = (event.enquiryInformation.leadId);
-            //     event.salesExecutiveId = (event.enquiryInformation.salesExecutiveId);
-            //     event.orgId = (event.enquiryInformation.orgId);
-            // }
+      event.PAYMENT_TYPE = event.paymentType;
 
-            assignFirstChild(event, 'Partners');
-            assignFirstChild(event, 'vehicleInterests');
-            assignFirstChild(event, 'EnquiryDetails');
-            assignFirstChild(event, 'customerDetail');
-            assignFirstChild(event, 'enquiryInformation');
+      event.VARIANT_CODE = event.variantCode;
 
-            mapToHANAStructure(event, 'FCT_ENQUIRY');
-        }
+      event.VEHICLE_MODEL = event.model;
 
-        return await upsertEvents(events, {
-            function: 'ENQUIRY / UPSERT',
-            table: 'FCT_ENQUIRY',
-            keyProperty: 'enquiryId'
-        });
+      mapToHANAStructure(event, "FCT_ENQUIRY");
+    }
+
+    return await upsertEvents(events, {
+      function: "ENQUIRY / UPSERT",
+      table: "FCT_ENQUIRY",
+      keyProperty: "enquiryId",
     });
+  });
 
-    //dene
-    srv.on('A_FCT_ENQUIRY_FOLLOWUP', async (req) => {
-        const events = Array.isArray(req.data.events) ? req.data.events : [req.data.events];
-        for (let event of events) {
-            event.followUpId = (event.id);
-            mapToHANAStructure(event, 'FCT_ENQUIRY_FOLLOWUP');
-        }
+  //dene - UPSERT Tested
+  srv.on("A_FCT_ENQUIRY_FOLLOWUP", async (req) => {
+    const events = Array.isArray(req.data.events)
+      ? req.data.events
+      : [req.data.events];
+    for (let event of events) {
+      event.followUpId = event.id;
+      event.LASTUPDATEDATE = event.lastUpdatedDate;
+      mapToHANAStructure(event, "FCT_ENQUIRY_FOLLOWUP");
+    }
 
-        return await upsertEvents(events, {
-            function: 'ENQUIRY_FOLLOWUP / UPSERT',
-            table: 'FCT_ENQUIRY_FOLLOWUP',
-            keyProperty: 'followUpId'
-        });
+    return await upsertEvents(events, {
+      function: "ENQUIRY_FOLLOWUP / UPSERT",
+      table: "FCT_ENQUIRY_FOLLOWUP",
+      keyProperty: "followUpId",
     });
+  });
 
-    //mapping issue
-    srv.on('A_FCT_ENQUIRY_ITEMS', async (req) => {
-        const events = Array.isArray(req.data.events) ? req.data.events : [req.data.events];
-        for (let event of events) {
-            event.enquiryItemId = (event.id);
-            // delete event.engineSize
-            // console.log("#######", typeof event.ProductDetails)
+  //dene - UPSERT Tested
+  srv.on("A_FCT_ENQUIRY_ITEMS", async (req) => {
+    const events = Array.isArray(req.data.events)
+      ? req.data.events
+      : [req.data.events];
+    for (let event of events) {
+      event.enquiryItemId = event.id;
+      assignFirstChild(event, "ProductDetails");
+      assignFirstChild(event, "financeDetails");
+      mapToHANAStructure(event, "FCT_ENQUIRY_ITEMS");
+    }
 
-            // if (typeof event.ProductDetails != "undefined") {
-            //     event.productClassification = (event.ProductDetails[0].productClassification);
-            //     event.productCost = (event.ProductDetails[0].productCost);
-            //     event.isVatApplicable = (event.ProductDetails[0].isVatApplicable);
-            //     event.productIdDescription = (event.ProductDetails[0].productIdDescription);
-
-            // }
-
-            // if (typeof event.financeDetails[0] != "undefined") {
-            //     event.productCategory = (event.financeDetails[0].productCategory);
-            //     event.productID = (event.financeDetails[0].productID);
-            //     event.financeCompanyNumber = (event.financeDetails[0].financeCompanyNumber);
-            //     event.financeSchemeName = (event.financeDetails[0].financeSchemeName);
-            //     event.financeBalance = (event.financeDetails[0].financeBalance);
-            //     event.financeRate = (event.financeDetails[0].financeRate);
-            //     event.financeTerm = (event.financeDetails[0].financeTerm);
-            //     event.financeType = (event.financeDetails[0].financeType);
-            //     event.minimumGuaranteedFutureValue = (event.financeDetails[0].minimumGuaranteedFutureValue);
-            //     event.pcpContractMileage = (event.financeDetails[0].pcpContractMileage);
-            //     event.monthlyPayment = (event.financeDetails[0].monthlyPayment);
-            //     event.cashInput = (event.financeDetails[0].cashInput);
-            //     event.financeCompanyNumberSAP = (event.financeDetails[0].financeCompanyNumberSAP);
-            //     event.quotationReferenceNumber = (event.financeDetails[0].quotationReferenceNumber);
-            // }
-
-            assignFirstChild(event, 'ProductDetails');
-            assignFirstChild(event, 'financeDetails');
-            mapToHANAStructure(event, 'FCT_ENQUIRY_ITEMS');
-        }
-
-        return await upsertEvents(events, {
-            function: 'ENQUIRY_ITEMS / UPSERT',
-            table: 'FCT_ENQUIRY_ITEMS',
-            keyProperty: 'enquiryItemId'
-        });
+    return await upsertEvents(events, {
+      function: "ENQUIRY_ITEMS / UPSERT",
+      table: "FCT_ENQUIRY_ITEMS",
+      keyProperty: "enquiryItemId",
     });
+  });
 
-    //done
-    srv.on('A_FCT_LEAD', async (req) => {
-        const events = Array.isArray(req.data.events) ? req.data.events : [req.data.events];
-        for (let event of events) {
-            mapToHANAStructure(event, 'FCT_LEAD');
-        }
+  //done - UPSERT Tested
+  srv.on("A_FCT_LEAD", async (req) => {
+    const events = Array.isArray(req.data.events)
+      ? req.data.events
+      : [req.data.events];
+    for (let event of events) {
 
-        return await upsertEvents(events, {
-            function: 'LEAD / UPSERT',
-            table: 'FCT_LEAD',
-            keyProperty: 'leadId'
-        });
+      mapToHANAStructure(event, "FCT_LEAD");
+    }
+
+    return await upsertEvents(events, {
+      function: "LEAD / UPSERT",
+      table: "FCT_LEAD",
+      keyProperty: "leadId",
     });
+  });
 
-    //done
-    srv.on('A_FCT_LEAD_UPDATES', async (req) => {
-        const events = Array.isArray(req.data.events) ? req.data.events : [req.data.events];
-        for (let event of events) {
-            event.leadUpdateId = (event.leadUpdatedId)
-            mapToHANAStructure(event, 'FCT_LEAD_UPDATES');
-        }
+  //done - UPSERT Tested
+  srv.on("A_FCT_LEAD_UPDATES", async (req) => {
+    const events = Array.isArray(req.data.events)
+      ? req.data.events
+      : [req.data.events];
+    for (let event of events) {
+      mapToHANAStructure(event, "FCT_LEAD_UPDATES");
+    }
 
-        return await upsertEvents(events, {
-            function: 'LEAD UPDATES / UPSERT',
-            table: 'FCT_LEAD_UPDATES',
-            keyProperty: 'leadUpdateId'
-        });
+    return await upsertEvents(events, {
+      function: "LEAD UPDATES / UPSERT",
+      table: "FCT_LEAD_UPDATES",
+      keyProperty: "leadUpdateId",
     });
+  });
 
-    //done
-    srv.on('A_DIM_MATERIAL', async (req) => {
-        const events = Array.isArray(req.data.events) ? req.data.events : [req.data.events];
-        for (let event of events) {
-            mapToHANAStructure(event, 'DIM_MATERIAL');
-        }
+  //done - UPSERT Tested
+  srv.on("A_DIM_MATERIAL", async (req) => {
+    const events = Array.isArray(req.data.events)
+      ? req.data.events
+      : [req.data.events];
+    for (let event of events) {
+      mapToHANAStructure(event, "DIM_MATERIAL");
+    }
 
-        return await upsertEvents(events, {
-            function: 'MATERIAL / UPSERT',
-            table: 'DIM_MATERIAL',
-            keyProperty: 'material'
-        });
+    return await upsertEvents(events, {
+      function: "MATERIAL / UPSERT",
+      table: "DIM_MATERIAL",
+      keyProperty: "material",
     });
+  });
 
-    //done
-    srv.on('A_FCT_OPPORTUNITY', async (req) => {
-        const events = Array.isArray(req.data.events) ? req.data.events : [req.data.events];
-        for (let event of events) {
-            mapToHANAStructure(event, 'FCT_OPPORTUNITY');
-        }
+  //done - UPSERT Tested
+  srv.on("A_FCT_OPPORTUNITY", async (req) => {
+    const events = Array.isArray(req.data.events)
+      ? req.data.events
+      : [req.data.events];
+    for (let event of events) {
+      mapToHANAStructure(event, "FCT_OPPORTUNITY");
+    }
 
-        return await upsertEvents(events, {
-            function: 'OPPORTUNITY / UPSERT',
-            table: 'FCT_OPPORTUNITY',
-            keyProperty: 'opportunityId'
-        });
+    return await upsertEvents(events, {
+      function: "OPPORTUNITY / UPSERT",
+      table: "FCT_OPPORTUNITY",
+      keyProperty: "opportunityId",
     });
+  });
 
+  //done - UPSERT Tested
+  srv.on("A_FCT_ORDER_ITEMS", async (req) => {
+    const events = Array.isArray(req.data.events)
+      ? req.data.events
+      : [req.data.events];
+    for (let event of events) {
+      event.orderItemId = event.id;
+      event.delivery_Time = event.deliveryTime;
+      mapToHANAStructure(event, "FCT_ORDER_ITEMS");
+    }
 
-    //done
-    srv.on('A_FCT_ORDER_ITEMS', async (req) => {
-        const events = Array.isArray(req.data.events) ? req.data.events : [req.data.events];
-        for (let event of events) {
-            event.orderItemId = (event.id);
-            event.delivery_Time = (event.deliveryTime);
-            mapToHANAStructure(event, 'FCT_ORDER_ITEMS');
-        }
-
-        return await upsertEvents(events, {
-            function: 'ORDER_ITEMS / UPSERT',
-            table: 'FCT_ORDER_ITEMS',
-            keyProperty: 'orderItemId'
-        });
+    return await upsertEvents(events, {
+      function: "ORDER_ITEMS / UPSERT",
+      table: "FCT_ORDER_ITEMS",
+      keyProperty: "orderItemId",
     });
+  });
 
-    //mapping issue
-    srv.on('A_FCT_ORDERS', async (req) => {
-        const events = Array.isArray(req.data.events) ? req.data.events : [req.data.events];
-        for (let event of events) {
-            event.orderId = (event.id);
+  //done - UPSERT Tested
+  srv.on("A_FCT_ORDERS", async (req) => {
+    const events = Array.isArray(req.data.events)
+      ? req.data.events
+      : [req.data.events];
+    for (let event of events) {
 
-            // if (typeof event.partners != "undefined") {
-            //     event.partner = (event.partners[0].partner);
-            //     event.partnerFunction = (event.partners[0].partnerFunction);
-            //     event.partnerName = (event.partners[0].partnerName);
-            // }
+      event.orderId = event.id;
+      
+      assignFirstChild(event, "finance");
+      assignFirstChild(event, "partners");
+      mapToHANAStructure(event, "FCT_ORDERS");
+    }
 
-            // if (typeof event.finance != "undefined") {
-            //     event.financeSchemeName = (event.finance[0].financeSchemeName);
-            //     event.productCategory = (event.finance[0].productCategory);
-            //     event.term = (event.finance[0].term);
-            //     event.monthlyPayment = (event.finance[0].monthlyPayment);
-            //     event.rate = (event.finance[0].rate);
-            //     event.startDate = (event.finance[0].startDate);
-            //     event.endDate = (event.finance[0].endDate);
-            //     event.type = (event.finance[0].type);
-            //     event.balance = (event.finance[0].balance);
-            //     event.invoiceId = (event.finance[0].invoiceId);
-            //     event.minimumGuaranteedFutureValue = (event.finance[0].minimumGuaranteedFutureValue);
-
-            // }
-
-            assignFirstChild(event, 'finance');
-            assignFirstChild(event, 'partners');
-            mapToHANAStructure(event, 'FCT_ORDERS');
-        }
-
-        return await upsertEvents(events, {
-            function: 'ORDERS / UPSERT',
-            table: 'FCT_ORDERS',
-            keyProperty: 'orderId'
-        });
+    return await upsertEvents(events, {
+      function: "ORDERS / UPSERT",
+      table: "FCT_ORDERS",
+      keyProperty: "orderId",
     });
+  });
 
-    // can not test, no data in HTTP file
-    // mapping issue
-    srv.on('A_FCT_QUOTATIONS', async (req) => {
-        const events = Array.isArray(req.data.events) ? req.data.events : [req.data.events];
-        for (let event of events) {
+//done - UPSERT Tested
+  srv.on("A_FCT_QUOTATIONS", async (req) => {
+    const events = Array.isArray(req.data.events)
+      ? req.data.events
+      : [req.data.events];
+    for (let event of events) {
+        event.quotationId = event.id
+        assignFirstChild(event, "finance");
+        assignFirstChild(event, "partners");
+        mapToHANAStructure(event, "FCT_QUOTATIONS");
+    }
 
-            serviceOrderJoblinesIdserviceOrderJoblinesId
-            if (typeof event.partners != "undefined") {
-                event.partner = (event.partners[0].partner);
-                event.partnerFunction = (event.partners[0].partnerFunction);
-                event.partnerName = (event.partners[0].partnerName);
-            }
-
-            if (typeof event.finance != "undefined") {
-                event.invoiceId = (event.finance.invoiceId);
-                event.rate = (event.finance.rate);
-                event.minimumGuranteedFutureValue = (event.finance.minimumGuranteedFutureValue);
-                event.type = (event.finance.type);
-                event.startDate = (event.finance.startDate);
-                event.endDate = (event.finance.endDate);
-                event.balance = (event.finance.balance);
-                event.monthlyPayment = (event.finance.monthlyPayment);
-                event.productCategory = (event.finance.productCategory);
-                event.term = (event.finance.term);
-            }
-        }
-
-        return await upsertEvents(events, {
-            function: 'QUOTATIONS / UPSERT',
-            table: 'FCT_QUOTATIONS',
-            keyProperty: 'quotationsItemsId'
-        });
+    return await upsertEvents(events, {
+      function: "QUOTATIONS / UPSERT",
+      table: "FCT_QUOTATIONS",
+      keyProperty: "quotationId",
     });
+  });
 
+  //done - UPSERT Tested
+  srv.on("A_FCT_QUOTATIONS_ITEMS", async (req) => {
+    const events = Array.isArray(req.data.events)
+      ? req.data.events
+      : [req.data.events];
+    for (let event of events) {
+      event.quotationsItemsId = event.id;
+      mapToHANAStructure(event, "FCT_QUOTATIONS_ITEMS");
+    }
 
-    // done 
-    srv.on('A_FCT_QUOTATIONS_ITEMS', async (req) => {
-        const events = Array.isArray(req.data.events) ? req.data.events : [req.data.events];
-        for (let event of events) {
-            event.quotationsItemsId = (event.id);
-            mapToHANAStructure(event, 'FCT_QUOTATIONS_ITEMS');
-        }
-
-        return await upsertEvents(events, {
-            function: 'QUOTATIONS_ITEMS / UPSERT',
-            table: 'FCT_QUOTATIONS_ITEMS',
-            keyProperty: 'quotationsItemsId'
-        });
+    return await upsertEvents(events, {
+      function: "QUOTATIONS_ITEMS / UPSERT",
+      table: "FCT_QUOTATIONS_ITEMS",
+      keyProperty: "quotationsItemsId",
     });
+  });
 
-    //done
-    srv.on('A_FCT_SERVICE_MAIN_CONT', async (req) => {
-        const events = Array.isArray(req.data.events) ? req.data.events : [req.data.events];
-        for (let event of events) {
-            event.serviceMainContractId = (event.id);
-            event.endDate = (event.contractEndDate);
-            mapToHANAStructure(event, 'FCT_SERVICE_MAIN_CONT');
-        }
+  //done - UPSERT Tested
+  srv.on("A_FCT_SERVICE_MAIN_CONT", async (req) => {
+    const events = Array.isArray(req.data.events)
+      ? req.data.events
+      : [req.data.events];
+    for (let event of events) {
+      event.serviceMainContractId = event.id;
+      event.endDate = event.contractEndDate;
+      mapToHANAStructure(event, "FCT_SERVICE_MAIN_CONT");
+    }
 
-        return await upsertEvents(events, {
-            function: 'SERVICE_MAIN_CONT / UPSERT',
-            table: 'FCT_SERVICE_MAIN_CONT',
-            keyProperty: 'serviceMainContractId'
-        });
+    return await upsertEvents(events, {
+      function: "SERVICE_MAIN_CONT / UPSERT",
+      table: "FCT_SERVICE_MAIN_CONT",
+      keyProperty: "serviceMainContractId",
     });
+  });
 
-    // mapping issue
-    srv.on('A_FCT_SERVICE_ORDER', async (req) => {
-        const events = Array.isArray(req.data.events) ? req.data.events : [req.data.events];
-        for (let event of events) {
+  //done - UPSERT Tested
+  srv.on("A_FCT_SERVICE_ORDER", async (req) => {
+    const events = Array.isArray(req.data.events)
+      ? req.data.events
+      : [req.data.events];
+    for (let event of events) {
+      event.serviceOrderId = event.id;
 
-            event.serviceOrderId = (event.id);
+      event.vehicleOnsite = event.vehicleOnsite ? "Y" : "N";
+      assignFirstChild(event, "addtionalInformation");
+      assignFirstChild(event, "appointment");
+      assignFirstChild(event, "Partners");
+      mapToHANAStructure(event, "FCT_SERVICE_ORDER");
+    }
 
-            // if (typeof event.appointment != "undefined") {
-            //     event.startDate = (event.appointment.startDate);
-            //     event.show = (event.appointment.show);
-            //     event.showDate = (event.appointment.showDate);
-            //     event.confirmationDate = (event.appointment.confirmationDate);
-            //     event.plannedStartTimestamp = (event.appointment.plannedStartTimestamp);
-            //     event.plannedStartDate = (event.appointment.plannedStartDate);
-            //     event.endDate = (event.appointment.endDate);
-            // }
-
-            // if (typeof event.addtionalInformation != "undefined") {
-            //     event.currentOdometer = (event.addtionalInformation.currentOdometer);
-            //     event.vehicleIdentificationNumber = (event.addtionalInformation.vehicleIdentificationNumber);
-            //     event.customerName = (event.addtionalInformation.customerName);
-            //     event.totalServiceTime = (event.addtionalInformation.totalServiceTime);
-            //     event.make = (event.addtionalInformation.make);
-            //     event.model = (event.addtionalInformation.model);
-            //     event.year = (event.addtionalInformation.year);
-            //     event.variant = (event.addtionalInformation.variant);
-            // }
-
-            // if (typeof event.partners != "undefined") {
-            //     event.partner = (event.partners[0].partner);
-            //     event.partnerFunction = (event.partners[0].partnerFunction);
-            //     event.partnerName = (event.partners[0].partnerName);
-            // }
-
-            // if (typeof event.address != "undefined") {
-            //     event.customerFirstName = (event.address[0].customerFirstName);
-            //     event.customerLastName = (event.address[0].customerLastName);
-            //     event.postalCode = (event.address[0].postalCode);
-            //     event.city = (event.address[0].city);
-            //     event.region = (event.address[0].region);
-            //     event.country = (event.address[0].country);
-            //     event.countryCode = (event.address[0].countryCode);
-            //     event.state = (event.address[0].state);
-            //     event.streetAddress = (event.address[0].streetAddress);
-            //     event.addressType = (event.address[0].addressType);
-            //     event.phoneNumber = (event.address[0].phoneNumber);
-            // }
-
-            // if (typeof event.contactInfo != "undefined") {
-            //     event.emailId = (event.contactInfo.emailId);
-            //     event.phoneNumber = (event.contactInfo.phoneNumber);
-            // }
-
-            event.vehicleOnsite = event.vehicleOnsite ? 'Y' : 'N'
-            assignFirstChild(event, 'addtionalInformation');
-            assignFirstChild(event, 'appointment');
-            mapToHANAStructure(event, 'FCT_SERVICE_ORDER');
-        }
-
-        return await upsertEvents(events, {
-            function: 'SERVICE_ORDER / UPSERT',
-            table: 'FCT_SERVICE_ORDER',
-            keyProperty: 'serviceOrderId'
-        });
+    return await upsertEvents(events, {
+      function: "SERVICE_ORDER / UPSERT",
+      table: "FCT_SERVICE_ORDER",
+      keyProperty: "serviceOrderId",
     });
+  });
 
-    // done
-    srv.on('A_FCT_SERVICE_ORDER_JOB_LINES', async (req) => {
-        const events = Array.isArray(req.data.events) ? req.data.events : [req.data.events];
-        for (let event of events) {
-            event.serviceOrderJoblinesId = (event.id);
-            mapToHANAStructure(event, 'FCT_SERVICE_ORDER_JOB_LINES');
-        }
+  //done - UPSERT Tested
+  srv.on("A_FCT_SERVICE_ORDER_JOB_LINES", async (req) => {
+    const events = Array.isArray(req.data.events)
+      ? req.data.events
+      : [req.data.events];
+    for (let event of events) {
+      event.serviceOrderJoblinesId = event.id;
+      mapToHANAStructure(event, "FCT_SERVICE_ORDER_JOB_LINES");
+    }
 
-        return await upsertEvents(events, {
-            function: 'SERVICE_ORDER_JOB_LINES / UPSERT',
-            table: 'FCT_SERVICE_ORDER_JOB_LINES',
-            keyProperty: 'serviceOrderJoblinesId'
-        });
+    return await upsertEvents(events, {
+      function: "SERVICE_ORDER_JOB_LINES / UPSERT",
+      table: "FCT_SERVICE_ORDER_JOB_LINES",
+      keyProperty: "serviceOrderJoblinesId",
     });
+  });
 
-    srv.on('A_DIM_VEHICLE_GROUP', async (req) => {
-        const events = Array.isArray(req.data.events) ? req.data.events : [req.data.events];
-        for (let event of events) {
-            event.vehicleIdentificationNumber = (event.id);
-            event.engineCapacity = (event.engineSize);
-            event.odometer = (event.currentOdometer);
-            event.exteriorColours = (event.exteriorColor);
-            event.interiorColours = (event.interiorColor);
+  //done - UPSERT Tested
 
-            // delete event.id
-            // delete event.engineSize
-            // delete event.itemStatus
-            // delete event.brandCode
-            // delete event.referenceDocumentItem
-            // delete event.currentOdometer
-            // delete event.exteriorColours
-            // delete event.interiorColors
-            // delete event.quantity
-            // delete event.deliveryDate
-            // delete event.customerId
-            // delete event.orgId
-            // delete event.salesOffice
-            // delete event.salesGroup
-            // delete event.division
-            // delete event.distributionChannel
-            // delete event.creationDate
-            mapToHANAStructure(event, 'DIM_VEHICLE_GROUP');
-        }
+  srv.on("A_DIM_VEHICLE_GROUP", async (req) => {
+    const events = Array.isArray(req.data.events)
+      ? req.data.events
+      : [req.data.events];
+    for (let event of events) {
+      event.vehicleIdentificationNumber = event.id;
+      event.engineCapacity = event.engineSize;
+      event.odometer = event.currentOdometer;
 
-        return await upsertEvents(events, {
-            function: 'VEHICLE_GROUP / UPSERT',
-            table: 'DIM_VEHICLE_GROUP',
-            keyProperty: 'vehicleIdentificationNumber'
-        });
+      mapToHANAStructure(event, "DIM_VEHICLE_GROUP");
+    }
+
+    return await upsertEvents(events, {
+      function: "VEHICLE_GROUP / UPSERT",
+      table: "DIM_VEHICLE_GROUP",
+      keyProperty: "vehicleIdentificationNumber",
     });
+  });
 
+   //done - UPSERT Tested
 
+   srv.on("A_FCT_WARRANTIES", async (req) => {
+    const events = Array.isArray(req.data.events)
+      ? req.data.events
+      : [req.data.events];
+    for (let event of events) {
+      event.warrantieSid = event.id;
+     
 
+      mapToHANAStructure(event, "FCT_WARRANTIES");
+    }
+
+    return await upsertEvents(events, {
+      function: "WARRANTIES / UPSERT",
+      table: "FCT_WARRANTIES",
+      keyProperty: "warrantieSid",
+    });
+  });
+
+  //done - UPSERT Tested
+
+  srv.on("A_FCT_RECALLS", async (req) => {
+    const events = Array.isArray(req.data.events)
+      ? req.data.events
+      : [req.data.events];
+    for (let event of events) {
+      event.recallSid = event.id;
+     event.created_On = event.creationDate
+     event.claim_Type_Description = event.claimTypeDescription
+      assignFirstChild(event, "partners");
+      mapToHANAStructure(event, "FCT_RECALLS");
+    }
+
+    return await upsertEvents(events, {
+      function: "RECALLS / UPSERT",
+      table: "FCT_RECALLS",
+      keyProperty: "recallSid",
+    });
+  });
 };
