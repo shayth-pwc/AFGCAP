@@ -111,3 +111,10 @@ entity VEHICLE_GROUP {
         exteriorAttributes          : String;
         interiorAttributes          : String;
 };
+
+@cds.persistence.exists
+entity CUST_UCPID_MAP {
+     crmId : many String;
+    UCPID : String;
+    sourceSystem : String;
+}

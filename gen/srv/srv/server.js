@@ -5,7 +5,7 @@ const oAuthSettings = {
     clientid: 'sb-afg-server!t20207',
     clientsecret: 'Ilrd/Fhwy1e+G87KZ8eCG+3Qprk=',
     url: "https://non-prod-rdb-mfv4kx6f.authentication.eu20.hana.ondemand.com/oauth/token?grant_type=client_credentials",
-}; 
+};
 
 cds.on('bootstrap', app => {
     app.get('/getToken', async (req, res) => {

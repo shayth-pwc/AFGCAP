@@ -77,8 +77,6 @@ service UpsertService @(impl: './upsertService.js') {
 
   action A_FCT_SERVICE_ORDER(events : many FCT_SERVICE_ORDER) returns many ResponseMessages;
 
-  //DIM
-
   entity DIM_MATERIAL as projection on DIM.MATERIAL;
 
   action A_DIM_MATERIAL(events : many DIM_MATERIAL) returns many ResponseMessages;
@@ -86,6 +84,11 @@ service UpsertService @(impl: './upsertService.js') {
   entity DIM_VEHICLE_GROUP as projection on DIM.VEHICLE_GROUP;
 
   action A_DIM_VEHICLE_GROUP(events : many DIM_VEHICLE_GROUP) returns many ResponseMessages;
+
+  entity DIM_CUST_UCPID_MAP as projection on DIM.CUST_UCPID_MAP;
+
+  action A_DIM_CUST_UCPID_MAP(events : many DIM_CUST_UCPID_MAP) returns many ResponseMessages;
+
 
 
 

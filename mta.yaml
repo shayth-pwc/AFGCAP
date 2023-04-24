@@ -8,7 +8,7 @@ build-parameters:
   before-all:
     - builder: custom
       commands:
-        - npx -p @sap/cds-dk cds build --production
+        - npx -p @sap/cds-dk cds build -s srv --production
 modules:
   - name: CAP-srv
     type: nodejs
@@ -23,26 +23,9 @@ modules:
           srv-url: '${default-url}'
     requires:
       - name: CAP-db
-      - name: CAP-auth
-  - name: CAP-db-deployer
-    type: hdb
-    path: gen/db
-    parameters:
-      buildpack: nodejs_buildpack
-    requires:
-      - name: CAP-db
 resources:
   - name: CAP-db
     type: com.sap.xs.hdi-container
     parameters:
       service: hana
       service-plan: hdi-shared
-  - name: CAP-auth
-    type: org.cloudfoundry.managed-service
-    parameters:
-      service: xsuaa
-      service-plan: application
-      path: ./xs-security.json
-      config:
-        xsappname: AFG-CAP-API
-        tenant-mode: dedicated

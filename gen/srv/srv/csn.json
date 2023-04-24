@@ -1,0 +1,8280 @@
+{
+  "namespace": "API",
+  "definitions": {
+    "API.ResponseMessages": {
+      "kind": "entity",
+      "@cds.persistence.skip": true,
+      "elements": {
+        "success": {
+          "type": "cds.Boolean",
+          "default": {
+            "val": false
+          }
+        },
+        "message": {
+          "type": "cds.String"
+        },
+        "error": {
+          "type": "cds.String"
+        }
+      }
+    },
+    "API.LOG": {
+      "kind": "entity",
+      "@cds.persistence.exists": true,
+      "elements": {
+        "ID": {
+          "@Core.Computed": true,
+          "key": true,
+          "type": "cds.UUID"
+        },
+        "CALLED_FUNC": {
+          "type": "cds.String"
+        },
+        "RESPONSE_CODE": {
+          "type": "cds.String"
+        },
+        "BRANDCODE": {
+          "type": "cds.String"
+        },
+        "RESPONSE_STATUS": {
+          "type": "cds.String"
+        },
+        "RESPONSE_TEXT": {
+          "type": "cds.String"
+        },
+        "RESPONSE_TIME": {
+          "type": "cds.String"
+        },
+        "CAPTURE_DATE": {
+          "type": "cds.Date"
+        },
+        "CAPTURE_TIME": {
+          "type": "cds.Time"
+        },
+        "CAPTURED_BY": {
+          "type": "cds.String"
+        },
+        "PAYLOAD": {
+          "type": "cds.String"
+        },
+        "STATUS": {
+          "type": "cds.String"
+        }
+      }
+    },
+    "DIM.MATERIAL": {
+      "kind": "entity",
+      "@cds.persistence.exists": true,
+      "elements": {
+        "material": {
+          "key": true,
+          "type": "cds.String"
+        },
+        "derivative": {
+          "type": "cds.String"
+        },
+        "make": {
+          "type": "cds.String"
+        },
+        "makeCode": {
+          "type": "cds.String"
+        },
+        "model": {
+          "type": "cds.String"
+        },
+        "modelCode": {
+          "type": "cds.String"
+        },
+        "modelYear": {
+          "type": "cds.Integer",
+          "default": {
+            "val": 0
+          }
+        },
+        "bodyType": {
+          "type": "cds.String"
+        },
+        "fuelType": {
+          "type": "cds.String"
+        },
+        "modelGrade": {
+          "type": "cds.String"
+        },
+        "modelGroup": {
+          "type": "cds.String"
+        },
+        "engineCapacity": {
+          "type": "cds.String"
+        },
+        "numberOfDoors": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "numberOfSeats": {
+          "type": "cds.String"
+        },
+        "transmissionType": {
+          "type": "cds.String"
+        },
+        "vehicleType": {
+          "type": "cds.String"
+        },
+        "countryOfOrigin": {
+          "type": "cds.String"
+        },
+        "yearOfManufature": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "torque": {
+          "type": "cds.String"
+        },
+        "tireSize": {
+          "type": "cds.String"
+        },
+        "trimType": {
+          "type": "cds.String"
+        },
+        "engineType": {
+          "type": "cds.String"
+        },
+        "finalDrive": {
+          "type": "cds.String"
+        },
+        "specificationRegion": {
+          "type": "cds.String"
+        },
+        "typeOfWheel": {
+          "type": "cds.String"
+        },
+        "cubicCapacity": {
+          "type": "cds.String"
+        },
+        "numberOfAxles": {
+          "type": "cds.Integer",
+          "default": {
+            "val": 0
+          }
+        },
+        "numberOfGears": {
+          "type": "cds.Integer",
+          "default": {
+            "val": 0
+          }
+        },
+        "numberOfTyres": {
+          "type": "cds.Integer",
+          "default": {
+            "val": 0
+          }
+        },
+        "numberOfValves": {
+          "type": "cds.Integer",
+          "default": {
+            "val": 0
+          }
+        },
+        "fuelTankCapacity": {
+          "type": "cds.String"
+        },
+        "numberOfCylinders": {
+          "type": "cds.Integer",
+          "default": {
+            "val": 0
+          }
+        }
+      }
+    },
+    "DIM.VEHICLE_GROUP": {
+      "kind": "entity",
+      "@cds.persistence.exists": true,
+      "elements": {
+        "id": {
+          "type": "cds.String"
+        },
+        "engineSize": {
+          "type": "cds.String"
+        },
+        "itemStatus": {
+          "type": "cds.String"
+        },
+        "referenceDocumentItem": {
+          "type": "cds.String"
+        },
+        "brandCode": {
+          "type": "cds.String"
+        },
+        "interiorColours": {
+          "type": "cds.String"
+        },
+        "exteriorColours": {
+          "type": "cds.String"
+        },
+        "currentOdometer": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "quantity": {
+          "type": "cds.String"
+        },
+        "deliveryDate": {
+          "type": "cds.DateTime"
+        },
+        "customerId": {
+          "type": "cds.String"
+        },
+        "orgId": {
+          "type": "cds.String"
+        },
+        "salesOffice": {
+          "type": "cds.String"
+        },
+        "salesGroup": {
+          "type": "cds.String"
+        },
+        "division": {
+          "type": "cds.String"
+        },
+        "distributionChannel": {
+          "type": "cds.String"
+        },
+        "creationDate": {
+          "type": "cds.DateTime"
+        },
+        "accountId": {
+          "type": "cds.String"
+        },
+        "accountName": {
+          "type": "cds.String"
+        },
+        "vehicleIdentificationNumber": {
+          "key": true,
+          "type": "cds.String"
+        },
+        "make": {
+          "type": "cds.String"
+        },
+        "makeCode": {
+          "type": "cds.String"
+        },
+        "model": {
+          "type": "cds.String"
+        },
+        "modelCode": {
+          "type": "cds.String"
+        },
+        "derivative": {
+          "type": "cds.String"
+        },
+        "material": {
+          "type": "cds.String"
+        },
+        "vehicleStatus": {
+          "type": "cds.String"
+        },
+        "odometer": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "modelYear": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "variantCode": {
+          "type": "cds.String"
+        },
+        "bodyType": {
+          "type": "cds.String"
+        },
+        "fuelType": {
+          "type": "cds.String"
+        },
+        "modelGrade": {
+          "type": "cds.String"
+        },
+        "modelGroup": {
+          "type": "cds.String"
+        },
+        "engineCapacity": {
+          "type": "cds.String"
+        },
+        "numberOfDoors": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "numberOfSeats": {
+          "type": "cds.String"
+        },
+        "transmissionType": {
+          "type": "cds.String"
+        },
+        "genericExteriorColours": {
+          "type": "cds.String"
+        },
+        "genericInteriorColours": {
+          "type": "cds.String"
+        },
+        "exteriorColourCode": {
+          "type": "cds.String"
+        },
+        "interiorColourCode": {
+          "type": "cds.String"
+        },
+        "vehicleInternalNumber": {
+          "type": "cds.String"
+        },
+        "location": {
+          "type": "cds.String"
+        },
+        "vehicleAllocation": {
+          "type": "cds.String"
+        },
+        "grossPrice": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "interior": {
+          "type": "cds.String"
+        },
+        "exterior": {
+          "type": "cds.String"
+        },
+        "safety": {
+          "type": "cds.String"
+        },
+        "warranty": {
+          "type": "cds.String"
+        },
+        "consumerOffers": {
+          "type": "cds.String"
+        },
+        "audioAndEntertainment": {
+          "type": "cds.String"
+        },
+        "boeDate": {
+          "type": "cds.DateTime"
+        },
+        "acquisitionDate": {
+          "type": "cds.DateTime"
+        },
+        "engineNumber": {
+          "type": "cds.String"
+        },
+        "lvMainType": {
+          "type": "cds.String"
+        },
+        "nextServiceDueDate": {
+          "type": "cds.DateTime"
+        },
+        "modelServiceCode": {
+          "type": "cds.String"
+        },
+        "licensePlateNumber": {
+          "type": "cds.String"
+        },
+        "countryOfOrgin": {
+          "type": "cds.String"
+        },
+        "registrationDate": {
+          "type": "cds.DateTime"
+        },
+        "registrationAuthority": {
+          "type": "cds.String"
+        },
+        "registrationType": {
+          "type": "cds.String"
+        },
+        "registrationCountry": {
+          "type": "cds.String"
+        },
+        "registrationOdometer": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "lastServiceDate": {
+          "type": "cds.DateTime"
+        },
+        "yearOfManufacture": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "activeCustomerId": {
+          "type": "cds.String"
+        },
+        "exteriorAttributes": {
+          "type": "cds.String"
+        },
+        "interiorAttributes": {
+          "type": "cds.String"
+        }
+      }
+    },
+    "FCT.SERVICE_ORDER_JOBS": {
+      "kind": "entity",
+      "@cds.persistence.exists": true,
+      "elements": {
+        "creationDate": {
+          "type": "cds.Timestamp"
+        },
+        "id": {
+          "key": true,
+          "type": "cds.String"
+        },
+        "serviceOrderId": {
+          "type": "cds.String"
+        },
+        "sourceSystem": {
+          "type": "cds.String"
+        },
+        "brandCode": {
+          "type": "cds.String"
+        },
+        "currency": {
+          "type": "cds.String"
+        },
+        "salesGroup": {
+          "type": "cds.String"
+        },
+        "quantity": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "price": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "discount": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "total": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "jobDescription": {
+          "type": "cds.String"
+        },
+        "tax": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "lastUpdateDate": {
+          "type": "cds.DateTime"
+        },
+        "vehicleIdentificationNumber": {
+          "type": "cds.String"
+        },
+        "customerCode": {
+          "type": "cds.String"
+        },
+        "jobId": {
+          "type": "cds.String"
+        },
+        "packageId": {
+          "type": "cds.String"
+        },
+        "packageDescription": {
+          "type": "cds.String"
+        },
+        "externalPackageId": {
+          "type": "cds.String"
+        },
+        "serviceTime": {
+          "type": "cds.String"
+        },
+        "unitOfMeasure": {
+          "type": "cds.String"
+        },
+        "orderAmount": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "orderNumber": {
+          "type": "cds.String"
+        },
+        "isDeferred": {
+          "type": "cds.Boolean",
+          "default": {
+            "val": false
+          }
+        },
+        "deferredReason": {
+          "type": "cds.String"
+        },
+        "deferredCategory": {
+          "type": "cds.String"
+        },
+        "deferredJobFollowupDate": {
+          "type": "cds.DateTime"
+        },
+        "defferedJobsCurrency": {
+          "type": "cds.String"
+        }
+      }
+    },
+    "FCT.WARRANTIES": {
+      "kind": "entity",
+      "@cds.persistence.exists": true,
+      "elements": {
+        "id": {
+          "type": "cds.String"
+        },
+        "warrantieSid": {
+          "key": true,
+          "type": "cds.String"
+        },
+        "sourceSystem": {
+          "type": "cds.String"
+        },
+        "brandCode": {
+          "type": "cds.String"
+        },
+        "lastUpdateDate": {
+          "type": "cds.DateTime"
+        },
+        "status": {
+          "type": "cds.String"
+        },
+        "description": {
+          "type": "cds.String"
+        },
+        "endDate": {
+          "type": "cds.String"
+        },
+        "vehicleidentifcationnumber": {
+          "type": "cds.String"
+        },
+        "warrantyinfo": {
+          "type": "cds.String"
+        },
+        "period": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "months": {
+          "type": "cds.String"
+        },
+        "startDate": {
+          "type": "cds.DateTime"
+        },
+        "startMileage": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "endMileage": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        }
+      }
+    },
+    "FCT.RECALLS": {
+      "kind": "entity",
+      "@cds.persistence.exists": true,
+      "elements": {
+        "creationDate": {
+          "type": "cds.DateTime"
+        },
+        "id": {
+          "type": "cds.String"
+        },
+        "claimTypeDescription": {
+          "type": "cds.String"
+        },
+        "recallSid": {
+          "key": true,
+          "type": "cds.String"
+        },
+        "sourceSystem": {
+          "type": "cds.String"
+        },
+        "brandCode": {
+          "type": "cds.String"
+        },
+        "lastUpdateDate": {
+          "type": "cds.DateTime"
+        },
+        "vehicleIdentificationNumber": {
+          "type": "cds.String"
+        },
+        "recallNumber": {
+          "type": "cds.String"
+        },
+        "vehicleRecallStatus": {
+          "type": "cds.String"
+        },
+        "claimType": {
+          "type": "cds.String"
+        },
+        "referenceDate": {
+          "type": "cds.DateTime"
+        },
+        "referenceNumber": {
+          "type": "cds.String"
+        },
+        "recallStatusDescription": {
+          "type": "cds.String"
+        },
+        "recallPriorityDescription": {
+          "type": "cds.String"
+        },
+        "recallValidFrom": {
+          "type": "cds.String"
+        },
+        "recallValidTo": {
+          "type": "cds.String"
+        },
+        "claim_Type_Description": {
+          "type": "cds.String"
+        },
+        "createdBy": {
+          "type": "cds.String"
+        },
+        "createdByName": {
+          "type": "cds.String"
+        },
+        "recallInfo": {
+          "type": "cds.String"
+        },
+        "externalRecallNumber": {
+          "type": "cds.String"
+        },
+        "customerCode": {
+          "type": "cds.String"
+        },
+        "created_On": {
+          "type": "cds.DateTime"
+        },
+        "partners": {
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": "*"
+          },
+          "targetAspect": {
+            "elements": {
+              "partner": {
+                "type": "cds.String"
+              },
+              "partnerDescription": {
+                "type": "cds.String"
+              }
+            }
+          },
+          "target": "FCT.RECALLS.partners",
+          "on": [
+            {
+              "ref": [
+                "partners",
+                "up_"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$self"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "FCT.SERVICE_ORDER_JOB_LINES": {
+      "kind": "entity",
+      "@cds.persistence.exists": true,
+      "elements": {
+        "id": {
+          "type": "cds.String"
+        },
+        "serviceOrderJoblinesId": {
+          "key": true,
+          "type": "cds.String"
+        },
+        "serviceOrderJobId": {
+          "type": "cds.String"
+        },
+        "sourceSystem": {
+          "type": "cds.String"
+        },
+        "brandCode": {
+          "type": "cds.String"
+        },
+        "currency": {
+          "type": "cds.String"
+        },
+        "salesGroup": {
+          "type": "cds.String"
+        },
+        "item": {
+          "type": "cds.String"
+        },
+        "material": {
+          "type": "cds.String"
+        },
+        "description": {
+          "type": "cds.String"
+        },
+        "quantity": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "uom": {
+          "type": "cds.String"
+        },
+        "batch": {
+          "type": "cds.String"
+        },
+        "price": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "discount": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "total": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "jobNumber": {
+          "type": "cds.String"
+        },
+        "jobDescription": {
+          "type": "cds.String"
+        },
+        "itemCategory": {
+          "type": "cds.String"
+        },
+        "laborPartValue": {
+          "type": "cds.String"
+        },
+        "laborPartDescription": {
+          "type": "cds.String"
+        },
+        "orderType": {
+          "type": "cds.String"
+        },
+        "orderTypeDesc": {
+          "type": "cds.String"
+        },
+        "lastupdatedate": {
+          "type": "cds.DateTime"
+        },
+        "creationDate": {
+          "type": "cds.DateTime"
+        }
+      }
+    },
+    "FCT.SERVICE_MAIN_CONT": {
+      "kind": "entity",
+      "@cds.persistence.exists": true,
+      "elements": {
+        "id": {
+          "type": "cds.String"
+        },
+        "removed": {
+          "type": "cds.Boolean",
+          "default": {
+            "val": false
+          }
+        },
+        "contractEndDate": {
+          "type": "cds.DateTime"
+        },
+        "serviceMainContractId": {
+          "key": true,
+          "type": "cds.String"
+        },
+        "sourceSystem": {
+          "type": "cds.String"
+        },
+        "brandCode": {
+          "type": "cds.String"
+        },
+        "lastUpdateDate": {
+          "type": "cds.DateTime"
+        },
+        "vehicleIdentificationNumber": {
+          "type": "cds.String"
+        },
+        "currency": {
+          "type": "cds.String"
+        },
+        "amount": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "orgId": {
+          "type": "cds.String"
+        },
+        "division": {
+          "type": "cds.String"
+        },
+        "salesGroup": {
+          "type": "cds.String"
+        },
+        "distributionchannel": {
+          "type": "cds.String"
+        },
+        "branchcode": {
+          "type": "cds.String"
+        },
+        "customerCode": {
+          "type": "cds.String"
+        },
+        "serviceContractNumber": {
+          "type": "cds.String"
+        },
+        "serviceContractItem": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "contractStartDate": {
+          "type": "cds.DateTime"
+        },
+        "coverageItemNumber": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "initialContractOdometer": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "packageHeaderIdentification": {
+          "type": "cds.String"
+        },
+        "counterReadingMileageFrom": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "counterReadingMileageTo": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "fleetCounterUnit": {
+          "type": "cds.String"
+        },
+        "coverageCounter": {
+          "type": "cds.Integer",
+          "default": {
+            "val": 0
+          }
+        },
+        "coverageConsumption": {
+          "type": "cds.Integer",
+          "default": {
+            "val": 0
+          }
+        },
+        "contractStatus": {
+          "type": "cds.String"
+        },
+        "endDate": {
+          "type": "cds.DateTime"
+        },
+        "startDate": {
+          "type": "cds.DateTime"
+        },
+        "contractType": {
+          "type": "cds.String"
+        },
+        "serviceAdvisorId": {
+          "type": "cds.String"
+        },
+        "contractServiceAdvisor": {
+          "type": "cds.String"
+        },
+        "salesOffice": {
+          "type": "cds.String"
+        },
+        "creationDate": {
+          "type": "cds.DateTime"
+        }
+      }
+    },
+    "FCT.ORDER_ITEMS": {
+      "kind": "entity",
+      "@cds.persistence.exists": true,
+      "elements": {
+        "creationDate": {
+          "type": "cds.DateTime"
+        },
+        "removed": {
+          "type": "cds.Boolean",
+          "default": {
+            "val": false
+          }
+        },
+        "salesOffice": {
+          "type": "cds.String"
+        },
+        "id": {
+          "type": "cds.String",
+          "length": 500
+        },
+        "deliveryTime": {
+          "type": "cds.DateTime"
+        },
+        "orderItemId": {
+          "key": true,
+          "type": "cds.String",
+          "length": 500
+        },
+        "orderId": {
+          "type": "cds.String"
+        },
+        "sourceSystem": {
+          "type": "cds.String"
+        },
+        "brandCode": {
+          "type": "cds.String"
+        },
+        "salesGroup": {
+          "type": "cds.String"
+        },
+        "customerId": {
+          "type": "cds.String"
+        },
+        "lastUpdateDate": {
+          "type": "cds.DateTime"
+        },
+        "item": {
+          "type": "cds.String"
+        },
+        "vehicleIdentificationNumber": {
+          "type": "cds.String"
+        },
+        "material": {
+          "type": "cds.String"
+        },
+        "derivative": {
+          "type": "cds.String"
+        },
+        "quantity": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "itemStatus": {
+          "type": "cds.String"
+        },
+        "deliveryDate": {
+          "type": "cds.DateTime"
+        },
+        "itemAmount": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "orderNumber": {
+          "type": "cds.String"
+        },
+        "orderAmount": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "rejectionReason": {
+          "type": "cds.String"
+        },
+        "productIdDescription": {
+          "type": "cds.String"
+        },
+        "vehicleDetails": {
+          "type": "cds.String"
+        },
+        "productClassification": {
+          "type": "cds.String"
+        },
+        "productCategory": {
+          "type": "cds.String"
+        },
+        "productId": {
+          "type": "cds.String"
+        },
+        "delivery_Time": {
+          "type": "cds.DateTime"
+        },
+        "invoiceDate": {
+          "type": "cds.DateTime"
+        }
+      }
+    },
+    "FCT.QUOTATIONS_ITEMS": {
+      "kind": "entity",
+      "@cds.persistence.exists": true,
+      "elements": {
+        "id": {
+          "type": "cds.String"
+        },
+        "quotationsItemsId": {
+          "key": true,
+          "type": "cds.String"
+        },
+        "quotationId": {
+          "type": "cds.String"
+        },
+        "sourceSystem": {
+          "type": "cds.String"
+        },
+        "brandCode": {
+          "type": "cds.String"
+        },
+        "salesGroup": {
+          "type": "cds.String"
+        },
+        "customerId": {
+          "type": "cds.String"
+        },
+        "item": {
+          "type": "cds.String"
+        },
+        "vehicleIdentificationNumber": {
+          "type": "cds.String"
+        },
+        "material": {
+          "type": "cds.String"
+        },
+        "derivative": {
+          "type": "cds.String"
+        },
+        "quantity": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "itemStatus": {
+          "type": "cds.String"
+        },
+        "deliveryDate": {
+          "type": "cds.DateTime"
+        },
+        "itemAmount": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "rejectionReason": {
+          "type": "cds.String"
+        },
+        "productIdDescription": {
+          "type": "cds.String"
+        },
+        "vehicleDetails": {
+          "type": "cds.String"
+        },
+        "productClassification": {
+          "type": "cds.String"
+        },
+        "productCategory": {
+          "type": "cds.String"
+        },
+        "productId": {
+          "type": "cds.String"
+        },
+        "lastUpdateDate": {
+          "type": "cds.DateTime"
+        },
+        "quotationNumber": {
+          "type": "cds.String"
+        },
+        "quotationAmount": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        }
+      }
+    },
+    "FCT.OPPORTUNITY": {
+      "kind": "entity",
+      "@cds.persistence.exists": true,
+      "elements": {
+        "opportunityId": {
+          "key": true,
+          "type": "cds.String"
+        },
+        "sourceSystem": {
+          "type": "cds.String"
+        },
+        "status": {
+          "type": "cds.String"
+        },
+        "createdDate": {
+          "type": "cds.DateTime"
+        },
+        "type": {
+          "type": "cds.String"
+        },
+        "salesOffice": {
+          "type": "cds.String"
+        },
+        "lostReason": {
+          "type": "cds.String"
+        },
+        "lostDate": {
+          "type": "cds.DateTime"
+        },
+        "currentVehicleMake": {
+          "type": "cds.String"
+        },
+        "currentVehicleModel": {
+          "type": "cds.String"
+        },
+        "salesExecutiveId": {
+          "type": "cds.String"
+        },
+        "brandCode": {
+          "type": "cds.String"
+        }
+      }
+    },
+    "FCT.LEAD_UPDATES": {
+      "kind": "entity",
+      "@cds.persistence.exists": true,
+      "elements": {
+        "leadUpdateId": {
+          "key": true,
+          "type": "cds.String"
+        },
+        "sourceSystem": {
+          "type": "cds.String"
+        },
+        "leadId": {
+          "type": "cds.String"
+        },
+        "leadStatus": {
+          "type": "cds.String"
+        },
+        "status": {
+          "type": "cds.String"
+        },
+        "customerId": {
+          "type": "cds.String"
+        }
+      }
+    },
+    "FCT.LEAD": {
+      "kind": "entity",
+      "@cds.persistence.exists": true,
+      "elements": {
+        "salesExecutiveId": {
+          "type": "cds.String"
+        },
+        "creationDate": {
+          "type": "cds.DateTime"
+        },
+        "removed": {
+          "type": "cds.Boolean",
+          "default": {
+            "val": false
+          }
+        },
+        "salesManagerId": {
+          "type": "cds.String"
+        },
+        "lastUpdateDate": {
+          "type": "cds.DateTime"
+        },
+        "salesGroup": {
+          "type": "cds.String"
+        },
+        "division": {
+          "type": "cds.String"
+        },
+        "sourceSystem": {
+          "type": "cds.String"
+        },
+        "salesOffice": {
+          "type": "cds.String"
+        },
+        "distributionChannel": {
+          "type": "cds.String"
+        },
+        "brandCode": {
+          "type": "cds.String"
+        },
+        "type": {
+          "type": "cds.String"
+        },
+        "leadId": {
+          "key": true,
+          "type": "cds.String"
+        },
+        "c4cLeadId": {
+          "type": "cds.String"
+        },
+        "salesOrg": {
+          "type": "cds.String"
+        },
+        "closedReason": {
+          "type": "cds.String"
+        },
+        "closedDate": {
+          "type": "cds.DateTime"
+        },
+        "createdDate": {
+          "type": "cds.DateTime"
+        },
+        "webSourceUrl": {
+          "type": "cds.String"
+        },
+        "googleClientId": {
+          "type": "cds.String"
+        },
+        "language": {
+          "type": "cds.String"
+        },
+        "leadStatus": {
+          "type": "cds.String"
+        },
+        "tradeInMake": {
+          "type": "cds.String"
+        },
+        "tradeInModel": {
+          "type": "cds.String"
+        },
+        "usedCarVin": {
+          "type": "cds.String"
+        },
+        "source": {
+          "type": "cds.String"
+        },
+        "branch": {
+          "type": "cds.String"
+        },
+        "sourceCode": {
+          "type": "cds.String"
+        },
+        "statusCode": {
+          "type": "cds.String"
+        },
+        "closedReasonCode": {
+          "type": "cds.String"
+        },
+        "webSource": {
+          "type": "cds.String"
+        },
+        "tradeInModelYear": {
+          "type": "cds.String"
+        },
+        "leadCampaign": {
+          "type": "cds.String"
+        },
+        "vehicleInterestMake": {
+          "type": "cds.String"
+        },
+        "vehicleInterestModelGroup": {
+          "type": "cds.String"
+        },
+        "leadChannel": {
+          "type": "cds.String"
+        },
+        "webFormName": {
+          "type": "cds.String"
+        },
+        "enquiryId": {
+          "type": "cds.String"
+        },
+        "leadReceivedDate": {
+          "type": "cds.DateTime"
+        },
+        "leadPassedToBranchTimestamp": {
+          "type": "cds.String"
+        },
+        "leadPassedByEmpId": {
+          "type": "cds.String"
+        },
+        "leadReceivedDateTime": {
+          "type": "cds.String"
+        },
+        "manualLeadCreatedBy": {
+          "type": "cds.String"
+        },
+        "customerId": {
+          "type": "cds.String"
+        }
+      }
+    },
+    "FCT.ENQUIRY_FOLLOWUP": {
+      "kind": "entity",
+      "@cds.persistence.exists": true,
+      "elements": {
+        "creationDate": {
+          "type": "cds.DateTime"
+        },
+        "id": {
+          "type": "cds.String"
+        },
+        "followUpId": {
+          "key": true,
+          "type": "cds.String"
+        },
+        "enquiryid": {
+          "type": "cds.String"
+        },
+        "lastupdatedate": {
+          "type": "cds.DateTime"
+        },
+        "salesGroup": {
+          "type": "cds.String"
+        },
+        "division": {
+          "type": "cds.String"
+        },
+        "customerId": {
+          "type": "cds.String"
+        },
+        "sourceSystem": {
+          "type": "cds.String"
+        },
+        "salesOffice": {
+          "type": "cds.String"
+        },
+        "distributionChannel": {
+          "type": "cds.String"
+        },
+        "brandCode": {
+          "type": "cds.String"
+        },
+        "opportunityId": {
+          "type": "cds.String"
+        },
+        "type": {
+          "type": "cds.String"
+        },
+        "status": {
+          "type": "cds.String"
+        },
+        "action": {
+          "type": "cds.String"
+        },
+        "comments": {
+          "type": "cds.String"
+        },
+        "assignedToSEId": {
+          "type": "cds.String"
+        },
+        "passToBranchId": {
+          "type": "cds.String"
+        },
+        "leadId": {
+          "type": "cds.String"
+        },
+        "c4cLeadId": {
+          "type": "cds.String"
+        },
+        "assignedToSEDate": {
+          "type": "cds.String"
+        },
+        "passedToBranchDate": {
+          "type": "cds.String"
+        },
+        "appointmentDate": {
+          "type": "cds.String"
+        },
+        "followUpDate": {
+          "type": "cds.DateTime"
+        },
+        "activityStart": {
+          "type": "cds.DateTime"
+        },
+        "activityEnd": {
+          "type": "cds.DateTime"
+        },
+        "salesOrg": {
+          "type": "cds.String"
+        },
+        "salesExecId": {
+          "type": "cds.String"
+        },
+        "activityChangedDate": {
+          "type": "cds.DateTime"
+        },
+        "customerName": {
+          "type": "cds.String"
+        },
+        "subject": {
+          "type": "cds.String"
+        },
+        "organizer": {
+          "type": "cds.String"
+        },
+        "location": {
+          "type": "cds.String"
+        },
+        "allDayEvent": {
+          "type": "cds.String"
+        },
+        "category": {
+          "type": "cds.String"
+        },
+        "priority": {
+          "type": "cds.String"
+        },
+        "primaryContactId": {
+          "type": "cds.String"
+        },
+        "primaryContactName": {
+          "type": "cds.String"
+        },
+        "createdBy": {
+          "type": "cds.String"
+        },
+        "createdOn": {
+          "type": "cds.DateTime"
+        },
+        "processor": {
+          "type": "cds.String"
+        },
+        "dateCompleted": {
+          "type": "cds.DateTime"
+        },
+        "completionPercentage": {
+          "type": "cds.String"
+        },
+        "transmissionStatus": {
+          "type": "cds.String"
+        },
+        "direction": {
+          "type": "cds.String"
+        },
+        "sentOn": {
+          "type": "cds.DateTime"
+        },
+        "owner": {
+          "type": "cds.String"
+        },
+        "senderEmailId": {
+          "type": "cds.String"
+        },
+        "senderName": {
+          "type": "cds.String"
+        },
+        "receiverEmailId": {
+          "type": "cds.String"
+        },
+        "phoneNumber": {
+          "type": "cds.String"
+        },
+        "subType": {
+          "type": "cds.String"
+        },
+        "reason": {
+          "type": "cds.String"
+        },
+        "channel": {
+          "type": "cds.String"
+        },
+        "associatedObject": {
+          "type": "cds.String"
+        },
+        "associatedObjectId": {
+          "type": "cds.String"
+        },
+        "activityTimeStamp": {
+          "type": "cds.String"
+        },
+        "chatText": {
+          "type": "cds.String"
+        },
+        "mobileNumber": {
+          "type": "cds.String"
+        },
+        "lastUpdatedDate": {
+          "type": "cds.DateTime"
+        }
+      }
+    },
+    "FCT.CUST_ECO_SYSTEM": {
+      "kind": "entity",
+      "@cds.persistence.exists": true,
+      "elements": {
+        "initialReviewCompletedDateTime": {
+          "type": "cds.DateTime"
+        },
+        "additionDetails": {
+          "type": "cds.String"
+        },
+        "priority": {
+          "type": "cds.String"
+        },
+        "sourceSystem": {
+          "type": "cds.String"
+        },
+        "VIN": {
+          "type": "cds.String"
+        },
+        "employeeResponsible": {
+          "type": "cds.String"
+        },
+        "source": {
+          "type": "cds.String"
+        },
+        "complaintSubCategory": {
+          "type": "cds.String"
+        },
+        "unclearStatusReason": {
+          "type": "cds.String"
+        },
+        "customerId": {
+          "type": "cds.String"
+        },
+        "originId": {
+          "type": "cds.String"
+        },
+        "customerExpectation": {
+          "type": "cds.String"
+        },
+        "sourceObjectType": {
+          "type": "cds.String"
+        },
+        "acquisitionDate": {
+          "type": "cds.DateTime"
+        },
+        "communicationMedium": {
+          "type": "cds.String"
+        },
+        "reportedBy": {
+          "type": "cds.String"
+        },
+        "brand": {
+          "type": "cds.String"
+        },
+        "processingTypeCode": {
+          "type": "cds.String"
+        },
+        "contactPersonName": {
+          "type": "cds.String"
+        },
+        "approvalStatus": {
+          "type": "cds.String"
+        },
+        "lastName": {
+          "type": "cds.String"
+        },
+        "complaintCategory": {
+          "type": "cds.String"
+        },
+        "showroomName": {
+          "type": "cds.String"
+        },
+        "creationDateTime": {
+          "type": "cds.DateTime"
+        },
+        "saleDate": {
+          "type": "cds.DateTime"
+        },
+        "assignedTo": {
+          "type": "cds.String"
+        },
+        "complaintId": {
+          "type": "cds.String"
+        },
+        "status": {
+          "type": "cds.String"
+        },
+        "callType": {
+          "type": "cds.String"
+        },
+        "plateNumber": {
+          "type": "cds.String"
+        },
+        "firstReactionDueDateTime": {
+          "type": "cds.DateTime"
+        },
+        "vehicleModel": {
+          "type": "cds.String"
+        },
+        "contactPersonEmail": {
+          "type": "cds.String"
+        },
+        "serviceCenterName": {
+          "type": "cds.String"
+        },
+        "odometerReading": {
+          "type": "cds.String"
+        },
+        "relatedTo": {
+          "type": "cds.String"
+        },
+        "mainTicketId": {
+          "key": true,
+          "type": "cds.String"
+        },
+        "completedCaseStatus": {
+          "type": "cds.String"
+        },
+        "escalationStatus": {
+          "type": "cds.String"
+        },
+        "firstName": {
+          "type": "cds.String"
+        },
+        "vehicleMake": {
+          "type": "cds.String"
+        },
+        "complaintTitle": {
+          "type": "cds.String"
+        },
+        "completionDueDateTime": {
+          "type": "cds.DateTime"
+        },
+        "isConsumer": {
+          "type": "cds.Boolean",
+          "default": {
+            "val": false
+          }
+        },
+        "contactPersonMobileNo": {
+          "type": "cds.String"
+        },
+        "resolvedOnDateTime": {
+          "type": "cds.String"
+        }
+      }
+    },
+    "FCT.ENQUIRY_ITEMS": {
+      "kind": "entity",
+      "@cds.persistence.exists": true,
+      "elements": {
+        "ProductDetails": {
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": "*"
+          },
+          "targetAspect": {
+            "elements": {
+              "productIdDescription": {
+                "type": "cds.String"
+              },
+              "productClassification": {
+                "type": "cds.String"
+              },
+              "productCost": {
+                "type": "cds.String"
+              },
+              "isVatApplicable": {
+                "type": "cds.String"
+              }
+            }
+          },
+          "target": "FCT.ENQUIRY_ITEMS.ProductDetails",
+          "on": [
+            {
+              "ref": [
+                "ProductDetails",
+                "up_"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$self"
+              ]
+            }
+          ]
+        },
+        "financeDetails": {
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": "*"
+          },
+          "targetAspect": {
+            "elements": {
+              "financeTerm": {
+                "type": "cds.String"
+              },
+              "financeRate": {
+                "type": "cds.String"
+              },
+              "financeCompanyNumberSAP": {
+                "type": "cds.String"
+              },
+              "monthlyPayment": {
+                "type": "cds.String"
+              },
+              "cashInput": {
+                "type": "cds.String"
+              },
+              "financeCompanyNumber": {
+                "type": "cds.String"
+              },
+              "minimumGuaranteedFutureValue": {
+                "type": "cds.String"
+              },
+              "financeSchemeName": {
+                "type": "cds.String"
+              },
+              "financeBalance": {
+                "type": "cds.String"
+              },
+              "financeType": {
+                "type": "cds.String"
+              }
+            }
+          },
+          "target": "FCT.ENQUIRY_ITEMS.financeDetails",
+          "on": [
+            {
+              "ref": [
+                "financeDetails",
+                "up_"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$self"
+              ]
+            }
+          ]
+        },
+        "brandCode": {
+          "type": "cds.String"
+        },
+        "model": {
+          "type": "cds.String"
+        },
+        "material": {
+          "type": "cds.String"
+        },
+        "make": {
+          "type": "cds.String"
+        },
+        "currentOdometer": {
+          "type": "cds.String"
+        },
+        "derivative": {
+          "type": "cds.String"
+        },
+        "modelYear": {
+          "type": "cds.String"
+        },
+        "creationDate": {
+          "type": "cds.DateTime"
+        },
+        "interiorColor": {
+          "type": "cds.String"
+        },
+        "exteriorColor": {
+          "type": "cds.String"
+        },
+        "variantCode": {
+          "type": "cds.String"
+        },
+        "orderItemId": {
+          "type": "cds.String"
+        },
+        "engineSize": {
+          "type": "cds.String"
+        },
+        "vehicleInterestModel": {
+          "type": "cds.String"
+        },
+        "vehicleInterestMake": {
+          "type": "cds.String"
+        },
+        "vehicleInterestModelGroup": {
+          "type": "cds.String"
+        },
+        "id": {
+          "key": true,
+          "type": "cds.String"
+        },
+        "lastUpdateDate": {
+          "type": "cds.DateTime"
+        },
+        "salesGroup": {
+          "type": "cds.String"
+        },
+        "division": {
+          "type": "cds.String"
+        },
+        "customerId": {
+          "type": "cds.String"
+        },
+        "sourceSystem": {
+          "type": "cds.String"
+        },
+        "salesOffice": {
+          "type": "cds.String"
+        },
+        "deliveryDate": {
+          "type": "cds.DateTime"
+        },
+        "orgId": {
+          "type": "cds.String"
+        },
+        "enquiryId": {
+          "type": "cds.String"
+        },
+        "vehicleInternalNumber": {
+          "type": "cds.String"
+        },
+        "quantity": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "campaignId": {
+          "type": "cds.String"
+        },
+        "rejectReasonCode": {
+          "type": "cds.String"
+        },
+        "referenceDocument": {
+          "type": "cds.String"
+        },
+        "referenceDocumentItem": {
+          "type": "cds.String"
+        },
+        "itemStatus": {
+          "type": "cds.String"
+        },
+        "engineNumber": {
+          "type": "cds.String"
+        },
+        "productionDate": {
+          "type": "cds.DateTime"
+        },
+        "campaignDescription": {
+          "type": "cds.String"
+        },
+        "addOnFlag": {
+          "type": "cds.String"
+        },
+        "productClassification": {
+          "type": "cds.String"
+        },
+        "productCategory": {
+          "type": "cds.String"
+        },
+        "productID": {
+          "type": "cds.String"
+        },
+        "productIdDescription": {
+          "type": "cds.String"
+        },
+        "productCost": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "isVatApplicable": {
+          "type": "cds.String"
+        },
+        "financeCompanyNumber": {
+          "type": "cds.String"
+        },
+        "financeSchemeName": {
+          "type": "cds.String"
+        },
+        "financeBalance": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "financeRate": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "financeTerm": {
+          "type": "cds.String"
+        },
+        "financeType": {
+          "type": "cds.String"
+        },
+        "minimumGuaranteedFutureValue": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "pcpContractMileage": {
+          "type": "cds.String"
+        },
+        "monthlyPayment": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "cashInput": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "financeCompanyNumberSAP": {
+          "type": "cds.String"
+        },
+        "quotationReferenceNumber": {
+          "type": "cds.String"
+        },
+        "distributionChannel": {
+          "type": "cds.String"
+        },
+        "negotiatedValue": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "revenueStartDate": {
+          "type": "cds.DateTime"
+        },
+        "revenueEndDate": {
+          "type": "cds.DateTime"
+        }
+      }
+    },
+    "FCT.ENQUIRY": {
+      "kind": "entity",
+      "@cds.persistence.exists": true,
+      "elements": {
+        "vehicleInterests": {
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": "*"
+          },
+          "targetAspect": {
+            "elements": {
+              "testDriveRejection": {
+                "type": "cds.String"
+              },
+              "makeCode": {
+                "type": "cds.String"
+              },
+              "tradeIn": {
+                "type": "cds.String"
+              },
+              "sourceOfEnquiry": {
+                "type": "cds.String"
+              },
+              "vehicleCategory": {
+                "type": "cds.String"
+              },
+              "budgetLow": {
+                "type": "cds.String"
+              },
+              "bodyStyleCode": {
+                "type": "cds.String"
+              },
+              "testDrive": {
+                "type": "cds.String"
+              },
+              "bodyStyle": {
+                "type": "cds.String"
+              },
+              "currentModel": {
+                "type": "cds.String"
+              },
+              "budgetHigh": {
+                "type": "cds.String"
+              },
+              "make": {
+                "type": "cds.String"
+              },
+              "model": {
+                "type": "cds.String"
+              },
+              "currentMake": {
+                "type": "cds.String"
+              },
+              "modelGroup": {
+                "type": "cds.String"
+              },
+              "derivative": {
+                "type": "cds.String"
+              },
+              "genericArticleCode": {
+                "type": "cds.String"
+              },
+              "variantCode": {
+                "type": "cds.String"
+              },
+              "financeType": {
+                "type": "cds.String"
+              },
+              "financeTerm": {
+                "type": "cds.String"
+              },
+              "testDriveDate": {
+                "type": "cds.DateTime"
+              },
+              "modelCode": {
+                "type": "cds.String"
+              }
+            }
+          },
+          "target": "FCT.ENQUIRY.vehicleInterests",
+          "on": [
+            {
+              "ref": [
+                "vehicleInterests",
+                "up_"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$self"
+              ]
+            }
+          ]
+        },
+        "EnquiryDetails": {
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": 1
+          },
+          "targetAspect": {
+            "elements": {
+              "EnquiryCreatedDate": {
+                "type": "cds.DateTime"
+              },
+              "EnquiryStatus": {
+                "type": "cds.String"
+              },
+              "OrderId": {
+                "type": "cds.String"
+              },
+              "QuotationID": {
+                "type": "cds.String"
+              }
+            }
+          },
+          "target": "FCT.ENQUIRY.EnquiryDetails",
+          "on": [
+            {
+              "ref": [
+                "EnquiryDetails",
+                "up_"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$self"
+              ]
+            }
+          ]
+        },
+        "customerDetail": {
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": 1
+          },
+          "targetAspect": {
+            "elements": {
+              "CRMID": {
+                "type": "cds.String"
+              }
+            }
+          },
+          "target": "FCT.ENQUIRY.customerDetail",
+          "on": [
+            {
+              "ref": [
+                "customerDetail",
+                "up_"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$self"
+              ]
+            }
+          ]
+        },
+        "enquiryInformation": {
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": 1
+          },
+          "targetAspect": {
+            "elements": {
+              "staffId": {
+                "type": "cds.Decimal",
+                "default": {
+                  "val": 0
+                }
+              },
+              "orgId": {
+                "type": "cds.String"
+              },
+              "salesGroup": {
+                "type": "cds.String"
+              },
+              "salesManagerId": {
+                "type": "cds.Decimal",
+                "default": {
+                  "val": 0
+                }
+              },
+              "branchId": {
+                "type": "cds.String"
+              },
+              "customerId": {
+                "type": "cds.String"
+              },
+              "division": {
+                "type": "cds.String"
+              },
+              "salesOffice": {
+                "type": "cds.String"
+              },
+              "salesExecutiveId": {
+                "type": "cds.Decimal",
+                "default": {
+                  "val": 0
+                }
+              },
+              "leadId": {
+                "type": "cds.String"
+              },
+              "enquiryType": {
+                "type": "cds.String"
+              },
+              "saleType": {
+                "type": "cds.String"
+              },
+              "distributionChannel": {
+                "type": "cds.String"
+              },
+              "offerExpired": {
+                "type": "cds.String"
+              },
+              "businessManagerId": {
+                "type": "cds.Decimal",
+                "default": {
+                  "val": 0
+                }
+              }
+            }
+          },
+          "target": "FCT.ENQUIRY.enquiryInformation",
+          "on": [
+            {
+              "ref": [
+                "enquiryInformation",
+                "up_"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$self"
+              ]
+            }
+          ]
+        },
+        "Partners": {
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": "*"
+          },
+          "targetAspect": {
+            "elements": {
+              "partner": {
+                "type": "cds.String"
+              },
+              "partnerFunction": {
+                "type": "cds.String"
+              },
+              "partnerName": {
+                "type": "cds.String"
+              }
+            }
+          },
+          "target": "FCT.ENQUIRY.Partners",
+          "on": [
+            {
+              "ref": [
+                "Partners",
+                "up_"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$self"
+              ]
+            }
+          ]
+        },
+        "removed": {
+          "type": "cds.Boolean"
+        },
+        "lostTo": {
+          "type": "cds.String"
+        },
+        "guaranteedFutureValue": {
+          "type": "cds.Decimal"
+        },
+        "creationDate": {
+          "type": "cds.DateTime"
+        },
+        "paymentType": {
+          "type": "cds.String"
+        },
+        "id": {
+          "key": true,
+          "type": "cds.String"
+        },
+        "salesManagerId": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "offerExpired": {
+          "type": "cds.String"
+        },
+        "businessManagerId": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "customerId": {
+          "type": "cds.String"
+        },
+        "enquiryType": {
+          "type": "cds.String"
+        },
+        "branchId": {
+          "type": "cds.String"
+        },
+        "saleType": {
+          "type": "cds.String"
+        },
+        "staffId": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "distributionChannel": {
+          "type": "cds.String"
+        },
+        "lastupdatedate": {
+          "type": "cds.DateTime"
+        },
+        "partner": {
+          "type": "cds.String"
+        },
+        "partnerName": {
+          "type": "cds.String"
+        },
+        "partnerFunction": {
+          "type": "cds.String"
+        },
+        "sourceOfEnquiry": {
+          "type": "cds.String"
+        },
+        "currentModel": {
+          "type": "cds.String"
+        },
+        "testDriveRejection": {
+          "type": "cds.String"
+        },
+        "financeTerm": {
+          "type": "cds.String"
+        },
+        "currentMake": {
+          "type": "cds.String"
+        },
+        "financeType": {
+          "type": "cds.String"
+        },
+        "budgetHigh": {
+          "type": "cds.String"
+        },
+        "budgetLow": {
+          "type": "cds.String"
+        },
+        "tradeIn": {
+          "type": "cds.String"
+        },
+        "testDriveDate": {
+          "type": "cds.DateTime"
+        },
+        "genericArticleCode": {
+          "type": "cds.String"
+        },
+        "modelGroup": {
+          "type": "cds.String"
+        },
+        "testDrive": {
+          "type": "cds.String"
+        },
+        "vehicle_model": {
+          "type": "cds.String"
+        },
+        "variant_Code": {
+          "type": "cds.String"
+        },
+        "brandCode": {
+          "type": "cds.String"
+        },
+        "CRMID": {
+          "type": "cds.String"
+        },
+        "EnquiryStatus": {
+          "type": "cds.String"
+        },
+        "QuotationID": {
+          "type": "cds.String"
+        },
+        "EnquiryCreatedDate": {
+          "type": "cds.DateTime"
+        },
+        "OrderId": {
+          "type": "cds.String"
+        },
+        "category": {
+          "type": "cds.String"
+        },
+        "salesGroup": {
+          "type": "cds.String"
+        },
+        "division": {
+          "type": "cds.String"
+        },
+        "sourceSystem": {
+          "type": "cds.String"
+        },
+        "salesOffice": {
+          "type": "cds.String"
+        },
+        "leadId": {
+          "type": "cds.String"
+        },
+        "salesExecutiveId": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "orgId": {
+          "type": "cds.String"
+        },
+        "lostTimestamp": {
+          "type": "cds.String"
+        },
+        "lostReason": {
+          "type": "cds.String"
+        },
+        "noOfCarsInHousehold": {
+          "type": "cds.Decimal"
+        },
+        "timeOfNextAppointment": {
+          "type": "cds.DateTime"
+        },
+        "deliveryTimestamp": {
+          "type": "cds.DateTime"
+        },
+        "orderedDate": {
+          "type": "cds.DateTime"
+        },
+        "lastContactTime": {
+          "type": "cds.DateTime"
+        },
+        "firstVisitDate": {
+          "type": "cds.DateTime"
+        },
+        "deliveryDate": {
+          "type": "cds.DateTime"
+        },
+        "totalNegotiatedValue": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "weightedValue": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "expectedValue": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "closeDate": {
+          "type": "cds.DateTime"
+        },
+        "name": {
+          "type": "cds.String"
+        },
+        "reasonForStatus": {
+          "type": "cds.String"
+        },
+        "salesCycle": {
+          "type": "cds.String"
+        },
+        "salesPhase": {
+          "type": "cds.String"
+        },
+        "probability": {
+          "type": "cds.String"
+        },
+        "startDate": {
+          "type": "cds.DateTime"
+        },
+        "forecastCategory": {
+          "type": "cds.String"
+        },
+        "natureOfBusiness": {
+          "type": "cds.String"
+        },
+        "tenderFee": {
+          "type": "cds.String"
+        },
+        "tenderRegistrationStart": {
+          "type": "cds.DateTime"
+        },
+        "tenderRegistrationEnd": {
+          "type": "cds.DateTime"
+        },
+        "modeOfPayment": {
+          "type": "cds.String"
+        },
+        "fAndIIntroduction": {
+          "type": "cds.String"
+        },
+        "accesories": {
+          "type": "cds.String"
+        },
+        "fabrication": {
+          "type": "cds.String"
+        },
+        "documentType": {
+          "type": "cds.String"
+        },
+        "customization": {
+          "type": "cds.String"
+        },
+        "payment_Type": {
+          "type": "cds.String"
+        }
+      }
+    },
+    "FCT.QUOTATIONS": {
+      "kind": "entity",
+      "@cds.persistence.exists": true,
+      "elements": {
+        "id": {
+          "type": "cds.String"
+        },
+        "quotationId": {
+          "key": true,
+          "type": "cds.String"
+        },
+        "tax": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "customerId": {
+          "type": "cds.String"
+        },
+        "currency": {
+          "type": "cds.String"
+        },
+        "branchCode": {
+          "type": "cds.String"
+        },
+        "orgId": {
+          "type": "cds.String"
+        },
+        "opportunityId": {
+          "type": "cds.String"
+        },
+        "distributionChannel": {
+          "type": "cds.String"
+        },
+        "salesGroup": {
+          "type": "cds.String"
+        },
+        "amount": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "division": {
+          "type": "cds.String"
+        },
+        "brandCode": {
+          "type": "cds.String"
+        },
+        "expectedDeliveryDate": {
+          "type": "cds.DateTime"
+        },
+        "sourceSystem": {
+          "type": "cds.String"
+        },
+        "quotationType": {
+          "type": "cds.String"
+        },
+        "quotationStatus": {
+          "type": "cds.String"
+        },
+        "lastUpdateDate": {
+          "type": "cds.DateTime"
+        },
+        "salesManagerId": {
+          "type": "cds.String"
+        },
+        "salesExecutiveId": {
+          "type": "cds.String"
+        },
+        "invoiceId": {
+          "type": "cds.String"
+        },
+        "finance": {
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": 1
+          },
+          "targetAspect": {
+            "elements": {
+              "balance": {
+                "type": "cds.Decimal",
+                "default": {
+                  "val": 0
+                }
+              },
+              "startDate": {
+                "type": "cds.DateTime"
+              },
+              "endDate": {
+                "type": "cds.DateTime"
+              },
+              "rate": {
+                "type": "cds.Decimal",
+                "default": {
+                  "val": 0
+                }
+              },
+              "minimumGuranteedFutureValue": {
+                "type": "cds.Decimal",
+                "default": {
+                  "val": 0
+                }
+              },
+              "type": {
+                "type": "cds.String"
+              },
+              "monthlyPayment": {
+                "type": "cds.Decimal",
+                "default": {
+                  "val": 0
+                }
+              },
+              "productCategory": {
+                "type": "cds.String"
+              },
+              "term": {
+                "type": "cds.String"
+              }
+            }
+          },
+          "target": "FCT.QUOTATIONS.finance",
+          "on": [
+            {
+              "ref": [
+                "finance",
+                "up_"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$self"
+              ]
+            }
+          ]
+        },
+        "partners": {
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": "*"
+          },
+          "targetAspect": {
+            "elements": {
+              "partnerName": {
+                "type": "cds.String"
+              },
+              "partnerFuction": {
+                "type": "cds.String"
+              },
+              "partner": {
+                "type": "cds.String"
+              }
+            }
+          },
+          "target": "FCT.QUOTATIONS.partners",
+          "on": [
+            {
+              "ref": [
+                "partners",
+                "up_"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$self"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "FCT.ORDERS": {
+      "kind": "entity",
+      "@cds.persistence.exists": true,
+      "elements": {
+        "finance": {
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": 1
+          },
+          "targetAspect": {
+            "elements": {
+              "financeSchemeName": {
+                "type": "cds.String"
+              },
+              "endDate": {
+                "type": "cds.String"
+              },
+              "type": {
+                "type": "cds.String"
+              },
+              "balance": {
+                "type": "cds.String"
+              },
+              "productCategory": {
+                "type": "cds.String"
+              },
+              "startDate": {
+                "type": "cds.String"
+              },
+              "minimumGuaranteedFutureValue": {
+                "type": "cds.Decimal"
+              },
+              "invoiceId": {
+                "type": "cds.String"
+              },
+              "rate": {
+                "type": "cds.Decimal"
+              },
+              "term": {
+                "type": "cds.String"
+              },
+              "monthlyPayment": {
+                "type": "cds.Decimal"
+              }
+            }
+          },
+          "target": "FCT.ORDERS.finance",
+          "on": [
+            {
+              "ref": [
+                "finance",
+                "up_"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$self"
+              ]
+            }
+          ]
+        },
+        "partners": {
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": "*"
+          },
+          "targetAspect": {
+            "elements": {
+              "partnerName": {
+                "type": "cds.String"
+              },
+              "partnerFunction": {
+                "type": "cds.String"
+              },
+              "partner": {
+                "type": "cds.String"
+              }
+            }
+          },
+          "target": "FCT.ORDERS.partners",
+          "on": [
+            {
+              "ref": [
+                "partners",
+                "up_"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$self"
+              ]
+            }
+          ]
+        },
+        "removed": {
+          "type": "cds.Boolean"
+        },
+        "creationDate": {
+          "type": "cds.Date"
+        },
+        "lastUpdatedDate": {
+          "type": "cds.Date"
+        },
+        "id": {
+          "key": true,
+          "type": "cds.String"
+        },
+        "tax": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "orderStatus": {
+          "type": "cds.String"
+        },
+        "customerId": {
+          "type": "cds.String"
+        },
+        "currency": {
+          "type": "cds.String"
+        },
+        "branchcode": {
+          "type": "cds.String"
+        },
+        "orgId": {
+          "type": "cds.String"
+        },
+        "opportunityId": {
+          "type": "cds.String"
+        },
+        "distributionchannel": {
+          "type": "cds.String"
+        },
+        "salesGroup": {
+          "type": "cds.String"
+        },
+        "amount": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "division": {
+          "type": "cds.String"
+        },
+        "brandCode": {
+          "type": "cds.String"
+        },
+        "expectedDeliveryDate": {
+          "type": "cds.DateTime"
+        },
+        "sourceSystem": {
+          "type": "cds.String"
+        },
+        "quotationId": {
+          "type": "cds.String"
+        },
+        "orderType": {
+          "type": "cds.String"
+        },
+        "lastUpdateDate": {
+          "type": "cds.DateTime"
+        },
+        "salesManagerId": {
+          "type": "cds.String"
+        },
+        "salesExecutiveId": {
+          "type": "cds.String"
+        },
+        "partnerFunction": {
+          "type": "cds.String"
+        },
+        "partnerName": {
+          "type": "cds.String"
+        },
+        "partner": {
+          "type": "cds.String"
+        },
+        "minimumGuaranteedFutureValue": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "financeSchemeName": {
+          "type": "cds.String"
+        },
+        "productCategory": {
+          "type": "cds.String"
+        },
+        "term": {
+          "type": "cds.String"
+        },
+        "monthlyPayment": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "rate": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "startDate": {
+          "type": "cds.DateTime"
+        },
+        "endDate": {
+          "type": "cds.DateTime"
+        },
+        "type": {
+          "type": "cds.String"
+        },
+        "balance": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "invoiceId": {
+          "type": "cds.String"
+        }
+      }
+    },
+    "FCT.SERVICE_ORDER": {
+      "kind": "entity",
+      "@cds.persistence.exists": true,
+      "elements": {
+        "addtionalInformation": {
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": 1
+          },
+          "targetAspect": {
+            "elements": {
+              "vehicleIdentificationNumber": {
+                "type": "cds.String"
+              },
+              "currentOdometer": {
+                "type": "cds.Decimal"
+              },
+              "locationName": {
+                "type": "cds.String"
+              }
+            }
+          },
+          "target": "FCT.SERVICE_ORDER.addtionalInformation",
+          "on": [
+            {
+              "ref": [
+                "addtionalInformation",
+                "up_"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$self"
+              ]
+            }
+          ]
+        },
+        "appointment": {
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": 1
+          },
+          "targetAspect": {
+            "elements": {
+              "startDate": {
+                "type": "cds.DateTime"
+              },
+              "endDate": {
+                "type": "cds.DateTime"
+              }
+            }
+          },
+          "target": "FCT.SERVICE_ORDER.appointment",
+          "on": [
+            {
+              "ref": [
+                "appointment",
+                "up_"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$self"
+              ]
+            }
+          ]
+        },
+        "Partners": {
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": "*"
+          },
+          "targetAspect": {
+            "elements": {
+              "partner": {
+                "type": "cds.String"
+              },
+              "partnerFunction": {
+                "type": "cds.String"
+              },
+              "partnerName": {
+                "type": "cds.String"
+              }
+            }
+          },
+          "target": "FCT.SERVICE_ORDER.Partners",
+          "on": [
+            {
+              "ref": [
+                "Partners",
+                "up_"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$self"
+              ]
+            }
+          ]
+        },
+        "serviceAdvisorNumber": {
+          "type": "cds.String"
+        },
+        "creationDate": {
+          "type": "cds.DateTime"
+        },
+        "id": {
+          "key": true,
+          "type": "cds.String"
+        },
+        "orderType": {
+          "type": "cds.String"
+        },
+        "amount": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "orderNumber": {
+          "type": "cds.String"
+        },
+        "serviceDate": {
+          "type": "cds.DateTime"
+        },
+        "salesGroup": {
+          "type": "cds.String"
+        },
+        "invoiceDate": {
+          "type": "cds.DateTime"
+        },
+        "vehicleOnsite": {
+          "type": "cds.String"
+        },
+        "isVehicleOnSite": {
+          "type": "cds.Boolean",
+          "default": {
+            "val": false
+          }
+        },
+        "orgId": {
+          "type": "cds.String"
+        },
+        "division": {
+          "type": "cds.String"
+        },
+        "distributionchannel": {
+          "type": "cds.String"
+        },
+        "status": {
+          "type": "cds.String"
+        },
+        "brandCode": {
+          "type": "cds.String"
+        },
+        "tax": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "currency": {
+          "type": "cds.String"
+        },
+        "branchcode": {
+          "type": "cds.String"
+        },
+        "invoiceId": {
+          "type": "cds.String"
+        },
+        "closeDate": {
+          "type": "cds.DateTime"
+        },
+        "description": {
+          "type": "cds.String"
+        },
+        "material": {
+          "type": "cds.String"
+        },
+        "customerArriveDate": {
+          "type": "cds.DateTime"
+        },
+        "customerCode": {
+          "type": "cds.String"
+        },
+        "serviceAdvisorId": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "addInfoAmount": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "lastUpdateDate": {
+          "type": "cds.DateTime"
+        },
+        "sourceSystem": {
+          "type": "cds.String"
+        },
+        "appointmentEndDate": {
+          "type": "cds.DateTime"
+        },
+        "startDate": {
+          "type": "cds.DateTime"
+        },
+        "show": {
+          "type": "cds.String"
+        },
+        "showDate": {
+          "type": "cds.DateTime"
+        },
+        "confirmationDate": {
+          "type": "cds.DateTime"
+        },
+        "plannedStartTimestamp": {
+          "type": "cds.DateTime"
+        },
+        "plannedStartDate": {
+          "type": "cds.DateTime"
+        },
+        "endDate": {
+          "type": "cds.DateTime"
+        },
+        "currentOdometer": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "vehicleIdentificationNumber": {
+          "type": "cds.String"
+        },
+        "customerName": {
+          "type": "cds.String"
+        },
+        "totalServiceTime": {
+          "type": "cds.String"
+        },
+        "make": {
+          "type": "cds.String"
+        },
+        "model": {
+          "type": "cds.String"
+        },
+        "year": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "variant": {
+          "type": "cds.String"
+        },
+        "partnerName": {
+          "type": "cds.String"
+        },
+        "partnerFunction": {
+          "type": "cds.String"
+        },
+        "partner": {
+          "type": "cds.String"
+        },
+        "emailId": {
+          "type": "cds.String"
+        },
+        "phoneNumber": {
+          "type": "cds.String"
+        },
+        "customerFirstName": {
+          "type": "cds.String"
+        },
+        "customerLastName": {
+          "type": "cds.String"
+        },
+        "postalCode": {
+          "type": "cds.String"
+        },
+        "city": {
+          "type": "cds.String"
+        },
+        "region": {
+          "type": "cds.String"
+        },
+        "country": {
+          "type": "cds.String"
+        },
+        "countryCode": {
+          "type": "cds.String"
+        },
+        "state": {
+          "type": "cds.String"
+        },
+        "streetAddress": {
+          "type": "cds.String"
+        },
+        "addressType": {
+          "type": "cds.String"
+        }
+      }
+    },
+    "API": {
+      "@source": "srv/service.cds",
+      "kind": "service"
+    },
+    "FCT": {
+      "@source": "srv/service.cds",
+      "kind": "service"
+    },
+    "DIM": {
+      "@source": "srv/service.cds",
+      "kind": "service"
+    },
+    "UpsertService": {
+      "@source": "srv/service.cds",
+      "kind": "service",
+      "@impl": "./upsertService.js"
+    },
+    "UpsertService.ResponseMessages": {
+      "kind": "entity",
+      "@cds.persistence.skip": true,
+      "projection": {
+        "from": {
+          "ref": [
+            "API.ResponseMessages"
+          ]
+        }
+      },
+      "elements": {
+        "success": {
+          "type": "cds.Boolean",
+          "default": {
+            "val": false
+          }
+        },
+        "message": {
+          "type": "cds.String"
+        },
+        "error": {
+          "type": "cds.String"
+        }
+      }
+    },
+    "UpsertService.FCT_SERVICE_ORDER_JOBS": {
+      "kind": "entity",
+      "projection": {
+        "from": {
+          "ref": [
+            "FCT.SERVICE_ORDER_JOBS"
+          ]
+        }
+      },
+      "elements": {
+        "creationDate": {
+          "type": "cds.Timestamp"
+        },
+        "id": {
+          "key": true,
+          "type": "cds.String"
+        },
+        "serviceOrderId": {
+          "type": "cds.String"
+        },
+        "sourceSystem": {
+          "type": "cds.String"
+        },
+        "brandCode": {
+          "type": "cds.String"
+        },
+        "currency": {
+          "type": "cds.String"
+        },
+        "salesGroup": {
+          "type": "cds.String"
+        },
+        "quantity": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "price": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "discount": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "total": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "jobDescription": {
+          "type": "cds.String"
+        },
+        "tax": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "lastUpdateDate": {
+          "type": "cds.DateTime"
+        },
+        "vehicleIdentificationNumber": {
+          "type": "cds.String"
+        },
+        "customerCode": {
+          "type": "cds.String"
+        },
+        "jobId": {
+          "type": "cds.String"
+        },
+        "packageId": {
+          "type": "cds.String"
+        },
+        "packageDescription": {
+          "type": "cds.String"
+        },
+        "externalPackageId": {
+          "type": "cds.String"
+        },
+        "serviceTime": {
+          "type": "cds.String"
+        },
+        "unitOfMeasure": {
+          "type": "cds.String"
+        },
+        "orderAmount": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "orderNumber": {
+          "type": "cds.String"
+        },
+        "isDeferred": {
+          "type": "cds.Boolean",
+          "default": {
+            "val": false
+          }
+        },
+        "deferredReason": {
+          "type": "cds.String"
+        },
+        "deferredCategory": {
+          "type": "cds.String"
+        },
+        "deferredJobFollowupDate": {
+          "type": "cds.DateTime"
+        },
+        "defferedJobsCurrency": {
+          "type": "cds.String"
+        }
+      }
+    },
+    "UpsertService.A_FCT_SERVICE_ORDER_JOBS": {
+      "kind": "action",
+      "params": {
+        "events": {
+          "items": {
+            "type": "UpsertService.FCT_SERVICE_ORDER_JOBS"
+          }
+        }
+      },
+      "returns": {
+        "items": {
+          "type": "UpsertService.ResponseMessages"
+        }
+      }
+    },
+    "UpsertService.FCT_WARRANTIES": {
+      "kind": "entity",
+      "projection": {
+        "from": {
+          "ref": [
+            "FCT.WARRANTIES"
+          ]
+        }
+      },
+      "elements": {
+        "id": {
+          "type": "cds.String"
+        },
+        "warrantieSid": {
+          "key": true,
+          "type": "cds.String"
+        },
+        "sourceSystem": {
+          "type": "cds.String"
+        },
+        "brandCode": {
+          "type": "cds.String"
+        },
+        "lastUpdateDate": {
+          "type": "cds.DateTime"
+        },
+        "status": {
+          "type": "cds.String"
+        },
+        "description": {
+          "type": "cds.String"
+        },
+        "endDate": {
+          "type": "cds.String"
+        },
+        "vehicleidentifcationnumber": {
+          "type": "cds.String"
+        },
+        "warrantyinfo": {
+          "type": "cds.String"
+        },
+        "period": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "months": {
+          "type": "cds.String"
+        },
+        "startDate": {
+          "type": "cds.DateTime"
+        },
+        "startMileage": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "endMileage": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        }
+      }
+    },
+    "UpsertService.A_FCT_WARRANTIES": {
+      "kind": "action",
+      "params": {
+        "events": {
+          "items": {
+            "type": "UpsertService.FCT_WARRANTIES"
+          }
+        }
+      },
+      "returns": {
+        "items": {
+          "type": "UpsertService.ResponseMessages"
+        }
+      }
+    },
+    "UpsertService.FCT_RECALLS": {
+      "kind": "entity",
+      "projection": {
+        "from": {
+          "ref": [
+            "FCT.RECALLS"
+          ]
+        }
+      },
+      "elements": {
+        "creationDate": {
+          "type": "cds.DateTime"
+        },
+        "id": {
+          "type": "cds.String"
+        },
+        "claimTypeDescription": {
+          "type": "cds.String"
+        },
+        "recallSid": {
+          "key": true,
+          "type": "cds.String"
+        },
+        "sourceSystem": {
+          "type": "cds.String"
+        },
+        "brandCode": {
+          "type": "cds.String"
+        },
+        "lastUpdateDate": {
+          "type": "cds.DateTime"
+        },
+        "vehicleIdentificationNumber": {
+          "type": "cds.String"
+        },
+        "recallNumber": {
+          "type": "cds.String"
+        },
+        "vehicleRecallStatus": {
+          "type": "cds.String"
+        },
+        "claimType": {
+          "type": "cds.String"
+        },
+        "referenceDate": {
+          "type": "cds.DateTime"
+        },
+        "referenceNumber": {
+          "type": "cds.String"
+        },
+        "recallStatusDescription": {
+          "type": "cds.String"
+        },
+        "recallPriorityDescription": {
+          "type": "cds.String"
+        },
+        "recallValidFrom": {
+          "type": "cds.String"
+        },
+        "recallValidTo": {
+          "type": "cds.String"
+        },
+        "claim_Type_Description": {
+          "type": "cds.String"
+        },
+        "createdBy": {
+          "type": "cds.String"
+        },
+        "createdByName": {
+          "type": "cds.String"
+        },
+        "recallInfo": {
+          "type": "cds.String"
+        },
+        "externalRecallNumber": {
+          "type": "cds.String"
+        },
+        "customerCode": {
+          "type": "cds.String"
+        },
+        "created_On": {
+          "type": "cds.DateTime"
+        },
+        "partners": {
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": "*"
+          },
+          "targetAspect": {
+            "elements": {
+              "partner": {
+                "type": "cds.String"
+              },
+              "partnerDescription": {
+                "type": "cds.String"
+              }
+            }
+          },
+          "target": "UpsertService.FCT_RECALLS.partners",
+          "on": [
+            {
+              "ref": [
+                "partners",
+                "up_"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$self"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "UpsertService.A_FCT_RECALLS": {
+      "kind": "action",
+      "params": {
+        "events": {
+          "items": {
+            "type": "UpsertService.FCT_RECALLS"
+          }
+        }
+      },
+      "returns": {
+        "items": {
+          "type": "UpsertService.ResponseMessages"
+        }
+      }
+    },
+    "UpsertService.FCT_SERVICE_ORDER_JOB_LINES": {
+      "kind": "entity",
+      "projection": {
+        "from": {
+          "ref": [
+            "FCT.SERVICE_ORDER_JOB_LINES"
+          ]
+        }
+      },
+      "elements": {
+        "id": {
+          "type": "cds.String"
+        },
+        "serviceOrderJoblinesId": {
+          "key": true,
+          "type": "cds.String"
+        },
+        "serviceOrderJobId": {
+          "type": "cds.String"
+        },
+        "sourceSystem": {
+          "type": "cds.String"
+        },
+        "brandCode": {
+          "type": "cds.String"
+        },
+        "currency": {
+          "type": "cds.String"
+        },
+        "salesGroup": {
+          "type": "cds.String"
+        },
+        "item": {
+          "type": "cds.String"
+        },
+        "material": {
+          "type": "cds.String"
+        },
+        "description": {
+          "type": "cds.String"
+        },
+        "quantity": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "uom": {
+          "type": "cds.String"
+        },
+        "batch": {
+          "type": "cds.String"
+        },
+        "price": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "discount": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "total": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "jobNumber": {
+          "type": "cds.String"
+        },
+        "jobDescription": {
+          "type": "cds.String"
+        },
+        "itemCategory": {
+          "type": "cds.String"
+        },
+        "laborPartValue": {
+          "type": "cds.String"
+        },
+        "laborPartDescription": {
+          "type": "cds.String"
+        },
+        "orderType": {
+          "type": "cds.String"
+        },
+        "orderTypeDesc": {
+          "type": "cds.String"
+        },
+        "lastupdatedate": {
+          "type": "cds.DateTime"
+        },
+        "creationDate": {
+          "type": "cds.DateTime"
+        }
+      }
+    },
+    "UpsertService.A_FCT_SERVICE_ORDER_JOB_LINES": {
+      "kind": "action",
+      "params": {
+        "events": {
+          "items": {
+            "type": "UpsertService.FCT_SERVICE_ORDER_JOB_LINES"
+          }
+        }
+      },
+      "returns": {
+        "items": {
+          "type": "UpsertService.ResponseMessages"
+        }
+      }
+    },
+    "UpsertService.FCT_SERVICE_MAIN_CONT": {
+      "kind": "entity",
+      "projection": {
+        "from": {
+          "ref": [
+            "FCT.SERVICE_MAIN_CONT"
+          ]
+        }
+      },
+      "elements": {
+        "id": {
+          "type": "cds.String"
+        },
+        "removed": {
+          "type": "cds.Boolean",
+          "default": {
+            "val": false
+          }
+        },
+        "contractEndDate": {
+          "type": "cds.DateTime"
+        },
+        "serviceMainContractId": {
+          "key": true,
+          "type": "cds.String"
+        },
+        "sourceSystem": {
+          "type": "cds.String"
+        },
+        "brandCode": {
+          "type": "cds.String"
+        },
+        "lastUpdateDate": {
+          "type": "cds.DateTime"
+        },
+        "vehicleIdentificationNumber": {
+          "type": "cds.String"
+        },
+        "currency": {
+          "type": "cds.String"
+        },
+        "amount": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "orgId": {
+          "type": "cds.String"
+        },
+        "division": {
+          "type": "cds.String"
+        },
+        "salesGroup": {
+          "type": "cds.String"
+        },
+        "distributionchannel": {
+          "type": "cds.String"
+        },
+        "branchcode": {
+          "type": "cds.String"
+        },
+        "customerCode": {
+          "type": "cds.String"
+        },
+        "serviceContractNumber": {
+          "type": "cds.String"
+        },
+        "serviceContractItem": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "contractStartDate": {
+          "type": "cds.DateTime"
+        },
+        "coverageItemNumber": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "initialContractOdometer": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "packageHeaderIdentification": {
+          "type": "cds.String"
+        },
+        "counterReadingMileageFrom": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "counterReadingMileageTo": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "fleetCounterUnit": {
+          "type": "cds.String"
+        },
+        "coverageCounter": {
+          "type": "cds.Integer",
+          "default": {
+            "val": 0
+          }
+        },
+        "coverageConsumption": {
+          "type": "cds.Integer",
+          "default": {
+            "val": 0
+          }
+        },
+        "contractStatus": {
+          "type": "cds.String"
+        },
+        "endDate": {
+          "type": "cds.DateTime"
+        },
+        "startDate": {
+          "type": "cds.DateTime"
+        },
+        "contractType": {
+          "type": "cds.String"
+        },
+        "serviceAdvisorId": {
+          "type": "cds.String"
+        },
+        "contractServiceAdvisor": {
+          "type": "cds.String"
+        },
+        "salesOffice": {
+          "type": "cds.String"
+        },
+        "creationDate": {
+          "type": "cds.DateTime"
+        }
+      }
+    },
+    "UpsertService.A_FCT_SERVICE_MAIN_CONT": {
+      "kind": "action",
+      "params": {
+        "events": {
+          "items": {
+            "type": "UpsertService.FCT_SERVICE_MAIN_CONT"
+          }
+        }
+      },
+      "returns": {
+        "items": {
+          "type": "UpsertService.ResponseMessages"
+        }
+      }
+    },
+    "UpsertService.FCT_ORDER_ITEMS": {
+      "kind": "entity",
+      "projection": {
+        "from": {
+          "ref": [
+            "FCT.ORDER_ITEMS"
+          ]
+        }
+      },
+      "elements": {
+        "creationDate": {
+          "type": "cds.DateTime"
+        },
+        "removed": {
+          "type": "cds.Boolean",
+          "default": {
+            "val": false
+          }
+        },
+        "salesOffice": {
+          "type": "cds.String"
+        },
+        "id": {
+          "type": "cds.String",
+          "length": 500
+        },
+        "deliveryTime": {
+          "type": "cds.DateTime"
+        },
+        "orderItemId": {
+          "key": true,
+          "type": "cds.String",
+          "length": 500
+        },
+        "orderId": {
+          "type": "cds.String"
+        },
+        "sourceSystem": {
+          "type": "cds.String"
+        },
+        "brandCode": {
+          "type": "cds.String"
+        },
+        "salesGroup": {
+          "type": "cds.String"
+        },
+        "customerId": {
+          "type": "cds.String"
+        },
+        "lastUpdateDate": {
+          "type": "cds.DateTime"
+        },
+        "item": {
+          "type": "cds.String"
+        },
+        "vehicleIdentificationNumber": {
+          "type": "cds.String"
+        },
+        "material": {
+          "type": "cds.String"
+        },
+        "derivative": {
+          "type": "cds.String"
+        },
+        "quantity": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "itemStatus": {
+          "type": "cds.String"
+        },
+        "deliveryDate": {
+          "type": "cds.DateTime"
+        },
+        "itemAmount": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "orderNumber": {
+          "type": "cds.String"
+        },
+        "orderAmount": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "rejectionReason": {
+          "type": "cds.String"
+        },
+        "productIdDescription": {
+          "type": "cds.String"
+        },
+        "vehicleDetails": {
+          "type": "cds.String"
+        },
+        "productClassification": {
+          "type": "cds.String"
+        },
+        "productCategory": {
+          "type": "cds.String"
+        },
+        "productId": {
+          "type": "cds.String"
+        },
+        "delivery_Time": {
+          "type": "cds.DateTime"
+        },
+        "invoiceDate": {
+          "type": "cds.DateTime"
+        }
+      }
+    },
+    "UpsertService.A_FCT_ORDER_ITEMS": {
+      "kind": "action",
+      "params": {
+        "events": {
+          "items": {
+            "type": "UpsertService.FCT_ORDER_ITEMS"
+          }
+        }
+      },
+      "returns": {
+        "items": {
+          "type": "UpsertService.ResponseMessages"
+        }
+      }
+    },
+    "UpsertService.FCT_QUOTATIONS_ITEMS": {
+      "kind": "entity",
+      "projection": {
+        "from": {
+          "ref": [
+            "FCT.QUOTATIONS_ITEMS"
+          ]
+        }
+      },
+      "elements": {
+        "id": {
+          "type": "cds.String"
+        },
+        "quotationsItemsId": {
+          "key": true,
+          "type": "cds.String"
+        },
+        "quotationId": {
+          "type": "cds.String"
+        },
+        "sourceSystem": {
+          "type": "cds.String"
+        },
+        "brandCode": {
+          "type": "cds.String"
+        },
+        "salesGroup": {
+          "type": "cds.String"
+        },
+        "customerId": {
+          "type": "cds.String"
+        },
+        "item": {
+          "type": "cds.String"
+        },
+        "vehicleIdentificationNumber": {
+          "type": "cds.String"
+        },
+        "material": {
+          "type": "cds.String"
+        },
+        "derivative": {
+          "type": "cds.String"
+        },
+        "quantity": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "itemStatus": {
+          "type": "cds.String"
+        },
+        "deliveryDate": {
+          "type": "cds.DateTime"
+        },
+        "itemAmount": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "rejectionReason": {
+          "type": "cds.String"
+        },
+        "productIdDescription": {
+          "type": "cds.String"
+        },
+        "vehicleDetails": {
+          "type": "cds.String"
+        },
+        "productClassification": {
+          "type": "cds.String"
+        },
+        "productCategory": {
+          "type": "cds.String"
+        },
+        "productId": {
+          "type": "cds.String"
+        },
+        "lastUpdateDate": {
+          "type": "cds.DateTime"
+        },
+        "quotationNumber": {
+          "type": "cds.String"
+        },
+        "quotationAmount": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        }
+      }
+    },
+    "UpsertService.A_FCT_QUOTATIONS_ITEMS": {
+      "kind": "action",
+      "params": {
+        "events": {
+          "items": {
+            "type": "UpsertService.FCT_QUOTATIONS_ITEMS"
+          }
+        }
+      },
+      "returns": {
+        "items": {
+          "type": "UpsertService.ResponseMessages"
+        }
+      }
+    },
+    "UpsertService.FCT_OPPORTUNITY": {
+      "kind": "entity",
+      "projection": {
+        "from": {
+          "ref": [
+            "FCT.OPPORTUNITY"
+          ]
+        }
+      },
+      "elements": {
+        "opportunityId": {
+          "key": true,
+          "type": "cds.String"
+        },
+        "sourceSystem": {
+          "type": "cds.String"
+        },
+        "status": {
+          "type": "cds.String"
+        },
+        "createdDate": {
+          "type": "cds.DateTime"
+        },
+        "type": {
+          "type": "cds.String"
+        },
+        "salesOffice": {
+          "type": "cds.String"
+        },
+        "lostReason": {
+          "type": "cds.String"
+        },
+        "lostDate": {
+          "type": "cds.DateTime"
+        },
+        "currentVehicleMake": {
+          "type": "cds.String"
+        },
+        "currentVehicleModel": {
+          "type": "cds.String"
+        },
+        "salesExecutiveId": {
+          "type": "cds.String"
+        },
+        "brandCode": {
+          "type": "cds.String"
+        }
+      }
+    },
+    "UpsertService.A_FCT_OPPORTUNITY": {
+      "kind": "action",
+      "params": {
+        "events": {
+          "items": {
+            "type": "UpsertService.FCT_OPPORTUNITY"
+          }
+        }
+      },
+      "returns": {
+        "items": {
+          "type": "UpsertService.ResponseMessages"
+        }
+      }
+    },
+    "UpsertService.FCT_LEAD_UPDATES": {
+      "kind": "entity",
+      "projection": {
+        "from": {
+          "ref": [
+            "FCT.LEAD_UPDATES"
+          ]
+        }
+      },
+      "elements": {
+        "leadUpdateId": {
+          "key": true,
+          "type": "cds.String"
+        },
+        "sourceSystem": {
+          "type": "cds.String"
+        },
+        "leadId": {
+          "type": "cds.String"
+        },
+        "leadStatus": {
+          "type": "cds.String"
+        },
+        "status": {
+          "type": "cds.String"
+        },
+        "customerId": {
+          "type": "cds.String"
+        }
+      }
+    },
+    "UpsertService.A_FCT_LEAD_UPDATES": {
+      "kind": "action",
+      "params": {
+        "events": {
+          "items": {
+            "type": "UpsertService.FCT_LEAD_UPDATES"
+          }
+        }
+      },
+      "returns": {
+        "items": {
+          "type": "UpsertService.ResponseMessages"
+        }
+      }
+    },
+    "UpsertService.FCT_LEAD": {
+      "kind": "entity",
+      "projection": {
+        "from": {
+          "ref": [
+            "FCT.LEAD"
+          ]
+        }
+      },
+      "elements": {
+        "salesExecutiveId": {
+          "type": "cds.String"
+        },
+        "creationDate": {
+          "type": "cds.DateTime"
+        },
+        "removed": {
+          "type": "cds.Boolean",
+          "default": {
+            "val": false
+          }
+        },
+        "salesManagerId": {
+          "type": "cds.String"
+        },
+        "lastUpdateDate": {
+          "type": "cds.DateTime"
+        },
+        "salesGroup": {
+          "type": "cds.String"
+        },
+        "division": {
+          "type": "cds.String"
+        },
+        "sourceSystem": {
+          "type": "cds.String"
+        },
+        "salesOffice": {
+          "type": "cds.String"
+        },
+        "distributionChannel": {
+          "type": "cds.String"
+        },
+        "brandCode": {
+          "type": "cds.String"
+        },
+        "type": {
+          "type": "cds.String"
+        },
+        "leadId": {
+          "key": true,
+          "type": "cds.String"
+        },
+        "c4cLeadId": {
+          "type": "cds.String"
+        },
+        "salesOrg": {
+          "type": "cds.String"
+        },
+        "closedReason": {
+          "type": "cds.String"
+        },
+        "closedDate": {
+          "type": "cds.DateTime"
+        },
+        "createdDate": {
+          "type": "cds.DateTime"
+        },
+        "webSourceUrl": {
+          "type": "cds.String"
+        },
+        "googleClientId": {
+          "type": "cds.String"
+        },
+        "language": {
+          "type": "cds.String"
+        },
+        "leadStatus": {
+          "type": "cds.String"
+        },
+        "tradeInMake": {
+          "type": "cds.String"
+        },
+        "tradeInModel": {
+          "type": "cds.String"
+        },
+        "usedCarVin": {
+          "type": "cds.String"
+        },
+        "source": {
+          "type": "cds.String"
+        },
+        "branch": {
+          "type": "cds.String"
+        },
+        "sourceCode": {
+          "type": "cds.String"
+        },
+        "statusCode": {
+          "type": "cds.String"
+        },
+        "closedReasonCode": {
+          "type": "cds.String"
+        },
+        "webSource": {
+          "type": "cds.String"
+        },
+        "tradeInModelYear": {
+          "type": "cds.String"
+        },
+        "leadCampaign": {
+          "type": "cds.String"
+        },
+        "vehicleInterestMake": {
+          "type": "cds.String"
+        },
+        "vehicleInterestModelGroup": {
+          "type": "cds.String"
+        },
+        "leadChannel": {
+          "type": "cds.String"
+        },
+        "webFormName": {
+          "type": "cds.String"
+        },
+        "enquiryId": {
+          "type": "cds.String"
+        },
+        "leadReceivedDate": {
+          "type": "cds.DateTime"
+        },
+        "leadPassedToBranchTimestamp": {
+          "type": "cds.String"
+        },
+        "leadPassedByEmpId": {
+          "type": "cds.String"
+        },
+        "leadReceivedDateTime": {
+          "type": "cds.String"
+        },
+        "manualLeadCreatedBy": {
+          "type": "cds.String"
+        },
+        "customerId": {
+          "type": "cds.String"
+        }
+      }
+    },
+    "UpsertService.A_FCT_LEAD": {
+      "kind": "action",
+      "params": {
+        "events": {
+          "items": {
+            "type": "UpsertService.FCT_LEAD"
+          }
+        }
+      },
+      "returns": {
+        "items": {
+          "type": "UpsertService.ResponseMessages"
+        }
+      }
+    },
+    "UpsertService.FCT_ENQUIRY_FOLLOWUP": {
+      "kind": "entity",
+      "projection": {
+        "from": {
+          "ref": [
+            "FCT.ENQUIRY_FOLLOWUP"
+          ]
+        }
+      },
+      "elements": {
+        "creationDate": {
+          "type": "cds.DateTime"
+        },
+        "id": {
+          "type": "cds.String"
+        },
+        "followUpId": {
+          "key": true,
+          "type": "cds.String"
+        },
+        "enquiryid": {
+          "type": "cds.String"
+        },
+        "lastupdatedate": {
+          "type": "cds.DateTime"
+        },
+        "salesGroup": {
+          "type": "cds.String"
+        },
+        "division": {
+          "type": "cds.String"
+        },
+        "customerId": {
+          "type": "cds.String"
+        },
+        "sourceSystem": {
+          "type": "cds.String"
+        },
+        "salesOffice": {
+          "type": "cds.String"
+        },
+        "distributionChannel": {
+          "type": "cds.String"
+        },
+        "brandCode": {
+          "type": "cds.String"
+        },
+        "opportunityId": {
+          "type": "cds.String"
+        },
+        "type": {
+          "type": "cds.String"
+        },
+        "status": {
+          "type": "cds.String"
+        },
+        "action": {
+          "type": "cds.String"
+        },
+        "comments": {
+          "type": "cds.String"
+        },
+        "assignedToSEId": {
+          "type": "cds.String"
+        },
+        "passToBranchId": {
+          "type": "cds.String"
+        },
+        "leadId": {
+          "type": "cds.String"
+        },
+        "c4cLeadId": {
+          "type": "cds.String"
+        },
+        "assignedToSEDate": {
+          "type": "cds.String"
+        },
+        "passedToBranchDate": {
+          "type": "cds.String"
+        },
+        "appointmentDate": {
+          "type": "cds.String"
+        },
+        "followUpDate": {
+          "type": "cds.DateTime"
+        },
+        "activityStart": {
+          "type": "cds.DateTime"
+        },
+        "activityEnd": {
+          "type": "cds.DateTime"
+        },
+        "salesOrg": {
+          "type": "cds.String"
+        },
+        "salesExecId": {
+          "type": "cds.String"
+        },
+        "activityChangedDate": {
+          "type": "cds.DateTime"
+        },
+        "customerName": {
+          "type": "cds.String"
+        },
+        "subject": {
+          "type": "cds.String"
+        },
+        "organizer": {
+          "type": "cds.String"
+        },
+        "location": {
+          "type": "cds.String"
+        },
+        "allDayEvent": {
+          "type": "cds.String"
+        },
+        "category": {
+          "type": "cds.String"
+        },
+        "priority": {
+          "type": "cds.String"
+        },
+        "primaryContactId": {
+          "type": "cds.String"
+        },
+        "primaryContactName": {
+          "type": "cds.String"
+        },
+        "createdBy": {
+          "type": "cds.String"
+        },
+        "createdOn": {
+          "type": "cds.DateTime"
+        },
+        "processor": {
+          "type": "cds.String"
+        },
+        "dateCompleted": {
+          "type": "cds.DateTime"
+        },
+        "completionPercentage": {
+          "type": "cds.String"
+        },
+        "transmissionStatus": {
+          "type": "cds.String"
+        },
+        "direction": {
+          "type": "cds.String"
+        },
+        "sentOn": {
+          "type": "cds.DateTime"
+        },
+        "owner": {
+          "type": "cds.String"
+        },
+        "senderEmailId": {
+          "type": "cds.String"
+        },
+        "senderName": {
+          "type": "cds.String"
+        },
+        "receiverEmailId": {
+          "type": "cds.String"
+        },
+        "phoneNumber": {
+          "type": "cds.String"
+        },
+        "subType": {
+          "type": "cds.String"
+        },
+        "reason": {
+          "type": "cds.String"
+        },
+        "channel": {
+          "type": "cds.String"
+        },
+        "associatedObject": {
+          "type": "cds.String"
+        },
+        "associatedObjectId": {
+          "type": "cds.String"
+        },
+        "activityTimeStamp": {
+          "type": "cds.String"
+        },
+        "chatText": {
+          "type": "cds.String"
+        },
+        "mobileNumber": {
+          "type": "cds.String"
+        },
+        "lastUpdatedDate": {
+          "type": "cds.DateTime"
+        }
+      }
+    },
+    "UpsertService.A_FCT_ENQUIRY_FOLLOWUP": {
+      "kind": "action",
+      "params": {
+        "events": {
+          "items": {
+            "type": "UpsertService.FCT_ENQUIRY_FOLLOWUP"
+          }
+        }
+      },
+      "returns": {
+        "items": {
+          "type": "UpsertService.ResponseMessages"
+        }
+      }
+    },
+    "UpsertService.FCT_CUST_ECO_SYSTEM": {
+      "kind": "entity",
+      "projection": {
+        "from": {
+          "ref": [
+            "FCT.CUST_ECO_SYSTEM"
+          ]
+        }
+      },
+      "elements": {
+        "initialReviewCompletedDateTime": {
+          "type": "cds.DateTime"
+        },
+        "additionDetails": {
+          "type": "cds.String"
+        },
+        "priority": {
+          "type": "cds.String"
+        },
+        "sourceSystem": {
+          "type": "cds.String"
+        },
+        "VIN": {
+          "type": "cds.String"
+        },
+        "employeeResponsible": {
+          "type": "cds.String"
+        },
+        "source": {
+          "type": "cds.String"
+        },
+        "complaintSubCategory": {
+          "type": "cds.String"
+        },
+        "unclearStatusReason": {
+          "type": "cds.String"
+        },
+        "customerId": {
+          "type": "cds.String"
+        },
+        "originId": {
+          "type": "cds.String"
+        },
+        "customerExpectation": {
+          "type": "cds.String"
+        },
+        "sourceObjectType": {
+          "type": "cds.String"
+        },
+        "acquisitionDate": {
+          "type": "cds.DateTime"
+        },
+        "communicationMedium": {
+          "type": "cds.String"
+        },
+        "reportedBy": {
+          "type": "cds.String"
+        },
+        "brand": {
+          "type": "cds.String"
+        },
+        "processingTypeCode": {
+          "type": "cds.String"
+        },
+        "contactPersonName": {
+          "type": "cds.String"
+        },
+        "approvalStatus": {
+          "type": "cds.String"
+        },
+        "lastName": {
+          "type": "cds.String"
+        },
+        "complaintCategory": {
+          "type": "cds.String"
+        },
+        "showroomName": {
+          "type": "cds.String"
+        },
+        "creationDateTime": {
+          "type": "cds.DateTime"
+        },
+        "saleDate": {
+          "type": "cds.DateTime"
+        },
+        "assignedTo": {
+          "type": "cds.String"
+        },
+        "complaintId": {
+          "type": "cds.String"
+        },
+        "status": {
+          "type": "cds.String"
+        },
+        "callType": {
+          "type": "cds.String"
+        },
+        "plateNumber": {
+          "type": "cds.String"
+        },
+        "firstReactionDueDateTime": {
+          "type": "cds.DateTime"
+        },
+        "vehicleModel": {
+          "type": "cds.String"
+        },
+        "contactPersonEmail": {
+          "type": "cds.String"
+        },
+        "serviceCenterName": {
+          "type": "cds.String"
+        },
+        "odometerReading": {
+          "type": "cds.String"
+        },
+        "relatedTo": {
+          "type": "cds.String"
+        },
+        "mainTicketId": {
+          "key": true,
+          "type": "cds.String"
+        },
+        "completedCaseStatus": {
+          "type": "cds.String"
+        },
+        "escalationStatus": {
+          "type": "cds.String"
+        },
+        "firstName": {
+          "type": "cds.String"
+        },
+        "vehicleMake": {
+          "type": "cds.String"
+        },
+        "complaintTitle": {
+          "type": "cds.String"
+        },
+        "completionDueDateTime": {
+          "type": "cds.DateTime"
+        },
+        "isConsumer": {
+          "type": "cds.Boolean",
+          "default": {
+            "val": false
+          }
+        },
+        "contactPersonMobileNo": {
+          "type": "cds.String"
+        },
+        "resolvedOnDateTime": {
+          "type": "cds.String"
+        }
+      }
+    },
+    "UpsertService.A_FCT_CUST_ECO_SYSTEM": {
+      "kind": "action",
+      "params": {
+        "events": {
+          "items": {
+            "type": "UpsertService.FCT_CUST_ECO_SYSTEM"
+          }
+        }
+      },
+      "returns": {
+        "items": {
+          "type": "UpsertService.ResponseMessages"
+        }
+      }
+    },
+    "UpsertService.FCT_ENQUIRY_ITEMS": {
+      "kind": "entity",
+      "projection": {
+        "from": {
+          "ref": [
+            "FCT.ENQUIRY_ITEMS"
+          ]
+        }
+      },
+      "elements": {
+        "ProductDetails": {
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": "*"
+          },
+          "targetAspect": {
+            "elements": {
+              "productIdDescription": {
+                "type": "cds.String"
+              },
+              "productClassification": {
+                "type": "cds.String"
+              },
+              "productCost": {
+                "type": "cds.String"
+              },
+              "isVatApplicable": {
+                "type": "cds.String"
+              }
+            }
+          },
+          "target": "UpsertService.FCT_ENQUIRY_ITEMS.ProductDetails",
+          "on": [
+            {
+              "ref": [
+                "ProductDetails",
+                "up_"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$self"
+              ]
+            }
+          ]
+        },
+        "financeDetails": {
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": "*"
+          },
+          "targetAspect": {
+            "elements": {
+              "financeTerm": {
+                "type": "cds.String"
+              },
+              "financeRate": {
+                "type": "cds.String"
+              },
+              "financeCompanyNumberSAP": {
+                "type": "cds.String"
+              },
+              "monthlyPayment": {
+                "type": "cds.String"
+              },
+              "cashInput": {
+                "type": "cds.String"
+              },
+              "financeCompanyNumber": {
+                "type": "cds.String"
+              },
+              "minimumGuaranteedFutureValue": {
+                "type": "cds.String"
+              },
+              "financeSchemeName": {
+                "type": "cds.String"
+              },
+              "financeBalance": {
+                "type": "cds.String"
+              },
+              "financeType": {
+                "type": "cds.String"
+              }
+            }
+          },
+          "target": "UpsertService.FCT_ENQUIRY_ITEMS.financeDetails",
+          "on": [
+            {
+              "ref": [
+                "financeDetails",
+                "up_"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$self"
+              ]
+            }
+          ]
+        },
+        "brandCode": {
+          "type": "cds.String"
+        },
+        "model": {
+          "type": "cds.String"
+        },
+        "material": {
+          "type": "cds.String"
+        },
+        "make": {
+          "type": "cds.String"
+        },
+        "currentOdometer": {
+          "type": "cds.String"
+        },
+        "derivative": {
+          "type": "cds.String"
+        },
+        "modelYear": {
+          "type": "cds.String"
+        },
+        "creationDate": {
+          "type": "cds.DateTime"
+        },
+        "interiorColor": {
+          "type": "cds.String"
+        },
+        "exteriorColor": {
+          "type": "cds.String"
+        },
+        "variantCode": {
+          "type": "cds.String"
+        },
+        "orderItemId": {
+          "type": "cds.String"
+        },
+        "engineSize": {
+          "type": "cds.String"
+        },
+        "vehicleInterestModel": {
+          "type": "cds.String"
+        },
+        "vehicleInterestMake": {
+          "type": "cds.String"
+        },
+        "vehicleInterestModelGroup": {
+          "type": "cds.String"
+        },
+        "id": {
+          "key": true,
+          "type": "cds.String"
+        },
+        "lastUpdateDate": {
+          "type": "cds.DateTime"
+        },
+        "salesGroup": {
+          "type": "cds.String"
+        },
+        "division": {
+          "type": "cds.String"
+        },
+        "customerId": {
+          "type": "cds.String"
+        },
+        "sourceSystem": {
+          "type": "cds.String"
+        },
+        "salesOffice": {
+          "type": "cds.String"
+        },
+        "deliveryDate": {
+          "type": "cds.DateTime"
+        },
+        "orgId": {
+          "type": "cds.String"
+        },
+        "enquiryId": {
+          "type": "cds.String"
+        },
+        "vehicleInternalNumber": {
+          "type": "cds.String"
+        },
+        "quantity": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "campaignId": {
+          "type": "cds.String"
+        },
+        "rejectReasonCode": {
+          "type": "cds.String"
+        },
+        "referenceDocument": {
+          "type": "cds.String"
+        },
+        "referenceDocumentItem": {
+          "type": "cds.String"
+        },
+        "itemStatus": {
+          "type": "cds.String"
+        },
+        "engineNumber": {
+          "type": "cds.String"
+        },
+        "productionDate": {
+          "type": "cds.DateTime"
+        },
+        "campaignDescription": {
+          "type": "cds.String"
+        },
+        "addOnFlag": {
+          "type": "cds.String"
+        },
+        "productClassification": {
+          "type": "cds.String"
+        },
+        "productCategory": {
+          "type": "cds.String"
+        },
+        "productID": {
+          "type": "cds.String"
+        },
+        "productIdDescription": {
+          "type": "cds.String"
+        },
+        "productCost": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "isVatApplicable": {
+          "type": "cds.String"
+        },
+        "financeCompanyNumber": {
+          "type": "cds.String"
+        },
+        "financeSchemeName": {
+          "type": "cds.String"
+        },
+        "financeBalance": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "financeRate": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "financeTerm": {
+          "type": "cds.String"
+        },
+        "financeType": {
+          "type": "cds.String"
+        },
+        "minimumGuaranteedFutureValue": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "pcpContractMileage": {
+          "type": "cds.String"
+        },
+        "monthlyPayment": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "cashInput": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "financeCompanyNumberSAP": {
+          "type": "cds.String"
+        },
+        "quotationReferenceNumber": {
+          "type": "cds.String"
+        },
+        "distributionChannel": {
+          "type": "cds.String"
+        },
+        "negotiatedValue": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "revenueStartDate": {
+          "type": "cds.DateTime"
+        },
+        "revenueEndDate": {
+          "type": "cds.DateTime"
+        }
+      }
+    },
+    "UpsertService.A_FCT_ENQUIRY_ITEMS": {
+      "kind": "action",
+      "params": {
+        "events": {
+          "items": {
+            "type": "UpsertService.FCT_ENQUIRY_ITEMS"
+          }
+        }
+      },
+      "returns": {
+        "items": {
+          "type": "UpsertService.ResponseMessages"
+        }
+      }
+    },
+    "UpsertService.FCT_ENQUIRY": {
+      "kind": "entity",
+      "projection": {
+        "from": {
+          "ref": [
+            "FCT.ENQUIRY"
+          ]
+        }
+      },
+      "elements": {
+        "vehicleInterests": {
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": "*"
+          },
+          "targetAspect": {
+            "elements": {
+              "testDriveRejection": {
+                "type": "cds.String"
+              },
+              "makeCode": {
+                "type": "cds.String"
+              },
+              "tradeIn": {
+                "type": "cds.String"
+              },
+              "sourceOfEnquiry": {
+                "type": "cds.String"
+              },
+              "vehicleCategory": {
+                "type": "cds.String"
+              },
+              "budgetLow": {
+                "type": "cds.String"
+              },
+              "bodyStyleCode": {
+                "type": "cds.String"
+              },
+              "testDrive": {
+                "type": "cds.String"
+              },
+              "bodyStyle": {
+                "type": "cds.String"
+              },
+              "currentModel": {
+                "type": "cds.String"
+              },
+              "budgetHigh": {
+                "type": "cds.String"
+              },
+              "make": {
+                "type": "cds.String"
+              },
+              "model": {
+                "type": "cds.String"
+              },
+              "currentMake": {
+                "type": "cds.String"
+              },
+              "modelGroup": {
+                "type": "cds.String"
+              },
+              "derivative": {
+                "type": "cds.String"
+              },
+              "genericArticleCode": {
+                "type": "cds.String"
+              },
+              "variantCode": {
+                "type": "cds.String"
+              },
+              "financeType": {
+                "type": "cds.String"
+              },
+              "financeTerm": {
+                "type": "cds.String"
+              },
+              "testDriveDate": {
+                "type": "cds.DateTime"
+              },
+              "modelCode": {
+                "type": "cds.String"
+              }
+            }
+          },
+          "target": "UpsertService.FCT_ENQUIRY.vehicleInterests",
+          "on": [
+            {
+              "ref": [
+                "vehicleInterests",
+                "up_"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$self"
+              ]
+            }
+          ]
+        },
+        "EnquiryDetails": {
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": 1
+          },
+          "targetAspect": {
+            "elements": {
+              "EnquiryCreatedDate": {
+                "type": "cds.DateTime"
+              },
+              "EnquiryStatus": {
+                "type": "cds.String"
+              },
+              "OrderId": {
+                "type": "cds.String"
+              },
+              "QuotationID": {
+                "type": "cds.String"
+              }
+            }
+          },
+          "target": "UpsertService.FCT_ENQUIRY.EnquiryDetails",
+          "on": [
+            {
+              "ref": [
+                "EnquiryDetails",
+                "up_"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$self"
+              ]
+            }
+          ]
+        },
+        "customerDetail": {
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": 1
+          },
+          "targetAspect": {
+            "elements": {
+              "CRMID": {
+                "type": "cds.String"
+              }
+            }
+          },
+          "target": "UpsertService.FCT_ENQUIRY.customerDetail",
+          "on": [
+            {
+              "ref": [
+                "customerDetail",
+                "up_"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$self"
+              ]
+            }
+          ]
+        },
+        "enquiryInformation": {
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": 1
+          },
+          "targetAspect": {
+            "elements": {
+              "staffId": {
+                "type": "cds.Decimal",
+                "default": {
+                  "val": 0
+                }
+              },
+              "orgId": {
+                "type": "cds.String"
+              },
+              "salesGroup": {
+                "type": "cds.String"
+              },
+              "salesManagerId": {
+                "type": "cds.Decimal",
+                "default": {
+                  "val": 0
+                }
+              },
+              "branchId": {
+                "type": "cds.String"
+              },
+              "customerId": {
+                "type": "cds.String"
+              },
+              "division": {
+                "type": "cds.String"
+              },
+              "salesOffice": {
+                "type": "cds.String"
+              },
+              "salesExecutiveId": {
+                "type": "cds.Decimal",
+                "default": {
+                  "val": 0
+                }
+              },
+              "leadId": {
+                "type": "cds.String"
+              },
+              "enquiryType": {
+                "type": "cds.String"
+              },
+              "saleType": {
+                "type": "cds.String"
+              },
+              "distributionChannel": {
+                "type": "cds.String"
+              },
+              "offerExpired": {
+                "type": "cds.String"
+              },
+              "businessManagerId": {
+                "type": "cds.Decimal",
+                "default": {
+                  "val": 0
+                }
+              }
+            }
+          },
+          "target": "UpsertService.FCT_ENQUIRY.enquiryInformation",
+          "on": [
+            {
+              "ref": [
+                "enquiryInformation",
+                "up_"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$self"
+              ]
+            }
+          ]
+        },
+        "Partners": {
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": "*"
+          },
+          "targetAspect": {
+            "elements": {
+              "partner": {
+                "type": "cds.String"
+              },
+              "partnerFunction": {
+                "type": "cds.String"
+              },
+              "partnerName": {
+                "type": "cds.String"
+              }
+            }
+          },
+          "target": "UpsertService.FCT_ENQUIRY.Partners",
+          "on": [
+            {
+              "ref": [
+                "Partners",
+                "up_"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$self"
+              ]
+            }
+          ]
+        },
+        "removed": {
+          "type": "cds.Boolean"
+        },
+        "lostTo": {
+          "type": "cds.String"
+        },
+        "guaranteedFutureValue": {
+          "type": "cds.Decimal"
+        },
+        "creationDate": {
+          "type": "cds.DateTime"
+        },
+        "paymentType": {
+          "type": "cds.String"
+        },
+        "id": {
+          "key": true,
+          "type": "cds.String"
+        },
+        "salesManagerId": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "offerExpired": {
+          "type": "cds.String"
+        },
+        "businessManagerId": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "customerId": {
+          "type": "cds.String"
+        },
+        "enquiryType": {
+          "type": "cds.String"
+        },
+        "branchId": {
+          "type": "cds.String"
+        },
+        "saleType": {
+          "type": "cds.String"
+        },
+        "staffId": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "distributionChannel": {
+          "type": "cds.String"
+        },
+        "lastupdatedate": {
+          "type": "cds.DateTime"
+        },
+        "partner": {
+          "type": "cds.String"
+        },
+        "partnerName": {
+          "type": "cds.String"
+        },
+        "partnerFunction": {
+          "type": "cds.String"
+        },
+        "sourceOfEnquiry": {
+          "type": "cds.String"
+        },
+        "currentModel": {
+          "type": "cds.String"
+        },
+        "testDriveRejection": {
+          "type": "cds.String"
+        },
+        "financeTerm": {
+          "type": "cds.String"
+        },
+        "currentMake": {
+          "type": "cds.String"
+        },
+        "financeType": {
+          "type": "cds.String"
+        },
+        "budgetHigh": {
+          "type": "cds.String"
+        },
+        "budgetLow": {
+          "type": "cds.String"
+        },
+        "tradeIn": {
+          "type": "cds.String"
+        },
+        "testDriveDate": {
+          "type": "cds.DateTime"
+        },
+        "genericArticleCode": {
+          "type": "cds.String"
+        },
+        "modelGroup": {
+          "type": "cds.String"
+        },
+        "testDrive": {
+          "type": "cds.String"
+        },
+        "vehicle_model": {
+          "type": "cds.String"
+        },
+        "variant_Code": {
+          "type": "cds.String"
+        },
+        "brandCode": {
+          "type": "cds.String"
+        },
+        "CRMID": {
+          "type": "cds.String"
+        },
+        "EnquiryStatus": {
+          "type": "cds.String"
+        },
+        "QuotationID": {
+          "type": "cds.String"
+        },
+        "EnquiryCreatedDate": {
+          "type": "cds.DateTime"
+        },
+        "OrderId": {
+          "type": "cds.String"
+        },
+        "category": {
+          "type": "cds.String"
+        },
+        "salesGroup": {
+          "type": "cds.String"
+        },
+        "division": {
+          "type": "cds.String"
+        },
+        "sourceSystem": {
+          "type": "cds.String"
+        },
+        "salesOffice": {
+          "type": "cds.String"
+        },
+        "leadId": {
+          "type": "cds.String"
+        },
+        "salesExecutiveId": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "orgId": {
+          "type": "cds.String"
+        },
+        "lostTimestamp": {
+          "type": "cds.String"
+        },
+        "lostReason": {
+          "type": "cds.String"
+        },
+        "noOfCarsInHousehold": {
+          "type": "cds.Decimal"
+        },
+        "timeOfNextAppointment": {
+          "type": "cds.DateTime"
+        },
+        "deliveryTimestamp": {
+          "type": "cds.DateTime"
+        },
+        "orderedDate": {
+          "type": "cds.DateTime"
+        },
+        "lastContactTime": {
+          "type": "cds.DateTime"
+        },
+        "firstVisitDate": {
+          "type": "cds.DateTime"
+        },
+        "deliveryDate": {
+          "type": "cds.DateTime"
+        },
+        "totalNegotiatedValue": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "weightedValue": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "expectedValue": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "closeDate": {
+          "type": "cds.DateTime"
+        },
+        "name": {
+          "type": "cds.String"
+        },
+        "reasonForStatus": {
+          "type": "cds.String"
+        },
+        "salesCycle": {
+          "type": "cds.String"
+        },
+        "salesPhase": {
+          "type": "cds.String"
+        },
+        "probability": {
+          "type": "cds.String"
+        },
+        "startDate": {
+          "type": "cds.DateTime"
+        },
+        "forecastCategory": {
+          "type": "cds.String"
+        },
+        "natureOfBusiness": {
+          "type": "cds.String"
+        },
+        "tenderFee": {
+          "type": "cds.String"
+        },
+        "tenderRegistrationStart": {
+          "type": "cds.DateTime"
+        },
+        "tenderRegistrationEnd": {
+          "type": "cds.DateTime"
+        },
+        "modeOfPayment": {
+          "type": "cds.String"
+        },
+        "fAndIIntroduction": {
+          "type": "cds.String"
+        },
+        "accesories": {
+          "type": "cds.String"
+        },
+        "fabrication": {
+          "type": "cds.String"
+        },
+        "documentType": {
+          "type": "cds.String"
+        },
+        "customization": {
+          "type": "cds.String"
+        },
+        "payment_Type": {
+          "type": "cds.String"
+        }
+      }
+    },
+    "UpsertService.A_FCT_ENQUIRY": {
+      "kind": "action",
+      "params": {
+        "events": {
+          "items": {
+            "type": "UpsertService.FCT_ENQUIRY"
+          }
+        }
+      },
+      "returns": {
+        "items": {
+          "type": "UpsertService.ResponseMessages"
+        }
+      }
+    },
+    "UpsertService.FCT_QUOTATIONS": {
+      "kind": "entity",
+      "projection": {
+        "from": {
+          "ref": [
+            "FCT.QUOTATIONS"
+          ]
+        }
+      },
+      "elements": {
+        "id": {
+          "type": "cds.String"
+        },
+        "quotationId": {
+          "key": true,
+          "type": "cds.String"
+        },
+        "tax": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "customerId": {
+          "type": "cds.String"
+        },
+        "currency": {
+          "type": "cds.String"
+        },
+        "branchCode": {
+          "type": "cds.String"
+        },
+        "orgId": {
+          "type": "cds.String"
+        },
+        "opportunityId": {
+          "type": "cds.String"
+        },
+        "distributionChannel": {
+          "type": "cds.String"
+        },
+        "salesGroup": {
+          "type": "cds.String"
+        },
+        "amount": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "division": {
+          "type": "cds.String"
+        },
+        "brandCode": {
+          "type": "cds.String"
+        },
+        "expectedDeliveryDate": {
+          "type": "cds.DateTime"
+        },
+        "sourceSystem": {
+          "type": "cds.String"
+        },
+        "quotationType": {
+          "type": "cds.String"
+        },
+        "quotationStatus": {
+          "type": "cds.String"
+        },
+        "lastUpdateDate": {
+          "type": "cds.DateTime"
+        },
+        "salesManagerId": {
+          "type": "cds.String"
+        },
+        "salesExecutiveId": {
+          "type": "cds.String"
+        },
+        "invoiceId": {
+          "type": "cds.String"
+        },
+        "finance": {
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": 1
+          },
+          "targetAspect": {
+            "elements": {
+              "balance": {
+                "type": "cds.Decimal",
+                "default": {
+                  "val": 0
+                }
+              },
+              "startDate": {
+                "type": "cds.DateTime"
+              },
+              "endDate": {
+                "type": "cds.DateTime"
+              },
+              "rate": {
+                "type": "cds.Decimal",
+                "default": {
+                  "val": 0
+                }
+              },
+              "minimumGuranteedFutureValue": {
+                "type": "cds.Decimal",
+                "default": {
+                  "val": 0
+                }
+              },
+              "type": {
+                "type": "cds.String"
+              },
+              "monthlyPayment": {
+                "type": "cds.Decimal",
+                "default": {
+                  "val": 0
+                }
+              },
+              "productCategory": {
+                "type": "cds.String"
+              },
+              "term": {
+                "type": "cds.String"
+              }
+            }
+          },
+          "target": "UpsertService.FCT_QUOTATIONS.finance",
+          "on": [
+            {
+              "ref": [
+                "finance",
+                "up_"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$self"
+              ]
+            }
+          ]
+        },
+        "partners": {
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": "*"
+          },
+          "targetAspect": {
+            "elements": {
+              "partnerName": {
+                "type": "cds.String"
+              },
+              "partnerFuction": {
+                "type": "cds.String"
+              },
+              "partner": {
+                "type": "cds.String"
+              }
+            }
+          },
+          "target": "UpsertService.FCT_QUOTATIONS.partners",
+          "on": [
+            {
+              "ref": [
+                "partners",
+                "up_"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$self"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "UpsertService.A_FCT_QUOTATIONS": {
+      "kind": "action",
+      "params": {
+        "events": {
+          "items": {
+            "type": "UpsertService.FCT_QUOTATIONS"
+          }
+        }
+      },
+      "returns": {
+        "items": {
+          "type": "UpsertService.ResponseMessages"
+        }
+      }
+    },
+    "UpsertService.FCT_ORDERS": {
+      "kind": "entity",
+      "projection": {
+        "from": {
+          "ref": [
+            "FCT.ORDERS"
+          ]
+        }
+      },
+      "elements": {
+        "finance": {
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": 1
+          },
+          "targetAspect": {
+            "elements": {
+              "financeSchemeName": {
+                "type": "cds.String"
+              },
+              "endDate": {
+                "type": "cds.String"
+              },
+              "type": {
+                "type": "cds.String"
+              },
+              "balance": {
+                "type": "cds.String"
+              },
+              "productCategory": {
+                "type": "cds.String"
+              },
+              "startDate": {
+                "type": "cds.String"
+              },
+              "minimumGuaranteedFutureValue": {
+                "type": "cds.Decimal"
+              },
+              "invoiceId": {
+                "type": "cds.String"
+              },
+              "rate": {
+                "type": "cds.Decimal"
+              },
+              "term": {
+                "type": "cds.String"
+              },
+              "monthlyPayment": {
+                "type": "cds.Decimal"
+              }
+            }
+          },
+          "target": "UpsertService.FCT_ORDERS.finance",
+          "on": [
+            {
+              "ref": [
+                "finance",
+                "up_"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$self"
+              ]
+            }
+          ]
+        },
+        "partners": {
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": "*"
+          },
+          "targetAspect": {
+            "elements": {
+              "partnerName": {
+                "type": "cds.String"
+              },
+              "partnerFunction": {
+                "type": "cds.String"
+              },
+              "partner": {
+                "type": "cds.String"
+              }
+            }
+          },
+          "target": "UpsertService.FCT_ORDERS.partners",
+          "on": [
+            {
+              "ref": [
+                "partners",
+                "up_"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$self"
+              ]
+            }
+          ]
+        },
+        "removed": {
+          "type": "cds.Boolean"
+        },
+        "creationDate": {
+          "type": "cds.Date"
+        },
+        "lastUpdatedDate": {
+          "type": "cds.Date"
+        },
+        "id": {
+          "key": true,
+          "type": "cds.String"
+        },
+        "tax": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "orderStatus": {
+          "type": "cds.String"
+        },
+        "customerId": {
+          "type": "cds.String"
+        },
+        "currency": {
+          "type": "cds.String"
+        },
+        "branchcode": {
+          "type": "cds.String"
+        },
+        "orgId": {
+          "type": "cds.String"
+        },
+        "opportunityId": {
+          "type": "cds.String"
+        },
+        "distributionchannel": {
+          "type": "cds.String"
+        },
+        "salesGroup": {
+          "type": "cds.String"
+        },
+        "amount": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "division": {
+          "type": "cds.String"
+        },
+        "brandCode": {
+          "type": "cds.String"
+        },
+        "expectedDeliveryDate": {
+          "type": "cds.DateTime"
+        },
+        "sourceSystem": {
+          "type": "cds.String"
+        },
+        "quotationId": {
+          "type": "cds.String"
+        },
+        "orderType": {
+          "type": "cds.String"
+        },
+        "lastUpdateDate": {
+          "type": "cds.DateTime"
+        },
+        "salesManagerId": {
+          "type": "cds.String"
+        },
+        "salesExecutiveId": {
+          "type": "cds.String"
+        },
+        "partnerFunction": {
+          "type": "cds.String"
+        },
+        "partnerName": {
+          "type": "cds.String"
+        },
+        "partner": {
+          "type": "cds.String"
+        },
+        "minimumGuaranteedFutureValue": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "financeSchemeName": {
+          "type": "cds.String"
+        },
+        "productCategory": {
+          "type": "cds.String"
+        },
+        "term": {
+          "type": "cds.String"
+        },
+        "monthlyPayment": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "rate": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "startDate": {
+          "type": "cds.DateTime"
+        },
+        "endDate": {
+          "type": "cds.DateTime"
+        },
+        "type": {
+          "type": "cds.String"
+        },
+        "balance": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "invoiceId": {
+          "type": "cds.String"
+        }
+      }
+    },
+    "UpsertService.A_FCT_ORDERS": {
+      "kind": "action",
+      "params": {
+        "events": {
+          "items": {
+            "type": "UpsertService.FCT_ORDERS"
+          }
+        }
+      },
+      "returns": {
+        "items": {
+          "type": "UpsertService.ResponseMessages"
+        }
+      }
+    },
+    "UpsertService.FCT_SERVICE_ORDER": {
+      "kind": "entity",
+      "projection": {
+        "from": {
+          "ref": [
+            "FCT.SERVICE_ORDER"
+          ]
+        }
+      },
+      "elements": {
+        "addtionalInformation": {
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": 1
+          },
+          "targetAspect": {
+            "elements": {
+              "vehicleIdentificationNumber": {
+                "type": "cds.String"
+              },
+              "currentOdometer": {
+                "type": "cds.Decimal"
+              },
+              "locationName": {
+                "type": "cds.String"
+              }
+            }
+          },
+          "target": "UpsertService.FCT_SERVICE_ORDER.addtionalInformation",
+          "on": [
+            {
+              "ref": [
+                "addtionalInformation",
+                "up_"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$self"
+              ]
+            }
+          ]
+        },
+        "appointment": {
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": 1
+          },
+          "targetAspect": {
+            "elements": {
+              "startDate": {
+                "type": "cds.DateTime"
+              },
+              "endDate": {
+                "type": "cds.DateTime"
+              }
+            }
+          },
+          "target": "UpsertService.FCT_SERVICE_ORDER.appointment",
+          "on": [
+            {
+              "ref": [
+                "appointment",
+                "up_"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$self"
+              ]
+            }
+          ]
+        },
+        "Partners": {
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": "*"
+          },
+          "targetAspect": {
+            "elements": {
+              "partner": {
+                "type": "cds.String"
+              },
+              "partnerFunction": {
+                "type": "cds.String"
+              },
+              "partnerName": {
+                "type": "cds.String"
+              }
+            }
+          },
+          "target": "UpsertService.FCT_SERVICE_ORDER.Partners",
+          "on": [
+            {
+              "ref": [
+                "Partners",
+                "up_"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$self"
+              ]
+            }
+          ]
+        },
+        "serviceAdvisorNumber": {
+          "type": "cds.String"
+        },
+        "creationDate": {
+          "type": "cds.DateTime"
+        },
+        "id": {
+          "key": true,
+          "type": "cds.String"
+        },
+        "orderType": {
+          "type": "cds.String"
+        },
+        "amount": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "orderNumber": {
+          "type": "cds.String"
+        },
+        "serviceDate": {
+          "type": "cds.DateTime"
+        },
+        "salesGroup": {
+          "type": "cds.String"
+        },
+        "invoiceDate": {
+          "type": "cds.DateTime"
+        },
+        "vehicleOnsite": {
+          "type": "cds.String"
+        },
+        "isVehicleOnSite": {
+          "type": "cds.Boolean",
+          "default": {
+            "val": false
+          }
+        },
+        "orgId": {
+          "type": "cds.String"
+        },
+        "division": {
+          "type": "cds.String"
+        },
+        "distributionchannel": {
+          "type": "cds.String"
+        },
+        "status": {
+          "type": "cds.String"
+        },
+        "brandCode": {
+          "type": "cds.String"
+        },
+        "tax": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "currency": {
+          "type": "cds.String"
+        },
+        "branchcode": {
+          "type": "cds.String"
+        },
+        "invoiceId": {
+          "type": "cds.String"
+        },
+        "closeDate": {
+          "type": "cds.DateTime"
+        },
+        "description": {
+          "type": "cds.String"
+        },
+        "material": {
+          "type": "cds.String"
+        },
+        "customerArriveDate": {
+          "type": "cds.DateTime"
+        },
+        "customerCode": {
+          "type": "cds.String"
+        },
+        "serviceAdvisorId": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "addInfoAmount": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "lastUpdateDate": {
+          "type": "cds.DateTime"
+        },
+        "sourceSystem": {
+          "type": "cds.String"
+        },
+        "appointmentEndDate": {
+          "type": "cds.DateTime"
+        },
+        "startDate": {
+          "type": "cds.DateTime"
+        },
+        "show": {
+          "type": "cds.String"
+        },
+        "showDate": {
+          "type": "cds.DateTime"
+        },
+        "confirmationDate": {
+          "type": "cds.DateTime"
+        },
+        "plannedStartTimestamp": {
+          "type": "cds.DateTime"
+        },
+        "plannedStartDate": {
+          "type": "cds.DateTime"
+        },
+        "endDate": {
+          "type": "cds.DateTime"
+        },
+        "currentOdometer": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "vehicleIdentificationNumber": {
+          "type": "cds.String"
+        },
+        "customerName": {
+          "type": "cds.String"
+        },
+        "totalServiceTime": {
+          "type": "cds.String"
+        },
+        "make": {
+          "type": "cds.String"
+        },
+        "model": {
+          "type": "cds.String"
+        },
+        "year": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "variant": {
+          "type": "cds.String"
+        },
+        "partnerName": {
+          "type": "cds.String"
+        },
+        "partnerFunction": {
+          "type": "cds.String"
+        },
+        "partner": {
+          "type": "cds.String"
+        },
+        "emailId": {
+          "type": "cds.String"
+        },
+        "phoneNumber": {
+          "type": "cds.String"
+        },
+        "customerFirstName": {
+          "type": "cds.String"
+        },
+        "customerLastName": {
+          "type": "cds.String"
+        },
+        "postalCode": {
+          "type": "cds.String"
+        },
+        "city": {
+          "type": "cds.String"
+        },
+        "region": {
+          "type": "cds.String"
+        },
+        "country": {
+          "type": "cds.String"
+        },
+        "countryCode": {
+          "type": "cds.String"
+        },
+        "state": {
+          "type": "cds.String"
+        },
+        "streetAddress": {
+          "type": "cds.String"
+        },
+        "addressType": {
+          "type": "cds.String"
+        }
+      }
+    },
+    "UpsertService.A_FCT_SERVICE_ORDER": {
+      "kind": "action",
+      "params": {
+        "events": {
+          "items": {
+            "type": "UpsertService.FCT_SERVICE_ORDER"
+          }
+        }
+      },
+      "returns": {
+        "items": {
+          "type": "UpsertService.ResponseMessages"
+        }
+      }
+    },
+    "UpsertService.DIM_MATERIAL": {
+      "kind": "entity",
+      "projection": {
+        "from": {
+          "ref": [
+            "DIM.MATERIAL"
+          ]
+        }
+      },
+      "elements": {
+        "material": {
+          "key": true,
+          "type": "cds.String"
+        },
+        "derivative": {
+          "type": "cds.String"
+        },
+        "make": {
+          "type": "cds.String"
+        },
+        "makeCode": {
+          "type": "cds.String"
+        },
+        "model": {
+          "type": "cds.String"
+        },
+        "modelCode": {
+          "type": "cds.String"
+        },
+        "modelYear": {
+          "type": "cds.Integer",
+          "default": {
+            "val": 0
+          }
+        },
+        "bodyType": {
+          "type": "cds.String"
+        },
+        "fuelType": {
+          "type": "cds.String"
+        },
+        "modelGrade": {
+          "type": "cds.String"
+        },
+        "modelGroup": {
+          "type": "cds.String"
+        },
+        "engineCapacity": {
+          "type": "cds.String"
+        },
+        "numberOfDoors": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "numberOfSeats": {
+          "type": "cds.String"
+        },
+        "transmissionType": {
+          "type": "cds.String"
+        },
+        "vehicleType": {
+          "type": "cds.String"
+        },
+        "countryOfOrigin": {
+          "type": "cds.String"
+        },
+        "yearOfManufature": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "torque": {
+          "type": "cds.String"
+        },
+        "tireSize": {
+          "type": "cds.String"
+        },
+        "trimType": {
+          "type": "cds.String"
+        },
+        "engineType": {
+          "type": "cds.String"
+        },
+        "finalDrive": {
+          "type": "cds.String"
+        },
+        "specificationRegion": {
+          "type": "cds.String"
+        },
+        "typeOfWheel": {
+          "type": "cds.String"
+        },
+        "cubicCapacity": {
+          "type": "cds.String"
+        },
+        "numberOfAxles": {
+          "type": "cds.Integer",
+          "default": {
+            "val": 0
+          }
+        },
+        "numberOfGears": {
+          "type": "cds.Integer",
+          "default": {
+            "val": 0
+          }
+        },
+        "numberOfTyres": {
+          "type": "cds.Integer",
+          "default": {
+            "val": 0
+          }
+        },
+        "numberOfValves": {
+          "type": "cds.Integer",
+          "default": {
+            "val": 0
+          }
+        },
+        "fuelTankCapacity": {
+          "type": "cds.String"
+        },
+        "numberOfCylinders": {
+          "type": "cds.Integer",
+          "default": {
+            "val": 0
+          }
+        }
+      }
+    },
+    "UpsertService.A_DIM_MATERIAL": {
+      "kind": "action",
+      "params": {
+        "events": {
+          "items": {
+            "type": "UpsertService.DIM_MATERIAL"
+          }
+        }
+      },
+      "returns": {
+        "items": {
+          "type": "UpsertService.ResponseMessages"
+        }
+      }
+    },
+    "UpsertService.DIM_VEHICLE_GROUP": {
+      "kind": "entity",
+      "projection": {
+        "from": {
+          "ref": [
+            "DIM.VEHICLE_GROUP"
+          ]
+        }
+      },
+      "elements": {
+        "id": {
+          "type": "cds.String"
+        },
+        "engineSize": {
+          "type": "cds.String"
+        },
+        "itemStatus": {
+          "type": "cds.String"
+        },
+        "referenceDocumentItem": {
+          "type": "cds.String"
+        },
+        "brandCode": {
+          "type": "cds.String"
+        },
+        "interiorColours": {
+          "type": "cds.String"
+        },
+        "exteriorColours": {
+          "type": "cds.String"
+        },
+        "currentOdometer": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "quantity": {
+          "type": "cds.String"
+        },
+        "deliveryDate": {
+          "type": "cds.DateTime"
+        },
+        "customerId": {
+          "type": "cds.String"
+        },
+        "orgId": {
+          "type": "cds.String"
+        },
+        "salesOffice": {
+          "type": "cds.String"
+        },
+        "salesGroup": {
+          "type": "cds.String"
+        },
+        "division": {
+          "type": "cds.String"
+        },
+        "distributionChannel": {
+          "type": "cds.String"
+        },
+        "creationDate": {
+          "type": "cds.DateTime"
+        },
+        "accountId": {
+          "type": "cds.String"
+        },
+        "accountName": {
+          "type": "cds.String"
+        },
+        "vehicleIdentificationNumber": {
+          "key": true,
+          "type": "cds.String"
+        },
+        "make": {
+          "type": "cds.String"
+        },
+        "makeCode": {
+          "type": "cds.String"
+        },
+        "model": {
+          "type": "cds.String"
+        },
+        "modelCode": {
+          "type": "cds.String"
+        },
+        "derivative": {
+          "type": "cds.String"
+        },
+        "material": {
+          "type": "cds.String"
+        },
+        "vehicleStatus": {
+          "type": "cds.String"
+        },
+        "odometer": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "modelYear": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "variantCode": {
+          "type": "cds.String"
+        },
+        "bodyType": {
+          "type": "cds.String"
+        },
+        "fuelType": {
+          "type": "cds.String"
+        },
+        "modelGrade": {
+          "type": "cds.String"
+        },
+        "modelGroup": {
+          "type": "cds.String"
+        },
+        "engineCapacity": {
+          "type": "cds.String"
+        },
+        "numberOfDoors": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "numberOfSeats": {
+          "type": "cds.String"
+        },
+        "transmissionType": {
+          "type": "cds.String"
+        },
+        "genericExteriorColours": {
+          "type": "cds.String"
+        },
+        "genericInteriorColours": {
+          "type": "cds.String"
+        },
+        "exteriorColourCode": {
+          "type": "cds.String"
+        },
+        "interiorColourCode": {
+          "type": "cds.String"
+        },
+        "vehicleInternalNumber": {
+          "type": "cds.String"
+        },
+        "location": {
+          "type": "cds.String"
+        },
+        "vehicleAllocation": {
+          "type": "cds.String"
+        },
+        "grossPrice": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "interior": {
+          "type": "cds.String"
+        },
+        "exterior": {
+          "type": "cds.String"
+        },
+        "safety": {
+          "type": "cds.String"
+        },
+        "warranty": {
+          "type": "cds.String"
+        },
+        "consumerOffers": {
+          "type": "cds.String"
+        },
+        "audioAndEntertainment": {
+          "type": "cds.String"
+        },
+        "boeDate": {
+          "type": "cds.DateTime"
+        },
+        "acquisitionDate": {
+          "type": "cds.DateTime"
+        },
+        "engineNumber": {
+          "type": "cds.String"
+        },
+        "lvMainType": {
+          "type": "cds.String"
+        },
+        "nextServiceDueDate": {
+          "type": "cds.DateTime"
+        },
+        "modelServiceCode": {
+          "type": "cds.String"
+        },
+        "licensePlateNumber": {
+          "type": "cds.String"
+        },
+        "countryOfOrgin": {
+          "type": "cds.String"
+        },
+        "registrationDate": {
+          "type": "cds.DateTime"
+        },
+        "registrationAuthority": {
+          "type": "cds.String"
+        },
+        "registrationType": {
+          "type": "cds.String"
+        },
+        "registrationCountry": {
+          "type": "cds.String"
+        },
+        "registrationOdometer": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "lastServiceDate": {
+          "type": "cds.DateTime"
+        },
+        "yearOfManufacture": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "activeCustomerId": {
+          "type": "cds.String"
+        },
+        "exteriorAttributes": {
+          "type": "cds.String"
+        },
+        "interiorAttributes": {
+          "type": "cds.String"
+        }
+      }
+    },
+    "UpsertService.A_DIM_VEHICLE_GROUP": {
+      "kind": "action",
+      "params": {
+        "events": {
+          "items": {
+            "type": "UpsertService.DIM_VEHICLE_GROUP"
+          }
+        }
+      },
+      "returns": {
+        "items": {
+          "type": "UpsertService.ResponseMessages"
+        }
+      }
+    },
+    "FCT.RECALLS.partners": {
+      "kind": "entity",
+      "@cds.persistence.exists": true,
+      "elements": {
+        "up_": {
+          "key": true,
+          "type": "cds.Association",
+          "cardinality": {
+            "min": 1,
+            "max": 1
+          },
+          "target": "FCT.RECALLS",
+          "keys": [
+            {
+              "ref": [
+                "recallSid"
+              ]
+            }
+          ],
+          "notNull": true
+        },
+        "partner": {
+          "type": "cds.String"
+        },
+        "partnerDescription": {
+          "type": "cds.String"
+        }
+      }
+    },
+    "FCT.ENQUIRY_ITEMS.ProductDetails": {
+      "kind": "entity",
+      "@cds.persistence.exists": true,
+      "elements": {
+        "up_": {
+          "key": true,
+          "type": "cds.Association",
+          "cardinality": {
+            "min": 1,
+            "max": 1
+          },
+          "target": "FCT.ENQUIRY_ITEMS",
+          "keys": [
+            {
+              "ref": [
+                "id"
+              ]
+            }
+          ],
+          "notNull": true
+        },
+        "productIdDescription": {
+          "type": "cds.String"
+        },
+        "productClassification": {
+          "type": "cds.String"
+        },
+        "productCost": {
+          "type": "cds.String"
+        },
+        "isVatApplicable": {
+          "type": "cds.String"
+        }
+      }
+    },
+    "FCT.ENQUIRY_ITEMS.financeDetails": {
+      "kind": "entity",
+      "@cds.persistence.exists": true,
+      "elements": {
+        "up_": {
+          "key": true,
+          "type": "cds.Association",
+          "cardinality": {
+            "min": 1,
+            "max": 1
+          },
+          "target": "FCT.ENQUIRY_ITEMS",
+          "keys": [
+            {
+              "ref": [
+                "id"
+              ]
+            }
+          ],
+          "notNull": true
+        },
+        "financeTerm": {
+          "type": "cds.String"
+        },
+        "financeRate": {
+          "type": "cds.String"
+        },
+        "financeCompanyNumberSAP": {
+          "type": "cds.String"
+        },
+        "monthlyPayment": {
+          "type": "cds.String"
+        },
+        "cashInput": {
+          "type": "cds.String"
+        },
+        "financeCompanyNumber": {
+          "type": "cds.String"
+        },
+        "minimumGuaranteedFutureValue": {
+          "type": "cds.String"
+        },
+        "financeSchemeName": {
+          "type": "cds.String"
+        },
+        "financeBalance": {
+          "type": "cds.String"
+        },
+        "financeType": {
+          "type": "cds.String"
+        }
+      }
+    },
+    "FCT.ENQUIRY.vehicleInterests": {
+      "kind": "entity",
+      "@cds.persistence.exists": true,
+      "elements": {
+        "up_": {
+          "key": true,
+          "type": "cds.Association",
+          "cardinality": {
+            "min": 1,
+            "max": 1
+          },
+          "target": "FCT.ENQUIRY",
+          "keys": [
+            {
+              "ref": [
+                "id"
+              ]
+            }
+          ],
+          "notNull": true
+        },
+        "testDriveRejection": {
+          "type": "cds.String"
+        },
+        "makeCode": {
+          "type": "cds.String"
+        },
+        "tradeIn": {
+          "type": "cds.String"
+        },
+        "sourceOfEnquiry": {
+          "type": "cds.String"
+        },
+        "vehicleCategory": {
+          "type": "cds.String"
+        },
+        "budgetLow": {
+          "type": "cds.String"
+        },
+        "bodyStyleCode": {
+          "type": "cds.String"
+        },
+        "testDrive": {
+          "type": "cds.String"
+        },
+        "bodyStyle": {
+          "type": "cds.String"
+        },
+        "currentModel": {
+          "type": "cds.String"
+        },
+        "budgetHigh": {
+          "type": "cds.String"
+        },
+        "make": {
+          "type": "cds.String"
+        },
+        "model": {
+          "type": "cds.String"
+        },
+        "currentMake": {
+          "type": "cds.String"
+        },
+        "modelGroup": {
+          "type": "cds.String"
+        },
+        "derivative": {
+          "type": "cds.String"
+        },
+        "genericArticleCode": {
+          "type": "cds.String"
+        },
+        "variantCode": {
+          "type": "cds.String"
+        },
+        "financeType": {
+          "type": "cds.String"
+        },
+        "financeTerm": {
+          "type": "cds.String"
+        },
+        "testDriveDate": {
+          "type": "cds.DateTime"
+        },
+        "modelCode": {
+          "type": "cds.String"
+        }
+      }
+    },
+    "FCT.ENQUIRY.EnquiryDetails": {
+      "kind": "entity",
+      "@cds.persistence.exists": true,
+      "elements": {
+        "up_": {
+          "key": true,
+          "type": "cds.Association",
+          "cardinality": {
+            "min": 1,
+            "max": 1
+          },
+          "target": "FCT.ENQUIRY",
+          "keys": [
+            {
+              "ref": [
+                "id"
+              ]
+            }
+          ],
+          "notNull": true
+        },
+        "EnquiryCreatedDate": {
+          "type": "cds.DateTime"
+        },
+        "EnquiryStatus": {
+          "type": "cds.String"
+        },
+        "OrderId": {
+          "type": "cds.String"
+        },
+        "QuotationID": {
+          "type": "cds.String"
+        }
+      }
+    },
+    "FCT.ENQUIRY.customerDetail": {
+      "kind": "entity",
+      "@cds.persistence.exists": true,
+      "elements": {
+        "up_": {
+          "key": true,
+          "type": "cds.Association",
+          "cardinality": {
+            "min": 1,
+            "max": 1
+          },
+          "target": "FCT.ENQUIRY",
+          "keys": [
+            {
+              "ref": [
+                "id"
+              ]
+            }
+          ],
+          "notNull": true
+        },
+        "CRMID": {
+          "type": "cds.String"
+        }
+      }
+    },
+    "FCT.ENQUIRY.enquiryInformation": {
+      "kind": "entity",
+      "@cds.persistence.exists": true,
+      "elements": {
+        "up_": {
+          "key": true,
+          "type": "cds.Association",
+          "cardinality": {
+            "min": 1,
+            "max": 1
+          },
+          "target": "FCT.ENQUIRY",
+          "keys": [
+            {
+              "ref": [
+                "id"
+              ]
+            }
+          ],
+          "notNull": true
+        },
+        "staffId": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "orgId": {
+          "type": "cds.String"
+        },
+        "salesGroup": {
+          "type": "cds.String"
+        },
+        "salesManagerId": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "branchId": {
+          "type": "cds.String"
+        },
+        "customerId": {
+          "type": "cds.String"
+        },
+        "division": {
+          "type": "cds.String"
+        },
+        "salesOffice": {
+          "type": "cds.String"
+        },
+        "salesExecutiveId": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "leadId": {
+          "type": "cds.String"
+        },
+        "enquiryType": {
+          "type": "cds.String"
+        },
+        "saleType": {
+          "type": "cds.String"
+        },
+        "distributionChannel": {
+          "type": "cds.String"
+        },
+        "offerExpired": {
+          "type": "cds.String"
+        },
+        "businessManagerId": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        }
+      }
+    },
+    "FCT.ENQUIRY.Partners": {
+      "kind": "entity",
+      "@cds.persistence.exists": true,
+      "elements": {
+        "up_": {
+          "key": true,
+          "type": "cds.Association",
+          "cardinality": {
+            "min": 1,
+            "max": 1
+          },
+          "target": "FCT.ENQUIRY",
+          "keys": [
+            {
+              "ref": [
+                "id"
+              ]
+            }
+          ],
+          "notNull": true
+        },
+        "partner": {
+          "type": "cds.String"
+        },
+        "partnerFunction": {
+          "type": "cds.String"
+        },
+        "partnerName": {
+          "type": "cds.String"
+        }
+      }
+    },
+    "FCT.QUOTATIONS.finance": {
+      "kind": "entity",
+      "@cds.persistence.exists": true,
+      "elements": {
+        "up_": {
+          "key": true,
+          "type": "cds.Association",
+          "cardinality": {
+            "min": 1,
+            "max": 1
+          },
+          "target": "FCT.QUOTATIONS",
+          "keys": [
+            {
+              "ref": [
+                "quotationId"
+              ]
+            }
+          ],
+          "notNull": true
+        },
+        "balance": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "startDate": {
+          "type": "cds.DateTime"
+        },
+        "endDate": {
+          "type": "cds.DateTime"
+        },
+        "rate": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "minimumGuranteedFutureValue": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "type": {
+          "type": "cds.String"
+        },
+        "monthlyPayment": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "productCategory": {
+          "type": "cds.String"
+        },
+        "term": {
+          "type": "cds.String"
+        }
+      }
+    },
+    "FCT.QUOTATIONS.partners": {
+      "kind": "entity",
+      "@cds.persistence.exists": true,
+      "elements": {
+        "up_": {
+          "key": true,
+          "type": "cds.Association",
+          "cardinality": {
+            "min": 1,
+            "max": 1
+          },
+          "target": "FCT.QUOTATIONS",
+          "keys": [
+            {
+              "ref": [
+                "quotationId"
+              ]
+            }
+          ],
+          "notNull": true
+        },
+        "partnerName": {
+          "type": "cds.String"
+        },
+        "partnerFuction": {
+          "type": "cds.String"
+        },
+        "partner": {
+          "type": "cds.String"
+        }
+      }
+    },
+    "FCT.ORDERS.finance": {
+      "kind": "entity",
+      "@cds.persistence.exists": true,
+      "elements": {
+        "up_": {
+          "key": true,
+          "type": "cds.Association",
+          "cardinality": {
+            "min": 1,
+            "max": 1
+          },
+          "target": "FCT.ORDERS",
+          "keys": [
+            {
+              "ref": [
+                "id"
+              ]
+            }
+          ],
+          "notNull": true
+        },
+        "financeSchemeName": {
+          "type": "cds.String"
+        },
+        "endDate": {
+          "type": "cds.String"
+        },
+        "type": {
+          "type": "cds.String"
+        },
+        "balance": {
+          "type": "cds.String"
+        },
+        "productCategory": {
+          "type": "cds.String"
+        },
+        "startDate": {
+          "type": "cds.String"
+        },
+        "minimumGuaranteedFutureValue": {
+          "type": "cds.Decimal"
+        },
+        "invoiceId": {
+          "type": "cds.String"
+        },
+        "rate": {
+          "type": "cds.Decimal"
+        },
+        "term": {
+          "type": "cds.String"
+        },
+        "monthlyPayment": {
+          "type": "cds.Decimal"
+        }
+      }
+    },
+    "FCT.ORDERS.partners": {
+      "kind": "entity",
+      "@cds.persistence.exists": true,
+      "elements": {
+        "up_": {
+          "key": true,
+          "type": "cds.Association",
+          "cardinality": {
+            "min": 1,
+            "max": 1
+          },
+          "target": "FCT.ORDERS",
+          "keys": [
+            {
+              "ref": [
+                "id"
+              ]
+            }
+          ],
+          "notNull": true
+        },
+        "partnerName": {
+          "type": "cds.String"
+        },
+        "partnerFunction": {
+          "type": "cds.String"
+        },
+        "partner": {
+          "type": "cds.String"
+        }
+      }
+    },
+    "FCT.SERVICE_ORDER.addtionalInformation": {
+      "kind": "entity",
+      "@cds.persistence.exists": true,
+      "elements": {
+        "up_": {
+          "key": true,
+          "type": "cds.Association",
+          "cardinality": {
+            "min": 1,
+            "max": 1
+          },
+          "target": "FCT.SERVICE_ORDER",
+          "keys": [
+            {
+              "ref": [
+                "id"
+              ]
+            }
+          ],
+          "notNull": true
+        },
+        "vehicleIdentificationNumber": {
+          "type": "cds.String"
+        },
+        "currentOdometer": {
+          "type": "cds.Decimal"
+        },
+        "locationName": {
+          "type": "cds.String"
+        }
+      }
+    },
+    "FCT.SERVICE_ORDER.appointment": {
+      "kind": "entity",
+      "@cds.persistence.exists": true,
+      "elements": {
+        "up_": {
+          "key": true,
+          "type": "cds.Association",
+          "cardinality": {
+            "min": 1,
+            "max": 1
+          },
+          "target": "FCT.SERVICE_ORDER",
+          "keys": [
+            {
+              "ref": [
+                "id"
+              ]
+            }
+          ],
+          "notNull": true
+        },
+        "startDate": {
+          "type": "cds.DateTime"
+        },
+        "endDate": {
+          "type": "cds.DateTime"
+        }
+      }
+    },
+    "FCT.SERVICE_ORDER.Partners": {
+      "kind": "entity",
+      "@cds.persistence.exists": true,
+      "elements": {
+        "up_": {
+          "key": true,
+          "type": "cds.Association",
+          "cardinality": {
+            "min": 1,
+            "max": 1
+          },
+          "target": "FCT.SERVICE_ORDER",
+          "keys": [
+            {
+              "ref": [
+                "id"
+              ]
+            }
+          ],
+          "notNull": true
+        },
+        "partner": {
+          "type": "cds.String"
+        },
+        "partnerFunction": {
+          "type": "cds.String"
+        },
+        "partnerName": {
+          "type": "cds.String"
+        }
+      }
+    },
+    "UpsertService.FCT_RECALLS.partners": {
+      "kind": "entity",
+      "@cds.autoexposed": true,
+      "projection": {
+        "from": {
+          "ref": [
+            "FCT.RECALLS.partners"
+          ]
+        }
+      },
+      "elements": {
+        "up_": {
+          "key": true,
+          "type": "cds.Association",
+          "cardinality": {
+            "min": 1,
+            "max": 1
+          },
+          "target": "UpsertService.FCT_RECALLS",
+          "keys": [
+            {
+              "ref": [
+                "recallSid"
+              ]
+            }
+          ],
+          "notNull": true
+        },
+        "partner": {
+          "type": "cds.String"
+        },
+        "partnerDescription": {
+          "type": "cds.String"
+        }
+      }
+    },
+    "UpsertService.FCT_ENQUIRY_ITEMS.ProductDetails": {
+      "kind": "entity",
+      "@cds.autoexposed": true,
+      "projection": {
+        "from": {
+          "ref": [
+            "FCT.ENQUIRY_ITEMS.ProductDetails"
+          ]
+        }
+      },
+      "elements": {
+        "up_": {
+          "key": true,
+          "type": "cds.Association",
+          "cardinality": {
+            "min": 1,
+            "max": 1
+          },
+          "target": "UpsertService.FCT_ENQUIRY_ITEMS",
+          "keys": [
+            {
+              "ref": [
+                "id"
+              ]
+            }
+          ],
+          "notNull": true
+        },
+        "productIdDescription": {
+          "type": "cds.String"
+        },
+        "productClassification": {
+          "type": "cds.String"
+        },
+        "productCost": {
+          "type": "cds.String"
+        },
+        "isVatApplicable": {
+          "type": "cds.String"
+        }
+      }
+    },
+    "UpsertService.FCT_ENQUIRY_ITEMS.financeDetails": {
+      "kind": "entity",
+      "@cds.autoexposed": true,
+      "projection": {
+        "from": {
+          "ref": [
+            "FCT.ENQUIRY_ITEMS.financeDetails"
+          ]
+        }
+      },
+      "elements": {
+        "up_": {
+          "key": true,
+          "type": "cds.Association",
+          "cardinality": {
+            "min": 1,
+            "max": 1
+          },
+          "target": "UpsertService.FCT_ENQUIRY_ITEMS",
+          "keys": [
+            {
+              "ref": [
+                "id"
+              ]
+            }
+          ],
+          "notNull": true
+        },
+        "financeTerm": {
+          "type": "cds.String"
+        },
+        "financeRate": {
+          "type": "cds.String"
+        },
+        "financeCompanyNumberSAP": {
+          "type": "cds.String"
+        },
+        "monthlyPayment": {
+          "type": "cds.String"
+        },
+        "cashInput": {
+          "type": "cds.String"
+        },
+        "financeCompanyNumber": {
+          "type": "cds.String"
+        },
+        "minimumGuaranteedFutureValue": {
+          "type": "cds.String"
+        },
+        "financeSchemeName": {
+          "type": "cds.String"
+        },
+        "financeBalance": {
+          "type": "cds.String"
+        },
+        "financeType": {
+          "type": "cds.String"
+        }
+      }
+    },
+    "UpsertService.FCT_ENQUIRY.vehicleInterests": {
+      "kind": "entity",
+      "@cds.autoexposed": true,
+      "projection": {
+        "from": {
+          "ref": [
+            "FCT.ENQUIRY.vehicleInterests"
+          ]
+        }
+      },
+      "elements": {
+        "up_": {
+          "key": true,
+          "type": "cds.Association",
+          "cardinality": {
+            "min": 1,
+            "max": 1
+          },
+          "target": "UpsertService.FCT_ENQUIRY",
+          "keys": [
+            {
+              "ref": [
+                "id"
+              ]
+            }
+          ],
+          "notNull": true
+        },
+        "testDriveRejection": {
+          "type": "cds.String"
+        },
+        "makeCode": {
+          "type": "cds.String"
+        },
+        "tradeIn": {
+          "type": "cds.String"
+        },
+        "sourceOfEnquiry": {
+          "type": "cds.String"
+        },
+        "vehicleCategory": {
+          "type": "cds.String"
+        },
+        "budgetLow": {
+          "type": "cds.String"
+        },
+        "bodyStyleCode": {
+          "type": "cds.String"
+        },
+        "testDrive": {
+          "type": "cds.String"
+        },
+        "bodyStyle": {
+          "type": "cds.String"
+        },
+        "currentModel": {
+          "type": "cds.String"
+        },
+        "budgetHigh": {
+          "type": "cds.String"
+        },
+        "make": {
+          "type": "cds.String"
+        },
+        "model": {
+          "type": "cds.String"
+        },
+        "currentMake": {
+          "type": "cds.String"
+        },
+        "modelGroup": {
+          "type": "cds.String"
+        },
+        "derivative": {
+          "type": "cds.String"
+        },
+        "genericArticleCode": {
+          "type": "cds.String"
+        },
+        "variantCode": {
+          "type": "cds.String"
+        },
+        "financeType": {
+          "type": "cds.String"
+        },
+        "financeTerm": {
+          "type": "cds.String"
+        },
+        "testDriveDate": {
+          "type": "cds.DateTime"
+        },
+        "modelCode": {
+          "type": "cds.String"
+        }
+      }
+    },
+    "UpsertService.FCT_ENQUIRY.EnquiryDetails": {
+      "kind": "entity",
+      "@cds.autoexposed": true,
+      "projection": {
+        "from": {
+          "ref": [
+            "FCT.ENQUIRY.EnquiryDetails"
+          ]
+        }
+      },
+      "elements": {
+        "up_": {
+          "key": true,
+          "type": "cds.Association",
+          "cardinality": {
+            "min": 1,
+            "max": 1
+          },
+          "target": "UpsertService.FCT_ENQUIRY",
+          "keys": [
+            {
+              "ref": [
+                "id"
+              ]
+            }
+          ],
+          "notNull": true
+        },
+        "EnquiryCreatedDate": {
+          "type": "cds.DateTime"
+        },
+        "EnquiryStatus": {
+          "type": "cds.String"
+        },
+        "OrderId": {
+          "type": "cds.String"
+        },
+        "QuotationID": {
+          "type": "cds.String"
+        }
+      }
+    },
+    "UpsertService.FCT_ENQUIRY.customerDetail": {
+      "kind": "entity",
+      "@cds.autoexposed": true,
+      "projection": {
+        "from": {
+          "ref": [
+            "FCT.ENQUIRY.customerDetail"
+          ]
+        }
+      },
+      "elements": {
+        "up_": {
+          "key": true,
+          "type": "cds.Association",
+          "cardinality": {
+            "min": 1,
+            "max": 1
+          },
+          "target": "UpsertService.FCT_ENQUIRY",
+          "keys": [
+            {
+              "ref": [
+                "id"
+              ]
+            }
+          ],
+          "notNull": true
+        },
+        "CRMID": {
+          "type": "cds.String"
+        }
+      }
+    },
+    "UpsertService.FCT_ENQUIRY.enquiryInformation": {
+      "kind": "entity",
+      "@cds.autoexposed": true,
+      "projection": {
+        "from": {
+          "ref": [
+            "FCT.ENQUIRY.enquiryInformation"
+          ]
+        }
+      },
+      "elements": {
+        "up_": {
+          "key": true,
+          "type": "cds.Association",
+          "cardinality": {
+            "min": 1,
+            "max": 1
+          },
+          "target": "UpsertService.FCT_ENQUIRY",
+          "keys": [
+            {
+              "ref": [
+                "id"
+              ]
+            }
+          ],
+          "notNull": true
+        },
+        "staffId": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "orgId": {
+          "type": "cds.String"
+        },
+        "salesGroup": {
+          "type": "cds.String"
+        },
+        "salesManagerId": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "branchId": {
+          "type": "cds.String"
+        },
+        "customerId": {
+          "type": "cds.String"
+        },
+        "division": {
+          "type": "cds.String"
+        },
+        "salesOffice": {
+          "type": "cds.String"
+        },
+        "salesExecutiveId": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "leadId": {
+          "type": "cds.String"
+        },
+        "enquiryType": {
+          "type": "cds.String"
+        },
+        "saleType": {
+          "type": "cds.String"
+        },
+        "distributionChannel": {
+          "type": "cds.String"
+        },
+        "offerExpired": {
+          "type": "cds.String"
+        },
+        "businessManagerId": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        }
+      }
+    },
+    "UpsertService.FCT_ENQUIRY.Partners": {
+      "kind": "entity",
+      "@cds.autoexposed": true,
+      "projection": {
+        "from": {
+          "ref": [
+            "FCT.ENQUIRY.Partners"
+          ]
+        }
+      },
+      "elements": {
+        "up_": {
+          "key": true,
+          "type": "cds.Association",
+          "cardinality": {
+            "min": 1,
+            "max": 1
+          },
+          "target": "UpsertService.FCT_ENQUIRY",
+          "keys": [
+            {
+              "ref": [
+                "id"
+              ]
+            }
+          ],
+          "notNull": true
+        },
+        "partner": {
+          "type": "cds.String"
+        },
+        "partnerFunction": {
+          "type": "cds.String"
+        },
+        "partnerName": {
+          "type": "cds.String"
+        }
+      }
+    },
+    "UpsertService.FCT_QUOTATIONS.finance": {
+      "kind": "entity",
+      "@cds.autoexposed": true,
+      "projection": {
+        "from": {
+          "ref": [
+            "FCT.QUOTATIONS.finance"
+          ]
+        }
+      },
+      "elements": {
+        "up_": {
+          "key": true,
+          "type": "cds.Association",
+          "cardinality": {
+            "min": 1,
+            "max": 1
+          },
+          "target": "UpsertService.FCT_QUOTATIONS",
+          "keys": [
+            {
+              "ref": [
+                "quotationId"
+              ]
+            }
+          ],
+          "notNull": true
+        },
+        "balance": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "startDate": {
+          "type": "cds.DateTime"
+        },
+        "endDate": {
+          "type": "cds.DateTime"
+        },
+        "rate": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "minimumGuranteedFutureValue": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "type": {
+          "type": "cds.String"
+        },
+        "monthlyPayment": {
+          "type": "cds.Decimal",
+          "default": {
+            "val": 0
+          }
+        },
+        "productCategory": {
+          "type": "cds.String"
+        },
+        "term": {
+          "type": "cds.String"
+        }
+      }
+    },
+    "UpsertService.FCT_QUOTATIONS.partners": {
+      "kind": "entity",
+      "@cds.autoexposed": true,
+      "projection": {
+        "from": {
+          "ref": [
+            "FCT.QUOTATIONS.partners"
+          ]
+        }
+      },
+      "elements": {
+        "up_": {
+          "key": true,
+          "type": "cds.Association",
+          "cardinality": {
+            "min": 1,
+            "max": 1
+          },
+          "target": "UpsertService.FCT_QUOTATIONS",
+          "keys": [
+            {
+              "ref": [
+                "quotationId"
+              ]
+            }
+          ],
+          "notNull": true
+        },
+        "partnerName": {
+          "type": "cds.String"
+        },
+        "partnerFuction": {
+          "type": "cds.String"
+        },
+        "partner": {
+          "type": "cds.String"
+        }
+      }
+    },
+    "UpsertService.FCT_ORDERS.finance": {
+      "kind": "entity",
+      "@cds.autoexposed": true,
+      "projection": {
+        "from": {
+          "ref": [
+            "FCT.ORDERS.finance"
+          ]
+        }
+      },
+      "elements": {
+        "up_": {
+          "key": true,
+          "type": "cds.Association",
+          "cardinality": {
+            "min": 1,
+            "max": 1
+          },
+          "target": "UpsertService.FCT_ORDERS",
+          "keys": [
+            {
+              "ref": [
+                "id"
+              ]
+            }
+          ],
+          "notNull": true
+        },
+        "financeSchemeName": {
+          "type": "cds.String"
+        },
+        "endDate": {
+          "type": "cds.String"
+        },
+        "type": {
+          "type": "cds.String"
+        },
+        "balance": {
+          "type": "cds.String"
+        },
+        "productCategory": {
+          "type": "cds.String"
+        },
+        "startDate": {
+          "type": "cds.String"
+        },
+        "minimumGuaranteedFutureValue": {
+          "type": "cds.Decimal"
+        },
+        "invoiceId": {
+          "type": "cds.String"
+        },
+        "rate": {
+          "type": "cds.Decimal"
+        },
+        "term": {
+          "type": "cds.String"
+        },
+        "monthlyPayment": {
+          "type": "cds.Decimal"
+        }
+      }
+    },
+    "UpsertService.FCT_ORDERS.partners": {
+      "kind": "entity",
+      "@cds.autoexposed": true,
+      "projection": {
+        "from": {
+          "ref": [
+            "FCT.ORDERS.partners"
+          ]
+        }
+      },
+      "elements": {
+        "up_": {
+          "key": true,
+          "type": "cds.Association",
+          "cardinality": {
+            "min": 1,
+            "max": 1
+          },
+          "target": "UpsertService.FCT_ORDERS",
+          "keys": [
+            {
+              "ref": [
+                "id"
+              ]
+            }
+          ],
+          "notNull": true
+        },
+        "partnerName": {
+          "type": "cds.String"
+        },
+        "partnerFunction": {
+          "type": "cds.String"
+        },
+        "partner": {
+          "type": "cds.String"
+        }
+      }
+    },
+    "UpsertService.FCT_SERVICE_ORDER.addtionalInformation": {
+      "kind": "entity",
+      "@cds.autoexposed": true,
+      "projection": {
+        "from": {
+          "ref": [
+            "FCT.SERVICE_ORDER.addtionalInformation"
+          ]
+        }
+      },
+      "elements": {
+        "up_": {
+          "key": true,
+          "type": "cds.Association",
+          "cardinality": {
+            "min": 1,
+            "max": 1
+          },
+          "target": "UpsertService.FCT_SERVICE_ORDER",
+          "keys": [
+            {
+              "ref": [
+                "id"
+              ]
+            }
+          ],
+          "notNull": true
+        },
+        "vehicleIdentificationNumber": {
+          "type": "cds.String"
+        },
+        "currentOdometer": {
+          "type": "cds.Decimal"
+        },
+        "locationName": {
+          "type": "cds.String"
+        }
+      }
+    },
+    "UpsertService.FCT_SERVICE_ORDER.appointment": {
+      "kind": "entity",
+      "@cds.autoexposed": true,
+      "projection": {
+        "from": {
+          "ref": [
+            "FCT.SERVICE_ORDER.appointment"
+          ]
+        }
+      },
+      "elements": {
+        "up_": {
+          "key": true,
+          "type": "cds.Association",
+          "cardinality": {
+            "min": 1,
+            "max": 1
+          },
+          "target": "UpsertService.FCT_SERVICE_ORDER",
+          "keys": [
+            {
+              "ref": [
+                "id"
+              ]
+            }
+          ],
+          "notNull": true
+        },
+        "startDate": {
+          "type": "cds.DateTime"
+        },
+        "endDate": {
+          "type": "cds.DateTime"
+        }
+      }
+    },
+    "UpsertService.FCT_SERVICE_ORDER.Partners": {
+      "kind": "entity",
+      "@cds.autoexposed": true,
+      "projection": {
+        "from": {
+          "ref": [
+            "FCT.SERVICE_ORDER.Partners"
+          ]
+        }
+      },
+      "elements": {
+        "up_": {
+          "key": true,
+          "type": "cds.Association",
+          "cardinality": {
+            "min": 1,
+            "max": 1
+          },
+          "target": "UpsertService.FCT_SERVICE_ORDER",
+          "keys": [
+            {
+              "ref": [
+                "id"
+              ]
+            }
+          ],
+          "notNull": true
+        },
+        "partner": {
+          "type": "cds.String"
+        },
+        "partnerFunction": {
+          "type": "cds.String"
+        },
+        "partnerName": {
+          "type": "cds.String"
+        }
+      }
+    }
+  },
+  "meta": {
+    "creator": "CDS Compiler v3.7.2",
+    "flavor": "inferred"
+  },
+  "$version": "2.0"
+}

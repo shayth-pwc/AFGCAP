@@ -1,0 +1,15 @@
+# Generated manifest.yml based on template version 0.1.0
+# appName = afg-server-cap
+# language=nodejs
+# multitenancy=false
+---
+applications:
+# -----------------------------------------------------------------------------------
+# Backend Service
+# -----------------------------------------------------------------------------------
+- name: cap-srv
+  path: gen/srv
+  default-route: true
+  memory: 256M
+  buildpack: nodejs_buildpack
+

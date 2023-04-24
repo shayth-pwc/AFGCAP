@@ -165,7 +165,7 @@ Content-Type:application/json;charset=UTF-8;IEEE754Compatible=true
 
 ####
 # LEAD UPDATES
-POST http://localhost:4004/upsert/FCT_LEAD_UPDATES HTTP/1.1
+POST http://localhost:4004/upsert/A_FCT_LEAD_UPDATES HTTP/1.1
 Content-Type:application/json;charset=UTF-8;IEEE754Compatible=true
 
 {
@@ -818,6 +818,7 @@ Content-Type:application/json;charset=UTF-8;IEEE754Compatible=true
         "lastUpdateDate":"2003-10-13T11:07:49.358Z"
       }]
     }
+    
 
 
 
@@ -917,7 +918,7 @@ Content-Type:application/json;charset=UTF-8;IEEE754Compatible=true
         "currentOdometer" : 97123,
         "locationName" : "LX-Sharjah Wadha A.sales"
       },
-      "id" : "307186891",
+      "id" : "3071865525",
       "orgId" : "2001",
       "brandCode" : "2001-41",
       "orderNumber" : "307186891",
@@ -1120,7 +1121,7 @@ Content-Type:application/json;charset=UTF-8;IEEE754Compatible=true
 
 
 #############
-#WARRANTIES
+#RECALLS
 POST http://localhost:4004/upsert/A_FCT_RECALLS HTTP/1.1
 Content-Type:application/json;charset=UTF-8;IEEE754Compatible=true
 
@@ -1154,6 +1155,20 @@ Content-Type:application/json;charset=UTF-8;IEEE754Compatible=true
         "customerCode":"f4l"
       }]
     }
+
+#############
+#UCPID_MAP
+POST http://localhost:4004/upsert/A_DIM_CUST_UCPID_MAP HTTP/1.1
+Content-Type:application/json;charset=UTF-8;IEEE754Compatible=true
+
+
+ {
+      "events": [
+        {"crmId":["221902165"],"UCPID":"031c8fad3caa92cfcb60ecca71a3c656"},
+        {"crmId":["222038185"],"UCPID":"9f368c95738ae15f4b9aea902be708d3"},
+        {"crmId":["221547249","101510151015"],"UCPID":"84d5632ab335bc1afe1a9d68a80e0d3d"}
+        ]
+  }
 
 
 

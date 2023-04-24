@@ -638,6 +638,7 @@ entity ENQUIRY {
       payment_Type            : String;
 };
 
+@cds.persistence.exists
 entity QUOTATIONS {
       //
       id                   : String;
@@ -684,7 +685,7 @@ entity QUOTATIONS {
                                partner        : String;
                              };
 };
-
+@cds.persistence.exists
 entity ORDERS {
       finance                      : Composition of one {
                                        financeSchemeName            : String;
@@ -744,6 +745,8 @@ entity ORDERS {
 };
 
 //typo in addtionalInformation, but HTTP data has the same
+
+@cds.persistence.exists
 entity SERVICE_ORDER {
       addtionalInformation        : Composition of one {
                                       vehicleIdentificationNumber : String;

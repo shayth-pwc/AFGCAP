@@ -8,13 +8,15 @@ module.exports = async (srv) => {
       await UPSERT.into(settings.table).entries(items);
       for (let item of items) {
         console.log(
-          `Successfully inserted data as bulk in ${settings.table} for ${item[settings.keyProperty]
+          `Successfully inserted data as bulk in ${settings.table} for ${
+            item[settings.keyProperty]
           }.`
         );
         response.push({
           success: true,
-          message: `Successfully inserted data as bulk in ${settings.table
-            } for ${item[settings.keyProperty]}.`,
+          message: `Successfully inserted data as bulk in ${
+            settings.table
+          } for ${item[settings.keyProperty]}.`,
         });
       }
     } catch (error) {
@@ -29,13 +31,15 @@ module.exports = async (srv) => {
     try {
       await UPSERT.into(settings.table).entries(item);
       console.log(
-        `Successfully inserted data in ${settings.table} for ${item[settings.keyProperty]
+        `Successfully inserted data in ${settings.table} for ${
+          item[settings.keyProperty]
         }.`
       );
       response = {
         success: true,
-        message: `Successfully inserted data in ${settings.table} for ${item[settings.keyProperty]
-          }.`,
+        message: `Successfully inserted data in ${settings.table} for ${
+          item[settings.keyProperty]
+        }.`,
       };
     } catch (error) {
       console.log(
@@ -44,8 +48,9 @@ module.exports = async (srv) => {
       );
       response = {
         success: false,
-        message: `Failed to insert data in ${settings.table} for ${item[settings.keyProperty]
-          }.`,
+        message: `Failed to insert data in ${settings.table} for ${
+          item[settings.keyProperty]
+        }.`,
         error: JSON.stringify(error),
       };
 
@@ -55,8 +60,9 @@ module.exports = async (srv) => {
         CALLED_FUNC: settings.function,
         RESPONSE_CODE: error.code?.toString().slice(0, 50),
         RESPONSE_STATUS: "error",
-        RESPONSE_TEXT: `Failed to insert data in ${settings.table} for ${item[settings.keyProperty]
-          }: ${JSON.stringify(error)}`.slice(0, 5000),
+        RESPONSE_TEXT: `Failed to insert data in ${settings.table} for ${
+          item[settings.keyProperty]
+        }: ${JSON.stringify(error)}`.slice(0, 5000),
         RESPONSE_TIME: "NA",
         CAPTURE_DATE: new Date(),
         CAPTURE_TIME: new Date(),
@@ -114,7 +120,8 @@ module.exports = async (srv) => {
     }
     deleted.length > 0 &&
       console.log(
-        `WARNING for ${tableName}: Removed ${deleted.length
+        `WARNING for ${tableName}: Removed ${
+          deleted.length
         } properties coming from Boomi: ${deleted.join(", ")}`
       );
     const upperCaseKeys = Object.keys(event).map((x) => x.toUpperCase());
@@ -123,26 +130,27 @@ module.exports = async (srv) => {
     );
     missing.length > 0 &&
       console.log(
-        `WARNING for ${tableName}: Missing ${missing.length
+        `WARNING for ${tableName}: Missing ${
+          missing.length
         } properties HANA expects: ${missing.join(", ")}`
       );
   };
 
-
+  
   // load HANA table structure when app starts
 
   var HANA_Tables = {}
-  setTimeout(function () {
-    getHANATableColumns("TECHDBUSER1").then(x => {
-      HANA_Tables = x
+  setTimeout (function()  {
+      getHANATableColumns("TECHDBUSER1") .then (x => {
+        HANA_Tables = x
       console.log(
         `Downloaded table structures of ${Object.keys(HANA_Tables).length} tables`
       );
 
     })
-
+      
   }, 5000)
-
+  
 
   //done - UPSERT Tested
   srv.on("A_FCT_SERVICE_ORDER_JOBS", async (req) => {
@@ -154,7 +162,7 @@ module.exports = async (srv) => {
       event.isDeferred = event.isDeferred === true;
       delete event.id
       mapToHANAStructure(event, "FCT_SERVICE_ORDER_JOBS");
-
+      
     }
 
     return await upsertEvents(events, {
@@ -338,7 +346,7 @@ module.exports = async (srv) => {
     for (let event of events) {
 
       event.orderId = event.id;
-
+      
       assignFirstChild(event, "finance");
       assignFirstChild(event, "partners");
       mapToHANAStructure(event, "FCT_ORDERS");
@@ -351,16 +359,16 @@ module.exports = async (srv) => {
     });
   });
 
-  //done - UPSERT Tested
+//done - UPSERT Tested
   srv.on("A_FCT_QUOTATIONS", async (req) => {
     const events = Array.isArray(req.data.events)
       ? req.data.events
       : [req.data.events];
     for (let event of events) {
-      event.quotationId = event.id
-      assignFirstChild(event, "finance");
-      assignFirstChild(event, "partners");
-      mapToHANAStructure(event, "FCT_QUOTATIONS");
+        event.quotationId = event.id
+        assignFirstChild(event, "finance");
+        assignFirstChild(event, "partners");
+        mapToHANAStructure(event, "FCT_QUOTATIONS");
     }
 
     return await upsertEvents(events, {
@@ -465,15 +473,15 @@ module.exports = async (srv) => {
     });
   });
 
-  //done - UPSERT Tested
+   //done - UPSERT Tested
 
-  srv.on("A_FCT_WARRANTIES", async (req) => {
+   srv.on("A_FCT_WARRANTIES", async (req) => {
     const events = Array.isArray(req.data.events)
       ? req.data.events
       : [req.data.events];
     for (let event of events) {
       event.warrantieSid = event.id;
-
+     
 
       mapToHANAStructure(event, "FCT_WARRANTIES");
     }
@@ -493,8 +501,8 @@ module.exports = async (srv) => {
       : [req.data.events];
     for (let event of events) {
       event.recallSid = event.id;
-      event.created_On = event.creationDate
-      event.claim_Type_Description = event.claimTypeDescription
+     event.created_On = event.creationDate
+     event.claim_Type_Description = event.claimTypeDescription
       assignFirstChild(event, "partners");
       mapToHANAStructure(event, "FCT_RECALLS");
     }
@@ -505,29 +513,4 @@ module.exports = async (srv) => {
       keyProperty: "recallSid",
     });
   });
-
-
-  srv.on("A_DIM_CUST_UCPID_MAP", async (req) => {
-    const events = Array.isArray(req.data.events)
-      ? req.data.events
-      : [req.data.events];
-    var results = [];
-try{
-  for (let event of events) {
-    for (let crmId of event.crmId) {
-      const payload = { CUSTOMERSOURCEID: crmId, CUSTOMERUCPID: event.UCPID, SOURCESYSTEM: event.sourceSystem }
-      console.log(payload);
-      results.push( await upsertEvents([payload], {
-        function: "UCPID_MAP / UPSERT",
-        table: "DIM_CUST_UCPID_MAP",
-        keyProperty: "CUSTOMERUCPID",
-      }));
-    }
-  }
-} catch(e){console.error(e);}
-  
-
-    return results.flat();
-  });
-
 };
